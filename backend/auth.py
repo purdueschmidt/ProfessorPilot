@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, redirect, session, url_for
+from flask import Flask, jsonify, redirect, session, url_for, request
 
 from flask_cognito_lib import CognitoAuth
 from flask_cognito_lib.decorators import (
@@ -20,6 +20,10 @@ app.config["AWS_COGNITO_REDIRECT_URL"] = "http://localhost:5000/postlogin"
 app.config["AWS_COGNITO_LOGOUT_URL"] = "http://localhost:5000/postlogout"
 
 auth = CognitoAuth(app)
+
+@app.route('/courses')
+def courses():
+    return 'HI'
 
 
 @app.route("/login")
@@ -48,7 +52,7 @@ def postlogin():
     # Do anything after the user has logged in here, e.g. a redirect or perform
     # logic based on a custom `session['state']` value if that was set before
     # login
-    return redirect(url_for("claims"))
+    return redirect(url_for("courses"))
 
 
 @app.route("/claims")
@@ -60,7 +64,7 @@ def claims():
     # an `@app.error_handler(AuthorisationRequiredError)
     # If their auth is valid, the current session will be shown including
     # their claims and user_info extracted from the Cognito tokens.
-    print(session)
+    print(session['claims'])
     return jsonify(session)
 
 
@@ -92,7 +96,7 @@ def postlogout():
     # This is the endpoint Cognito redirects to after a user has logged out,
     # handle any logic here, like returning to the homepage.
     # This route must be set as one of the User Pool client's Sign Out URLs.
-    return redirect(url_for("home"))
+    return redirect(url_for("courses"))
 
 
 if __name__ == "__main__":
