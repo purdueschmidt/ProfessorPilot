@@ -21,10 +21,33 @@ app.config["AWS_COGNITO_LOGOUT_URL"] = "http://localhost:5000/postlogout"
 
 auth = CognitoAuth(app)
 
-@app.route('/courses')
+@app.route('/', methods=['GET'])
+@app.route('/home', methods=['GET'])
+def home():
+    log = {'John': 'Smith'}
+    #return jsonify(log)
+    return (log)
+
+@app.route('/courses', methods=['GET', 'POST'])
 def courses():
+    log = {'name': 'tim'}
+    print(log)
+    return log
+
+
+@app.route('/professors')
+def professors():
+    log = {'name': '123'}
+    print(log)
+    return log
+
+@app.route('/discussions')
+def discussions():
     return 'HI'
 
+@app.route('/contact')
+def contact():
+    return 'HI'
 
 @app.route("/login")
 @cognito_login
@@ -37,6 +60,7 @@ def login():
     # into the Cognito hosted UI); this could be used for dynamic redirects,
     # for example, set `session['state'] = "some_custom_value"` before passing
     # the user to this route
+    session['state'] = 'unauthorized'
     pass
 
 
@@ -52,7 +76,9 @@ def postlogin():
     # Do anything after the user has logged in here, e.g. a redirect or perform
     # logic based on a custom `session['state']` value if that was set before
     # login
-    return redirect(url_for("courses"))
+    #session['state'] = 'authorized'
+    #return redirect(url_for("courses"))
+    return redirect(url_for("claims"))
 
 
 @app.route("/claims")
@@ -64,8 +90,10 @@ def claims():
     # an `@app.error_handler(AuthorisationRequiredError)
     # If their auth is valid, the current session will be shown including
     # their claims and user_info extracted from the Cognito tokens.
-    print(session['claims'])
-    return jsonify(session)
+    #print(session['claims'])
+    #return jsonify(session)
+    return redirect(url_for("courses")) 
+
 
 
 @app.route("/admin")
@@ -96,6 +124,7 @@ def postlogout():
     # This is the endpoint Cognito redirects to after a user has logged out,
     # handle any logic here, like returning to the homepage.
     # This route must be set as one of the User Pool client's Sign Out URLs.
+    session['state'] = 'unauthorized'
     return redirect(url_for("courses"))
 
 
