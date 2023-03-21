@@ -35,18 +35,18 @@ export const Auth0Features = () => {
 
   return (
     <div className="auth0-features">
-      <h2 className="auth0-features__title">Explore Auth0 Features</h2>
-      <div className="auth0-features__grid">
-        {featuresList.map((feature) => (
-          <Auth0Feature
-            key={feature.resourceUrl}
-            title={feature.title}
-            description={feature.description}
-            resourceUrl={feature.resourceUrl}
-            icon={feature.icon}
-          />
-        ))}
-      </div>
+      <h2 className="auth0-features__title">Search</h2>
+      {/*<div className="auth0-features__grid">*/}
+      {/*  {featuresList.map((feature) => (*/}
+      {/*    <Auth0Feature*/}
+      {/*      key={feature.resourceUrl}*/}
+      {/*      title={feature.title}*/}
+      {/*      description={feature.description}*/}
+      {/*      resourceUrl={feature.resourceUrl}*/}
+      {/*      icon={feature.icon}*/}
+      {/*    />*/}
+      {/*  ))}*/}
+      {/*</div>*/}
     </div>
   );
 };

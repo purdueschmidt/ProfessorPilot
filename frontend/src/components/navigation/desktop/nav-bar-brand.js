@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logo from './../../images/wings.png';
 
 export const NavBarBrand = () => {
   return (
@@ -7,11 +8,12 @@ export const NavBarBrand = () => {
       <NavLink to="/">
         <img
           className="nav-bar__logo"
-          src="https://cdn.auth0.com/blog/hub/code-samples/hello-world/auth0-logo.svg"
-          alt="Auth0 shield logo"
-          width="122"
-          height="36"
+          src={logo}
+          alt="ProfessorPilot logo"
+          width="75"
+          height="75"
         />
+          <p>ProfessorPilot</p>
       </NavLink>
     </div>
   );
