@@ -6,9 +6,9 @@ import boto3
 import time
 from flask import jsonify, request
 
-dynamodb = boto3.resource('dynamodb', aws_access_key_id   = 'AKIAWQOUMGGDI7G4YO3F',
-        aws_secret_access_key = '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',
-        region_name = 'us-east-2')
+# dynamodb = boto3.resource('dynamodb', aws_access_key_id   = 'AKIAWQOUMGGDI7G4YO3F',
+#         aws_secret_access_key = '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',
+#         region_name = 'us-east-2')
 table = dynamodb.Table('CourseReviews')
 
 def get_public_message():

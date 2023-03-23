@@ -41,7 +41,7 @@ export const ReviewForm = () => {
 
   const submitReview = async (data) => {
     try {
-      const response = await fetch("http://localhost:5000/api/submit_review", {
+      const response = await fetch("http://localhost:6060/api/submit_review", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,6 +109,7 @@ export const ReviewForm = () => {
                     id="reviewer"
                     name="reviewer"
                     required
+                    ref={reviewer}
                 />
                 </div>
                 <div className="form-group">
@@ -118,7 +119,8 @@ export const ReviewForm = () => {
                     className="form-control"
                     id="coursename"
                     name="coursename"
-                    required
+                    required 
+                    ref={courseName}
                 />
                 </div>
                 <div className="form-group">
@@ -127,8 +129,9 @@ export const ReviewForm = () => {
                     type="text"
                     className="form-control"
                     id="code"
-                    name="code"
+                    name="code" 
                     required
+                    ref={courseCode}
                 />
                 </div>
                 <div className="form-group">
@@ -139,6 +142,7 @@ export const ReviewForm = () => {
                     id="term"
                     name="term"
                     required
+                    ref={term}
                 />
                 </div>
                 <div className="form-group">
@@ -149,6 +153,7 @@ export const ReviewForm = () => {
                     id="year"
                     name="year"
                     required
+                    ref={year}
                 />
                 </div>
                 {criteria.map((criterion, index) => (
@@ -178,6 +183,7 @@ export const ReviewForm = () => {
                         name="text"
                         rows="4"
                         required
+                        ref={reviewText}
                     ></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
