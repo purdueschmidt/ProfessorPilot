@@ -1,7 +1,6 @@
 from http import HTTPStatus
 
 import jwt
-
 from api.utils import json_abort
 
 
