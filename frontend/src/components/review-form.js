@@ -41,7 +41,8 @@ export const ReviewForm = () => {
 
   const submitReview = async (data) => {
     try {
-      const response = await fetch("http://localhost:6060/api/submit_review", {
+      // const response = await fetch("http://localhost:6060/api/submit_review", {
+        const response = await fetch("http://localhost:6060/api/messages/submit_review", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +51,9 @@ export const ReviewForm = () => {
       });
 
       if (response.ok) {
-        alert("Review submitted successfully.");
+        // alert("Review submitted successfully.");
+        const result = await response.json();
+        alert(result["Message"])
       } else {
         alert("Failed to submit review.");
       }

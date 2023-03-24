@@ -40,34 +40,35 @@ def get_admin_message():
     )
 
 
-def submit_review(data):
+def submit_review():
     data = request.get_json()
+    #print(data)
 
     reviewer = data['reviewer']
-    review_id = str(uuid.uuid4())
-    timestamp = str(int(time.time() * 1000))
+    # review_id = str(uuid.uuid4())
+    # timestamp = str(int(time.time() * 1000))
+    #
+    # course_review = {
+    #     'PK': f'REVIEW#{review_id}',
+    #     'SK': f'USER#{reviewer}',
+    #     'GSI1PK': f'USER#{reviewer}',
+    #     'CourseCode': data['course_code'],
+    #     'CourseName': data['course_name'],
+    #     'Difficulty': data['difficulty'],
+    #     'Interest': data['interest'],
+    #     'Usefulness': data['usefulness'],
+    #     'Organization': data['organization'],
+    #     'Workload': data['workload'],
+    #     'Rating': data['rating'],
+    #     'ReviewText': data['review_text'],
+    #     'Term': data['term'],
+    #     'Year': data['year'],
+    #     'Upvotes': 0,
+    #     'Status': 'active',
+    #     'CreateDate': timestamp,
+    #     'ModifiedDate': timestamp,
+    #     'ReviewId': review_id
+    # }
 
-    course_review = {
-        'PK': f'REVIEW#{review_id}',
-        'SK': f'USER#{reviewer}',
-        'GSI1PK': f'USER#{reviewer}',
-        'CourseCode': data['course_code'],
-        'CourseName': data['course_name'],
-        'Difficulty': data['difficulty'],
-        'Interest': data['interest'],
-        'Usefulness': data['usefulness'],
-        'Organization': data['organization'],
-        'Workload': data['workload'],
-        'Rating': data['rating'],
-        'ReviewText': data['review_text'],
-        'Term': data['term'],
-        'Year': data['year'],
-        'Upvotes': 0,
-        'Status': 'active',
-        'CreateDate': timestamp,
-        'ModifiedDate': timestamp,
-        'ReviewId': review_id
-    }
-
-    response = table.put_item(Item=course_review)
-    return jsonify({'message': 'Review submitted successfully'}), 201
+    #response = table.put_item(Item=course_review)
+    return {"Message":"Submit Review Success"}

@@ -1,13 +1,17 @@
+import json
+
+import flask
 from flask import (
-    Blueprint
+    Blueprint, request, jsonify, app
 )
 
-from api.messages.messages_service import (
+from .messages_service import (
     get_public_message,
     get_protected_message,
-    get_admin_message
+    get_admin_message,
+    submit_review
 )
-from api.security.guards import (
+from ..security.guards import (
     authorization_guard,
     permissions_guard,
     admin_messages_permissions
@@ -48,9 +52,8 @@ def home():
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response
     if request.method == 'POST':
-        data = request.get_json()
-        response, status_code = submit_review(data)
-        return jsonify(response), status_code
+        val = submit_review()
+        return jsonify(val), 200
     else:
         # Return some other response for GET requests (if needed)
         pass
