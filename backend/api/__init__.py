@@ -25,6 +25,7 @@ def create_app():
     ##########################################
 
     app = Flask(__name__, instance_relative_config=True)
+    
 
     ##########################################
     # HTTP Security Headers
@@ -65,10 +66,17 @@ def create_app():
         app,
         resources={r"/api/*": {"origins": client_origin_url}},
         allow_headers=["Authorization", "Content-Type"],
-        methods=["GET"],
+        methods=["GET", "POST", "OPTIONS"],
         max_age=86400
     )
 
+    # def add_cors_headers(response):
+    #     response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+    #     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    #     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    #     return response
+
+    # app.after_request(add_cors_headers)
     ##########################################
     # Blueprint Registration
     ##########################################

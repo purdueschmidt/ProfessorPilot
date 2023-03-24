@@ -13,6 +13,9 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+#.env
+.backend.env
+
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -196,6 +199,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variables file
+
 .env
 .env.test
 .env.production

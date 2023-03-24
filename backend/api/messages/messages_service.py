@@ -5,10 +5,21 @@ import uuid
 import boto3
 import time
 from flask import jsonify, request
+import os
+from dotenv import load_dotenv
 
-# dynamodb = boto3.resource('dynamodb', aws_access_key_id   = 'AKIAWQOUMGGDI7G4YO3F',
-#         aws_secret_access_key = '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',
-#         region_name = 'us-east-2')
+load_dotenv()
+
+aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
+aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+region_name = os.getenv('AWS_REGION_NAME')
+
+dynamodb = boto3.resource(
+    'dynamodb',
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=region_name
+)
 table = dynamodb.Table('CourseReviews')
 
 def get_public_message():

@@ -38,9 +38,15 @@ def admin():
 
 @bp.route('/', methods=(['GET', 'POST']))
 @bp.route('/home', methods=(['GET', 'POST']))
-@bp.route('/submit_review', methods=['POST'])
-@authorization_guard
+@bp.route('/submit_review', methods=['GET', 'POST', 'OPTIONS'])
+#@authorization_guard
 def home():
+    if request.method == 'OPTIONS':
+        response = flask.Response(status=200)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        return response
     if request.method == 'POST':
         data = request.get_json()
         response, status_code = submit_review(data)
