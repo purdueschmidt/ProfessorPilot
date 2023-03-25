@@ -1,0 +1,21 @@
+.star-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .rating-container {
+    display: flex;
+    align-items: center;
+    grid-column: span 2; /* each container spans 2 columns */
+  }
+  
+  .key-index {
+    grid-column: 1 / span 2; /* each key/index spans the first 2 columns */
+    font-size: 1.5rem;
+  }
+  
+  .index {
+    font-size: 1.2em;
+  }

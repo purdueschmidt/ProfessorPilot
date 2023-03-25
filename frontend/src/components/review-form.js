@@ -2,6 +2,10 @@ import React, { useRef, useState } from "react";
 
 import "../styles/components/review-form.css";
 
+import ReviewGrid from "./review-grid";
+import StarRating from "./star-rating";
+import StarGrid from "./star-grid";
+
 export const ReviewForm = () => {
   const reviewer = useRef();
   const courseName = useRef();
@@ -63,8 +67,7 @@ export const ReviewForm = () => {
     }
   };
 
-  const handleRatingChange = (criterion, e) => {
-    const value = parseInt(e.target.value);
+  const handleRatingChange = (criterion, value) => {
     
     switch (criterion) {
       case "difficulty":
@@ -101,96 +104,89 @@ export const ReviewForm = () => {
 
 
     return (
-        <div className="review-item">
-        <h2 className="text-center">Course Review Form</h2>
-            <form id="courseReviewForm" onSubmit={handleSubmit}>
-                <div className="form-group">
-                <label htmlFor="reviewer">Reviewer:</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="reviewer"
-                    name="reviewer"
-                    required
-                    ref={reviewer}
-                />
-                </div>
-                <div className="form-group">
-                <label htmlFor="coursename">Course Name:</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="coursename"
-                    name="coursename"
-                    required 
-                    ref={courseName}
-                />
-                </div>
-                <div className="form-group">
-                <label htmlFor="code">Course Code:</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="code"
-                    name="code" 
-                    required
-                    ref={courseCode}
-                />
-                </div>
-                <div className="form-group">
-                <label htmlFor="term">Term:</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="term"
-                    name="term"
-                    required
-                    ref={term}
-                />
-                </div>
-                <div className="form-group">
-                <label htmlFor="year">Year:</label>
-                <input
-                    type="number"
-                    className="form-control"
-                    id="year"
-                    name="year"
-                    required
-                    ref={year}
-                />
-                </div>
-                {criteria.map((criterion, index) => (
-                <div key={index} className="form-group rating-group">
-                    <label htmlFor={criterion}>{criterion}:</label>
-                    <div className="rating">
-                        {[1, 2, 3, 4, 5].map((rating) => (
-                            <label key={rating}>
-                            <input
-                                type="radio"
-                                name={criterion}
-                                value={rating}
-                                className="rating-input"
-                                onChange={(e) => handleRatingChange(criterion, e)}
-                            />
-                            <span className="rating-star">★</span>
-                        </label>
-                    ))}
-                    </div>
-                </div>
-                ))}
-                <div className="form-group">
-                    <label htmlFor="text">Review Text:</label>
-                    <textarea
-                        className="form-control"
-                        id="text"
-                        name="text"
-                        rows="4"
-                        required
-                        ref={reviewText}
-                    ></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+      <div className="review-item">
+      <h2 className="text-center">Course Review Form</h2>
+      <form id="courseReviewForm" onSubmit={handleSubmit}>
+        <ReviewGrid>
+          <div className="form-group reviewer">
+            <label htmlFor="reviewer">Reviewer:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="reviewer"
+              name="reviewer"
+              required
+              ref={reviewer}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="coursename">Course Name:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="coursename"
+              name="coursename"
+              required
+              ref={courseName}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="code">Course Code:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="code"
+              name="code"
+              required
+              ref={courseCode}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="term">Term:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="term"
+              name="term"
+              required
+              ref={term}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="year">Year:</label>
+            <input
+              type="number"
+              className="form-control"
+              id="year"
+              name="year"
+              required
+              ref={year}
+            />
+          </div>
+        </ReviewGrid>
+        <StarGrid>
+          {criteria.map((criterion, index) => (
+            <div key={index} className="form-group rating-group">
+              <label htmlFor={criterion}>{criterion}:</label>
+              <StarRating
+                onRatingChange={(rating) => handleRatingChange(criterion, rating)}
+              />
+            </div>
+          ))}
+        </StarGrid>
+        <div className="form-group">
+            <label htmlFor="text">Review Text:</label>
+            <textarea
+                className="form-control"
+                id="text"
+                name="text"
+                rows="4"
+                required
+                ref={reviewText}
+            ></textarea>
         </div>
+        <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+      </div>
     );
 };

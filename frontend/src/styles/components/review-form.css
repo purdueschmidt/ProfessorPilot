@@ -76,9 +76,9 @@
     color: var(--grey);
   }
   
-  .rating-input:checked ~ .rating-star,
+  .rating-input:checked + .rating-star,
   .rating-star:hover,
-  .rating-star:hover ~ .rating-star {
+  .rating-star:hover + .rating-star {
     color: var(--gold);
   }
   
@@ -97,4 +97,4 @@
       padding: 0.8rem;
     }
   }
-  
+
