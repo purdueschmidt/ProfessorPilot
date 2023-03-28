@@ -1,0 +1,37 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.8rem;
+    margin-top: 3.2rem;
+    background-color: var(--dark-aluminium);
+
+}
+
+.card-content{
+    background-color: var(--black);
+}
+
+.rating-box{
+    background-color: var(--dark-aluminium);
+    padding: 1.8rem;
+    width: 100%;
+}
+
+.rating {
+    color: white;
+    background-color: #635dff;
+}
+
+.text{
+    color: white;
+}
+
+.info-box{
+    background-color: var(--dark-aluminium);
+    padding: 1.8rem;
+    width: 275px;
+    height: 100%;
+}

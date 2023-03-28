@@ -8,18 +8,18 @@
     background-color: var(--dark-aluminium);
   }
   
-  .review-item h2 {
+.review-item h2 {
     color: var(--white);
     font-size: 2.4rem;
     text-align: center;
     margin-bottom: 1.6rem;
   }
   
-  .review-item form {
+.review-item form {
     width: 100%;
   }
   
-  .review-item label {
+.review-item label {
     color: var(--white);
     font-weight: 600;
     font-size: 1.6rem;
@@ -27,8 +27,8 @@
     display: block;
   }
   
-  .review-item input,
-  .review-item textarea {
+.review-item input,
+.review-item textarea {
     width: 100%;
     border-radius: 0.4rem;
     padding: 0.8rem;
@@ -39,8 +39,8 @@
     color: var(--black);
   }
   
-  .review-item button {
-    background-color: var(--blue);
+.review-item button {
+    background-color: #635dff;
     border: none;
     border-radius: 0.8rem;
     color: var(--white);
@@ -51,50 +51,50 @@
     transition: background-color 0.2s ease;
   }
   
-  .review-item button:hover {
+.review-item button:hover {
     background-color: var(--dark-blue);
   }
   
-  .rating-group {
+.rating-group {
     display: flex;
     flex-direction: column;
   }
   
-  .rating {
+.rating {
     display: flex;
     justify-content: flex-start;
   }
   
-  .rating-input {
+.rating-input {
     display: none;
   }
   
-  .rating-star {
+.rating-star {
     font-size: 1.6rem;
     cursor: pointer;
     padding: 0 0.4rem;
     color: var(--grey);
   }
   
-  .rating-input:checked + .rating-star,
-  .rating-star:hover,
-  .rating-star:hover + .rating-star {
+.rating-input:checked + .rating-star,
+.rating-star:hover,
+.rating-star:hover + .rating-star {
     color: var(--gold);
   }
   
-  @media only screen and (max-width: 480px) {
-    .review-item h2 {
+@media only screen and (max-width: 480px) {
+  .review-item h2 {
       font-size: 2rem;
-    }
-  
-    .review-item label {
-      font-size: 1.4rem;
-    }
-  
-    .review-item input,
-    .review-item textarea {
-      font-size: 1.4rem;
-      padding: 0.8rem;
-    }
   }
+  
+  .review-item label {
+    font-size: 1.4rem;
+  }
+  
+  .review-item input,
+  .review-item textarea {
+    font-size: 1.4rem;
+    padding: 0.8rem;
+  }
+}
 
