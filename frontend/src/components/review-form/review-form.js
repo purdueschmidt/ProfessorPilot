@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-import "../styles/components/review-form.css";
+import "../../styles/components/review-form.css";
 
 import ReviewGrid from "./review-grid";
 import StarRating from "./star-rating";

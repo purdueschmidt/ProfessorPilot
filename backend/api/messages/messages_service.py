@@ -3,6 +3,7 @@ from api.messages.message import CourseReview
 from api import config
 import uuid
 import boto3
+from boto3.dynamodb.conditions import Key
 import time
 from flask import jsonify, request
 import os
@@ -72,3 +73,20 @@ def submit_review():
 
     response = table.put_item(Item=course_review)
     return {"Message":"Submit Review Success"}
+
+
+
+def get_recent_reviews():
+    scan_params = {
+        'FilterExpression': Key("PK").begins_with("REVIEW#"),
+        'Limit': 25,  # Set the limit to 25 to return 25 reviews
+    }
+
+    response = table.scan(**scan_params)
+
+    if 'Items' in response:
+        items = response['Items']
+        sorted_items = sorted(items, key=lambda x: x['CreateDate'], reverse=True)
+        return sorted_items
+    else:
+        return []

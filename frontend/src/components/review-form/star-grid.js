@@ -1,5 +1,5 @@
 import React from 'react';
-import "../styles/components/grids/star-grid.css";
+import "../../styles/components/grids/star-grid.css";
 import StarRating from './star-rating';
 
 

@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { PageLoader } from "./components/page-loader";
-import { AuthenticationGuard } from "./components/authentication-guard";
+import { AuthenticationGuard } from "./components/auth/authentication-guard";
 import { AdminPage } from "./pages/admin-page";
 import { CallbackPage } from "./pages/callback-page";
 import { HomePage } from "./pages/home-page";
@@ -10,7 +10,7 @@ import { NotFoundPage } from "./pages/not-found-page";
 import { ProfilePage } from "./pages/profile-page";
 import { ProtectedPage } from "./pages/protected-page";
 import { PublicPage } from "./pages/public-page";
-import { ReviewForm } from "./components/review-form";
+import { ReviewForm } from "./components/review-form/review-form";
 
 export const App = () => {
   const { isLoading } = useAuth0();
