@@ -27,7 +27,7 @@ export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/submit_review" component={<ReviewForm />} />
+      <Route path="/submit_course_review" component={<ReviewForm />} />
       <Route path="/course_reviews" element={<CourseReviewsPage />}/>
       <Route path="/profile" element={<AuthenticationGuard component={ProfilePage} />}/>
       <Route path="/public" element={<PublicPage />} />

@@ -7,7 +7,7 @@ export const ReviewsList = () => {
 
   const fetchRecentReviews = async () => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/recent_reviews`);
+      const response = await fetch(`http://localhost:6060/api/reviews/recent_course_reviews`);
       if (response.ok) {
         const recentReviews = await response.json();
         setReviews(recentReviews);
@@ -27,12 +27,10 @@ export const ReviewsList = () => {
       <Grid container spacing={1}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
-          if (!review.CourseName) return null;
+          // if (!review.CourseName) return null;
           return (
             <Grid item xs={12} sm={6} key={index}>
               <CourseReviewCard
-                courseName={review.CourseName}
-                courseCode={review.CourseCode}
                 term={review.Term}
                 year={review.Year}
                 reviewText={review.ReviewText}

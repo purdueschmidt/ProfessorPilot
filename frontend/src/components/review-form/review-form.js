@@ -8,8 +8,6 @@ import StarGrid from "./star-grid";
 
 export const ReviewForm = () => {
   const reviewer = useRef();
-  const courseName = useRef();
-  const courseCode = useRef();
   const term = useRef();
   const year = useRef();
   const reviewText = useRef();
@@ -19,15 +17,12 @@ export const ReviewForm = () => {
   const [usefulness, setUsefulness] = useState(0);
   const [organization, setOrganization] = useState(0);
   const [workload, setWorkload] = useState(0);
-  const [rating, setRating] = useState(0);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
       reviewer: reviewer.current.value,
-      course_name: courseName.current.value,
-      course_code: courseCode.current.value,
       term: term.current.value,
       year: year.current.value,
       difficulty: difficulty,
@@ -35,7 +30,6 @@ export const ReviewForm = () => {
       usefulness: usefulness,
       organization: organization,
       workload: workload,
-      rating: rating,
       review_text: reviewText.current.value,
     };
 
@@ -46,7 +40,7 @@ export const ReviewForm = () => {
   const submitReview = async (data) => {
     try {
       // const response = await fetch("http://localhost:6060/api/submit_review", {
-        const response = await fetch("http://localhost:6060/api/messages/submit_review", {
+        const response = await fetch("http://localhost:6060/api/reviews/submit_course_review", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,9 +79,6 @@ export const ReviewForm = () => {
       case "workload":
         setWorkload(value);
         break;
-      case "rating":
-        setRating(value);
-        break;
       default:
         break;
     }
@@ -98,8 +89,7 @@ export const ReviewForm = () => {
     "interest",
     "usefulness",
     "organization",
-    "workload",
-    "rating",
+    "workload"
   ];
 
 
@@ -117,28 +107,6 @@ export const ReviewForm = () => {
               name="reviewer"
               required
               ref={reviewer}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="coursename">Course Name:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="coursename"
-              name="coursename"
-              required
-              ref={courseName}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="code">Course Code:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="code"
-              name="code"
-              required
-              ref={courseCode}
             />
           </div>
           <div className="form-group">

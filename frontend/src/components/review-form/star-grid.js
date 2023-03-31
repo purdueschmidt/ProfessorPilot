@@ -4,7 +4,7 @@ import StarRating from './star-rating';
 
 
 const StarGrid = ({ onRatingChange }) => {
-    const criteria = [    'difficulty',    'interest',    'usefulness',    'organization',    'workload',    'rating',  ];
+    const criteria = [    'difficulty',    'interest',    'usefulness',    'organization',    'workload'];
   
     return (
       <div className="star-grid">
