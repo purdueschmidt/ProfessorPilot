@@ -1,4 +1,4 @@
-from .messages_service import get_admin_message, get_protected_message, get_public_message
+from .course_reviews_service import get_admin_message, get_protected_message, get_public_message
 
 
 def test_get_public_message():

@@ -7,7 +7,7 @@ from flask_cors import CORS
 from flask_talisman import Talisman
 
 from api import exception_views
-from api.messages import messages_views
+from api.reviews import course_reviews_views
 from api.security.auth0_service import auth0_service
 
 from common.utils import safe_get_env_var
@@ -81,7 +81,7 @@ def create_app():
     # Blueprint Registration
     ##########################################
 
-    app.register_blueprint(messages_views.bp)
+    app.register_blueprint(course_reviews_views.bp)
     app.register_blueprint(exception_views.bp)
 
     return app

@@ -1,12 +1,38 @@
-from pymongo import MongoClient
-from flask import request
-from bson.objectid import ObjectId
-import time
+from api.reviews.message import Message
+from api import config
 import uuid
+import time
+from flask import jsonify, request
+import os
+from dotenv import load_dotenv
+from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://profpilotbackend:5YhEEhDu80zRZVOj@cluster0.qumcf3l.mongodb.net/test')
+load_dotenv()
+
+client_url = os.getenv('CLIENT')
+
+
+client = MongoClient(client_url)
 db = client['CourseReviews']
 course_reviews = db['CourseReviews']
+
+def get_public_message():
+    return Message(
+        "This is a public message."
+    )
+
+
+def get_protected_message():
+    return Message(
+        "This is a protected message."
+    )
+
+
+def get_admin_message():
+    return Message(
+        "This is an admin message."
+    )
+
 
 def submit_review():
     data = request.get_json()
@@ -44,4 +70,3 @@ def get_recent_reviews():
     cursor = course_reviews.find({"PK": {"$regex": "^REVIEW#"}}).sort("CreateDate", -1).limit(25)
     recent_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
     return recent_reviews
-

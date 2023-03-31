@@ -7,7 +7,7 @@ export const ReviewsList = () => {
 
   const fetchRecentReviews = async () => {
     try {
-      const response = await fetch(`http://localhost:6060/api/messages/recent_reviews`);
+      const response = await fetch(`http://localhost:6060/api/reviews/recent_reviews`);
       if (response.ok) {
         const recentReviews = await response.json();
         setReviews(recentReviews);
@@ -23,7 +23,7 @@ export const ReviewsList = () => {
 
   return (
     <div>
-      <h1>Recent Reviews</h1>
+      <h1></h1>
       <Grid container spacing={1}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
