@@ -9,13 +9,16 @@ from .messages_service import (
     get_public_message,
     get_protected_message,
     get_admin_message,
-    submit_review, 
-    get_recent_reviews
 )
 from ..security.guards import (
     authorization_guard,
     permissions_guard,
     admin_messages_permissions
+)
+
+from ..db.course_reviews_table import (
+    submit_review, 
+    get_recent_reviews
 )
 
 bp_name = 'api-messages'

@@ -11,6 +11,7 @@ import { ProfilePage } from "./pages/profile-page";
 import { ProtectedPage } from "./pages/protected-page";
 import { PublicPage } from "./pages/public-page";
 import { ReviewForm } from "./components/review-form/review-form";
+import { CourseReviewsPage } from "./pages/course-reviews";
 
 export const App = () => {
   const { isLoading } = useAuth0();
@@ -27,10 +28,8 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/submit_review" component={<ReviewForm />} />
-      <Route
-        path="/profile"
-        element={<AuthenticationGuard component={ProfilePage} />}
-      />
+      <Route path="/course_reviews" element={<CourseReviewsPage />}/>
+      <Route path="/profile" element={<AuthenticationGuard component={ProfilePage} />}/>
       <Route path="/public" element={<PublicPage />} />
       <Route
         path="/protected"
