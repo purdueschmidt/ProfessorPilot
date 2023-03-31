@@ -1,7 +1,7 @@
 from api.reviews.message import Message
 import uuid
 import time
-from flask import jsonify, request
+from flask import jsonify, request, Response
 import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
@@ -101,3 +101,44 @@ def get_admin_message():
     return Message(
         "This is an admin message."
     )
+
+
+def submit_course_review():
+    data = request.get_json()
+    reviewer = data['reviewer']
+    review_id = str(uuid.uuid4())
+    timestamp = str(int(time.time() * 1000))
+
+    course_review = {
+        'Reviewer': str(reviewer),
+        'Difficulty': data['difficulty'],
+        'Interest': data['interest'],
+        'Usefulness': data['usefulness'],
+        'Organization': data['organization'],
+        'Workload': data['workload'],
+        'ReviewText': data['review_text'],
+        'Term': data['term'],
+        'Year': data['year'],
+        'Upvotes': 0,
+        'Status': 'active',
+        'CreateDate': timestamp,
+        'ModifiedDate': timestamp,
+        'ReviewId': review_id
+    }
+       
+    
+    response = course_reviews.insert_one(course_review)
+    return {"Message": "Submit Review Success"}
+
+
+def get_recent_course_reviews():
+    cursor = course_reviews.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1).limit(25)
+    recent_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
+    
+    if recent_course_reviews is None:
+        print("null")
+    else:
+        print("not null")
+
+    print('recent course reviews:', recent_course_reviews)
+    return recent_course_reviews

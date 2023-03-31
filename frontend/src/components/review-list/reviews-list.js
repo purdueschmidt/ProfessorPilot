@@ -56,6 +56,7 @@ export const ReviewsList = ({ endpoint, courseCode }) => {
 
   const fetchReviews = useCallback(async () => {
     try {
+
       let response;
       if (endpoint === "recent_course_reviews") {
         response = await fetch(`http://localhost:6060/api/reviews/recent_course_reviews`);
@@ -77,11 +78,12 @@ export const ReviewsList = ({ endpoint, courseCode }) => {
 
   return (
     <div>
-      <h1></h1>
+      <h1>Course Review</h1>
       <Grid container spacing={1}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
           // if (!review.CourseName) return null;
+
           return (
             <Grid item xs={12} sm={6} key={index}>
               <CourseReviewCard

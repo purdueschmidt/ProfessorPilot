@@ -33,7 +33,6 @@ export const App = () => {
 
       <Route path="/courses" element={<ReviewForm />}/>
       <Route path="/submit_course_review" element={<ReviewForm/>} />
-
       <Route path="/coursesPage" element={<CoursesPage />}/>
       <Route path="/coursesPage/:courseCode" element={<CourseReviewsPage />} />
       {/* <Route path="/CourseReviewsPage" element={<CourseReviewsPage />}/> */}

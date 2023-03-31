@@ -12,6 +12,7 @@ from .course_reviews_service import (
     get_recent_course_reviews,
     get_all_courses,
     get_reviews_by_course_code
+    get_recent_course_reviews
 )
 from ..security.guards import (
     authorization_guard,
@@ -28,14 +29,18 @@ bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
 @bp.route('/', methods=(['GET', 'POST']))
 @bp.route('/home', methods=(['GET', 'POST', 'OPTONS']))
 @bp.route('/submit_course_review', methods=['GET', 'POST', 'OPTIONS'])
+@bp.route('/recent_course_reviews', methods=['GET', 'OPTIONS'])
 #@authorization_guard
+
 def home():
     if request.method == 'GET':
-        recent_course_reviews = get_recent_course_reviews()
+        recent_course_reviews = get_recent_course_reviews()  # Remove the arguments from the function call
         response = jsonify(recent_course_reviews)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        # const recentreviews = await response.json();
+        # console.log('Recent review data:', recentreviews);
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)

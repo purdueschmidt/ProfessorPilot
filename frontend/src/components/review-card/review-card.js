@@ -9,6 +9,7 @@ import '../../styles/components/review-card.css'
 
 
 const CourseReviewCard = ({term, year, courseCode, reviewText, workload, organization, usefulness, interest, difficulty }) => {
+
   return (
     <Card className='card' sx={{ minWidth: 200, mt: 2, mb: 2 }}>
         <CardContent className='card-content'>
