@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from api.reviews.message import Message
+=======
+from message import Message
+>>>>>>> 3125e88 (added functions for reviews)
 import uuid
 import time
 from flask import jsonify, request, Response
@@ -87,6 +91,8 @@ def get_all_courses():
 
 
 
+category_index = course_reviews.create_index("CourseName") # create CourseCode index on collection
+
 def get_public_message():
     return Message(
         "This is a public message."
@@ -108,7 +114,7 @@ def submit_course_review():
     reviewer = data['reviewer']
     review_id = str(uuid.uuid4())
     timestamp = str(int(time.time() * 1000))
-
+    print(time)
     course_review = {
         'Reviewer': str(reviewer),
         'Difficulty': data['difficulty'],
@@ -142,3 +148,23 @@ def get_recent_course_reviews():
 
     print('recent course reviews:', recent_course_reviews)
     return recent_course_reviews
+
+def get_all_course_reviews():
+    " Fetches all course reviews from the db collection"
+
+    cursor = course_reviews.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1)
+    all_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
+
+    return all_course_reviews
+
+
+def get_course_reviews(course_name:str):
+    " Fetches course reviews for a specific course from the db collection"
+
+    cursor = course_reviews.find({"CourseName" : course_name}).sort("CreateDate", -1)
+    specific_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
+
+    return  specific_course_reviews
+    
+# print(get_course_reviews("Quantum Networking and Security"))
+

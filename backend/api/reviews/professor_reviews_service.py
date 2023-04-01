@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import message
+=======
+from message import Message
+>>>>>>> 3125e88 (added functions for reviews)
 import uuid
 import time
 from flask import jsonify, request
@@ -11,54 +15,77 @@ load_dotenv()
 client_url = os.getenv('CLIENT')
 
 client = MongoClient(client_url)
-db = client['ProfessorReviews']
-professor_reviews = db['ProfessorReviews']
+db = client['ProfessorPilot']
+professor_reviews_collection = db['ProfessorReviews']
+
+category_index = professor_reviews_collection.create_index("ProfessorName") # create CourseCode index on collection
+
 
 def get_public_message():
-    return message.Message(
+    return Message(
         "This is a public message."
     )
 
 
 def get_protected_message():
-    return message.Message(
+    return Message(
         "This is a protected message."
     )
 
 
 def get_admin_message():
-    return message.Message(
+    return Message(
         "This is an admin message."
     )
 
 def submit_professor_review():
-    # data = request.get_json()
-    # reviewer = data['reviewer']
+    data = request.get_json()
+    reviewer = data['reviewer']
     review_id = str(uuid.uuid4())
     timestamp = str(int(time.time() * 1000))
 
     professor_review = { 
-        'User': 'Alex',
-        'ProfessorName': 'Henry Chen',
-        'Communication': 4,
-        'Organization': 5,
-        'Availability': 4,
-        'Grading': 5,
-        'Competency': 5,
-        'ReviewText': ' Great professor',
+        'Reviewer': str(reviewer),
+        'Communication': data['communication'],
+        'Organization': data['organization'],
+        'Availability': data['availability'],
+        'Grading': data['grading'],
+        'Competency': data['competency'],
+        'ReviewText': data['review_text'],
         'Upvotes': 0,
         'Status': 'active',
         'CreateDate': timestamp,
+        'ModifiedDate': timestamp,
         'ReviewId': review_id
 
     }
-    response = professor_reviews.insert_one(professor_review)
+    response = professor_reviews_collection.insert_one(professor_review)
     return {"Message": "Submit Review Success"}
 
 def get_recent_professor_reviews():
-    cursor = professor_reviews.find({"User": {"$regex": "^REVIEW#"}}).sort("CreateDate", -1).limit(25)
+    cursor = professor_reviews_collection.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1).limit(25)
     recent_professor_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
+
     return recent_professor_reviews
 
 
+<<<<<<< HEAD
 # print(get_recent_reviews)
+=======
+def get_all_professor_reviews():
+    " Fetches all professor reviews from the db collection"
+    cursor = professor_reviews_collection.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1)
+    all_professor_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
+
+    
+    return all_professor_reviews
+
+def get_professor_reviews(professor_name):
+    " Fetches reviews for a specific professor from the db collection"
+
+    cursor = professor_reviews_collection.find({"ProfessorName" : professor_name}).sort("CreateDate", -1)
+    specific_professor_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
+
+    return  specific_professor_reviews
+
+>>>>>>> 3125e88 (added functions for reviews)
