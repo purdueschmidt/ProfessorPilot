@@ -18,9 +18,12 @@ from ..security.guards import (
 bp_name = 'api-reviews'
 bp_url_prefix = '/api/reviews'
 bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
+
 @bp.route("/public")
 def public():
     return vars(get_public_message())
+
+
 @bp.route('/submit_review', methods=['GET', 'POST', 'OPTIONS'])
 @bp.route('/recent_reviews', methods=['GET', 'OPTIONS'])
 def Home():

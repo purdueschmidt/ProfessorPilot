@@ -1,4 +1,3 @@
-// import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { NavBarTab } from "./nav-bar-tab";
 
@@ -8,8 +7,8 @@ export const NavBarTabs = () => {
   return (
     <div className="nav-bar__tabs">
         <NavBarTab path="/" label="Home" />
-        <NavBarTab path="/public" label="Course Reviews" />
-        <NavBarTab path="/public" label="Professor Reviews" />
+        <NavBarTab path="/courses" label="Courses"/>
+        <NavBarTab path="/public" label="Professors" />
       {/*<NavBarTab path="/profile" label="Profile" />*/}
       {/*<NavBarTab path="/public" label="Public" />*/}
       {/*{isAuthenticated && (*/}

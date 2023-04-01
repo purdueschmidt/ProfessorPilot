@@ -45,6 +45,9 @@ def home():
         val = submit_course_review()
         return jsonify(val), 200
 
+
+
+
 @bp.route("/public")
 def public():
     return vars(get_public_message())

@@ -54,6 +54,8 @@ def get_recent_course_reviews():
     print('recent course reviews:', recent_course_reviews)
     return recent_course_reviews
 
+
+
 def get_public_message():
     return Message(
         "This is a public message."

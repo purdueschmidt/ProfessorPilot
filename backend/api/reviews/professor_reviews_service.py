@@ -51,6 +51,7 @@ def submit_professor_review():
     }
     response = professor_reviews.insert_one(professor_review)
     return {"Message": "Submit Review Success"}
+
 def get_recent_professor_reviews():
     cursor = professor_reviews.find({"User": {"$regex": "^REVIEW#"}}).sort("CreateDate", -1).limit(25)
     recent_professor_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
