@@ -1,4 +1,90 @@
-.review-item {
+.review-form-container {
+  background-color: var(--dark-aluminium);
+  border-radius: 4px;
+  padding: 20px;
+  color: white;
+}
+
+.review-form-title {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.review-form-field {
+  color: white !important;
+}
+
+.review-form-field input,
+.review-form-field textarea {
+  color: white;
+}
+
+.review-form-field label {
+  color: white;
+}
+
+.review-form-field input::placeholder,
+.review-form-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.review-form-field .MuiInput-underline::before,
+.review-form-field .MuiInput-underline::after {
+  border-color: white;
+}
+
+.review-form-field .MuiSelect-icon {
+  fill: white;
+}
+
+.review-form-button {
+  margin-top: 20px;
+}
+.review-form-fieldd{
+  color: var(--dark-aluminium);
+}
+.grouped-select-container {
+  background-color: var(--dark-aluminium);
+  border-radius: 4px;
+  padding: 20px;
+  color: white;
+}
+
+.grouped-select-input-label {
+  color: white;
+}
+
+.grouped-select-none {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.grouped-select-optgroup {
+  color: white;
+}
+
+.grouped-select-option {
+  color: white;
+  background-color: var(--dark-aluminium);
+}
+
+.grouped-select {
+  color: white;
+  background-color: var(--dark-aluminium);
+}
+
+.grouped-select-form-control .MuiInput-underline::before,
+.grouped-select-form-control .MuiInput-underline::after {
+  border-color: white;
+}
+
+.grouped-select-form-control .MuiSelect-icon {
+  fill: white;
+}
+
+
+
+
+/* .review-item {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -97,4 +183,4 @@
     padding: 0.8rem;
   }
 }
-
+ */

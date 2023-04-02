@@ -29,9 +29,11 @@ export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      {/* <Route path="/questions" component={<ReviewForm />} /> */}
       <Route path="/submit_course_review" component={<ReviewForm />} />
+      <Route path="/courses" element={<ReviewForm />}/>
       <Route path="/course_reviews" element={<CourseReviewsPage />}/>
-      <Route path="/courses" element={<CoursesPage />}/>
+      <Route path="/coursesPage" element={<CoursesPage />}/>
       <Route path="/course-reviews/:course_id" element={<CourseReviews />} />
       <Route path="/profile" element={<AuthenticationGuard component={ProfilePage} />}/>
       <Route path="/public" element={<PublicPage />} />

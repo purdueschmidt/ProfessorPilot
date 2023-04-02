@@ -22,18 +22,20 @@ def get_all_courses():
     print('All courses:', all_courses)
     return all_courses
 
-# def get_course_reviews():
-#     cursor = courses_collection.find({})
-#     all_courses = [{**course, '_id': str(course['_id'])} for course in cursor]
 
-#     if all_courses is None:
-#         print("null")
-#     else:
-#         print("not null")
+def get_courses_from_db():
+    courses_collection = db["Courses"]
 
-#     print('All courses:', all_courses)
-#     return all_courses
+    courses = []
+    for course in courses_collection.find():
+        courses.append({
+            "_id": str(course["_id"]),
+            "major": course["major"],
+            "course_code": course["course_code"],
+            "course_name": course["course_name"]
+        })
 
+    return courses
 
 if __name__ == "__main__":
     get_all_courses()

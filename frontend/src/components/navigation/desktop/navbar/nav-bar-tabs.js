@@ -7,7 +7,7 @@ export const NavBarTabs = () => {
   return (
     <div className="nav-bar__tabs">
         <NavBarTab path="/" label="Home" />
-        <NavBarTab path="/courses" label="Courses"/>
+        <NavBarTab path="/coursesPage" label="Courses"/>
         <NavBarTab path="/public" label="Professors" />
       {/*<NavBarTab path="/profile" label="Profile" />*/}
       {/*<NavBarTab path="/public" label="Public" />*/}

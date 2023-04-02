@@ -1,10 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect} from "react";
 
 import "../../styles/components/review-form.css";
 
-import ReviewGrid from "./review-grid";
-import StarRating from "./star-rating";
-import StarGrid from "./star-grid";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Rating from "@mui/material/Rating";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
 
 export const ReviewForm = () => {
   const reviewer = useRef();
@@ -12,11 +19,35 @@ export const ReviewForm = () => {
   const year = useRef();
   const reviewText = useRef();
 
+  const [major, setMajor] = useState("");
+  const [courses, setCourses] = useState([]);
+  const [courseCode, setCourseCode] = useState("");
+
+
   const [difficulty, setDifficulty] = useState(0);
   const [interest, setInterest] = useState(0);
   const [usefulness, setUsefulness] = useState(0);
   const [organization, setOrganization] = useState(0);
   const [workload, setWorkload] = useState(0);
+
+  useEffect(() => {
+    fetchCoursesAndMajors();
+  }, []);
+
+  const fetchCoursesAndMajors = async () => {
+    try {
+      const response = await fetch("http://localhost:6060/api/courses/courses");
+      if (response.ok) {
+        const data = await response.json();
+        setCourses(data);
+      } else {
+        console.error("Failed to fetch courses");
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,6 +56,7 @@ export const ReviewForm = () => {
       reviewer: reviewer.current.value,
       term: term.current.value,
       year: year.current.value,
+      courseCode: courseCode,
       difficulty: difficulty,
       interest: interest,
       usefulness: usefulness,
@@ -84,6 +116,16 @@ export const ReviewForm = () => {
     }
   };
 
+  const handleChange = (event) => {
+    console.log("Select change event:", event);
+    const name = event.target.name;
+    const value = event.target.value;
+  
+    if (name === "courseCode") {
+      setCourseCode(event.target.value);
+    }
+  };
+
   const criteria = [
     "difficulty",
     "interest",
@@ -92,69 +134,94 @@ export const ReviewForm = () => {
     "workload"
   ];
 
+  const uniqueMajors = Array.from(new Set(courses.map((course) => course.major)));
 
-    return (
-      <div className="review-item">
-      <h2 className="text-center">Course Review Form</h2>
+
+  return (
+    <Container maxWidth="sm" className="review-form-container">
+      <Typography variant="h4" align="center" className="review-form-title" gutterBottom>
+        Course Review Form
+      </Typography>
       <form id="courseReviewForm" onSubmit={handleSubmit}>
-        <ReviewGrid>
-          <div className="form-group reviewer">
-            <label htmlFor="reviewer">Reviewer:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="reviewer"
-              name="reviewer"
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              className="review-form-field"
+              label="Reviewer"
+              fullWidth
               required
-              ref={reviewer}
+              inputRef={reviewer}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="term">Term:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="term"
-              name="term"
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              className="review-form-field"
+              label="Term"
+              fullWidth
               required
-              ref={term}
+              inputRef={term}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="year">Year:</label>
-            <input
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              className="review-form-field"
+              label="Year"
+              fullWidth
+              required
               type="number"
-              className="form-control"
-              id="year"
-              name="year"
-              required
-              ref={year}
+              inputRef={year}
             />
-          </div>
-        </ReviewGrid>
-        <StarGrid>
-          {criteria.map((criterion, index) => (
-            <div key={index} className="form-group rating-group">
-              <label htmlFor={criterion}>{criterion}:</label>
-              <StarRating
-                onRatingChange={(rating) => handleRatingChange(criterion, rating)}
-              />
+          </Grid>
+          
+          <Grid item xs={12} sm={6}>
+            <div className="grouped-select-container">
+              <FormControl className="grouped-select-form-control" sx={{ m: 1, minWidth: 120}}>
+                <InputLabel className="review-form-field" htmlFor="grouped-native-select">Course Code</InputLabel>
+                <Select name="courseCode" onChange={handleChange} value={courseCode} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
+                  <option aria-label="None" value="" />
+                  {uniqueMajors.map((major, index) => (
+                    <optgroup key={index} label={major}>
+                      {courses
+                        .filter((course) => course.major === major)
+                        .map((course) => (
+                          <option className="review-form-field" key={course.course_code} value={course.course_code}>
+                            {course.course_code}
+                          </option>
+                        ))}
+                    </optgroup>
+                  ))}
+                </Select>
+              </FormControl>
             </div>
+          </Grid>
+          {criteria.map((criterion, index) => (
+            <Grid item xs={12} sm={6} key={index}>
+              <Typography variant="subtitle1" className="review-form-field">{criterion}:</Typography>
+              <Rating
+                name={criterion}
+                value={eval(criterion)}
+                onChange={(event, newValue) => handleRatingChange(criterion, newValue)}
+              />
+            </Grid>
           ))}
-        </StarGrid>
-        <div className="form-group">
-            <label htmlFor="text">Review Text:</label>
-            <textarea
-                className="form-control"
-                id="text"
-                name="text"
-                rows="4"
-                required
-                ref={reviewText}
-            ></textarea>
-        </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    );
+          <Grid item xs={12}>
+            <TextField
+              className="review-form-field"
+              label="Review Text"
+              multiline
+              rows={4}
+              fullWidth
+              required
+              inputRef={reviewText}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" className="review-form-button">
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </Container>
+  );
 };

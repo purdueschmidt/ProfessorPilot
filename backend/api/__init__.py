@@ -13,6 +13,8 @@ from api.security.auth0_service import auth0_service
 
 from common.utils import safe_get_env_var
 
+from .utils import CustomJSONEncoder
+
 def create_app():
     ##########################################
     # Environment Variables
@@ -26,6 +28,7 @@ def create_app():
     ##########################################
 
     app = Flask(__name__, instance_relative_config=True)
+    app.json_encoder = CustomJSONEncoder #for mongodb
     
 
     ##########################################

@@ -8,11 +8,11 @@ import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 
 
-const CourseCard = ({ major, course_code, course_name, course_id }) => {
+const CourseCard = ({ major, course_code, course_name, _id }) => {
   const navigate = useNavigate();
   
   const handleClick = () => {
-    navigate(`/course-reviews/${course_id}`);
+    navigate(`/course-reviews/${_id}`);
     };
 
   return (

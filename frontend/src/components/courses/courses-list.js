@@ -8,7 +8,7 @@ const CoursesList = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch('http://localhost:6060/api/courses/courses');
+      const response = await fetch('http://localhost:6060/api/courses/coursesPage');
       if (response.ok){
         const courses = await response.json();
         setCourses(courses)
@@ -47,10 +47,3 @@ const CoursesList = () => {
 
 
 export default CoursesList;
-
-
-
-
-
-// {Array.isArray(courses) &&
-
