@@ -32,9 +32,11 @@ def public():
 
 @bp.route('/home', methods=(['GET', 'POST', 'OPTONS']))
 @bp.route('/recent_professor_reviews', methods=['GET', 'OPTIONS'])
+@bp.route('/submit_professor_review', methods=['GET', 'POST', 'OPTIONS'])
+
 def Home():
     if request.method == 'GET':
-        recent_professor_reviews = get_recent_professor_reviews
+        recent_professor_reviews = get_recent_professor_reviews()
         response = jsonify(recent_professor_reviews)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
@@ -44,13 +46,9 @@ def Home():
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-
-
-@bp.route('/submit_professor_review', methods=['GET', 'POST', 'OPTIONS'])
-def submit_professor_review():
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'     
     if request.method == 'POST':
-        val = submit_professor_review
+        val = submit_professor_review()
         return jsonify(val), 200
 
 
@@ -59,7 +57,7 @@ def get_all_professor_reviews():
     "Gets all professor reviews"
 
     if request.method == 'GET':
-        professor_reviews = get_all_professor_reviews
+        professor_reviews = get_all_professor_reviews()
         response = jsonify(professor_reviews)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'

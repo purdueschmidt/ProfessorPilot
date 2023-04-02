@@ -10,14 +10,11 @@ from .course_reviews_service import (
     get_admin_message,
     submit_course_review,
     get_recent_course_reviews,
-<<<<<<< HEAD
     get_all_courses,
     get_reviews_by_course_code
     get_recent_course_reviews
-=======
     get_all_course_reviews,
     get_course_reviews
->>>>>>> 3125e88 (added functions for reviews)
 )
 from ..security.guards import (
     authorization_guard,
@@ -34,12 +31,15 @@ bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
 @bp.route('/', methods=(['GET', 'POST']))
 @bp.route('/home', methods=(['GET', 'POST', 'OPTONS']))
 @bp.route('/recent_course_reviews', methods=['GET', 'OPTIONS'])
+@bp.route('/submit_course_review', methods=['GET', 'POST', 'OPTIONS'])
+
 #@authorization_guard
 
 def home():
     if request.method == 'GET':
         recent_course_reviews = get_recent_course_reviews()  # Remove the arguments from the function call
         response = jsonify(recent_course_reviews)
+        print('my response',response)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
@@ -52,14 +52,10 @@ def home():
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response
-   
-@bp.route('/submit_course_review', methods=['GET', 'POST', 'OPTIONS'])
-def submit_course_review():
      
     if request.method == 'POST':
         val = submit_course_review()
         return jsonify(val), 200
-<<<<<<< HEAD
 
 @bp.route("/recent_course_reviews", methods=["GET", "OPTIONS"])
 def recent_entries():
@@ -90,23 +86,6 @@ def get_course_reviews(courseCode):
         return response
     if request.method == 'GET':
         course_reviews = get_reviews_by_course_code(courseCode)
-=======
-  
-
-@bp.route('/all_course_reviews', methods=['GET', 'OPTIONS'])
-def get_all_course_reviews():  
-    "Gets all course reviews"
-    if request.method == 'GET':
-        course_reviews = get_all_course_reviews
->>>>>>> 3125e88 (added functions for reviews)
-        response = jsonify(course_reviews)
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-
-        return response, 200
-<<<<<<< HEAD
-
 
 
 #COURSES
@@ -156,18 +135,3 @@ def admin():
 #         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
 #         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
 #         return response, 200
-=======
-    
-@bp.route('/courses/<course_name>/course_reviews', methods=['GET', 'OPTIONS'])
-def get_course_reviews(course_name:str):  
-
-    "Gets reviews for a specific course"
-    if request.method == 'GET':
-        course_reviews = get_course_reviews(course_name)
-        response = jsonify(course_reviews)
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-
-        return response, 200
->>>>>>> 3125e88 (added functions for reviews)

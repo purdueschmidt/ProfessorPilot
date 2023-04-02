@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import message
-=======
-from message import Message
->>>>>>> 3125e88 (added functions for reviews)
+from api.reviews.message import Message
 import uuid
 import time
 from flask import jsonify, request
@@ -68,10 +64,6 @@ def get_recent_professor_reviews():
 
     return recent_professor_reviews
 
-
-<<<<<<< HEAD
-# print(get_recent_reviews)
-=======
 def get_all_professor_reviews():
     " Fetches all professor reviews from the db collection"
     cursor = professor_reviews_collection.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1)
@@ -88,4 +80,3 @@ def get_professor_reviews(professor_name):
 
     return  specific_professor_reviews
 
->>>>>>> 3125e88 (added functions for reviews)

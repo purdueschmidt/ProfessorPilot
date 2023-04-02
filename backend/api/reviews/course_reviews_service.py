@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 from api.reviews.message import Message
-=======
-from message import Message
->>>>>>> 3125e88 (added functions for reviews)
+
 import uuid
 import time
 from flask import jsonify, request, Response
@@ -10,6 +7,7 @@ import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from bson import Decimal128
+
 
 
 load_dotenv()
@@ -138,6 +136,7 @@ def submit_course_review():
 
 
 def get_recent_course_reviews():
+    
     cursor = course_reviews.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1).limit(25)
     recent_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
     
@@ -168,3 +167,4 @@ def get_course_reviews(course_name:str):
     
 # print(get_course_reviews("Quantum Networking and Security"))
 
+# get_recent_course_reviews()
