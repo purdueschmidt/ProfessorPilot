@@ -22,11 +22,12 @@ course_form =db['CourseForm']
 #category_index = course_reviews.create_index("courseCode") # create CourseCode index on collection
 
 
-def submit_course_review():
-    data = request.get_json()
+def submit_course_review(course_json):
+    data = course_json
+
     reviewer = data['reviewer']
-    _id = str(uuid.uuid4())
-    timestamp = str(int(time.time() * 1000))
+    review_id = str(uuid.uuid4())
+    timestamp = str(int(time.time()))
 
     course_review = {
         '_id': _id,
@@ -46,6 +47,7 @@ def submit_course_review():
         'ModifiedDate': timestamp
     }
 
+    response = course_reviews.insert_one(course_review)
     return {"Message": "Submit Review Success"}
 
 def get_recent_course_reviews():
@@ -106,33 +108,6 @@ def get_admin_message():
         "This is an admin message."
     )
 
-
-def submit_course_review():
-    data = request.get_json()
-    reviewer = data['reviewer']
-    _id = str(uuid.uuid4())
-    timestamp = str(int(time.time() * 1000))
-    course_review = {
-        '_id': _id,
-        'Reviewer': str(reviewer),
-        'courseCode': data['courseCode'],
-        'Term': data['term'],
-        'Year': data['year'],
-        'Difficulty': data['difficulty'],
-        'Interest': data['interest'],
-        'Usefulness': data['usefulness'],
-        'Organization': data['organization'],
-        'Workload': data['workload'],
-        'ReviewText': data['review_text'],
-        'Upvotes': 0,
-        'Status': 'active',
-        'CreateDate': timestamp,
-        'ModifiedDate': timestamp
-    }
-    response = course_reviews.insert_one(course_review)
-    return {"Message": "Submit Review Success"}
-
-
 def get_recent_course_reviews():
     cursor = course_reviews.find({"Status": "active"}).sort(("CreateDate", -1)).limit=25
     
@@ -148,7 +123,4 @@ def get_course_reviews(course_code:str):
     specific_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
 
     return  specific_course_reviews
-    
-# print(get_course_reviews("Quantum Networking and Security"))
 
-# get_recent_course_reviews()
