@@ -13,7 +13,7 @@ import { PublicPage } from "./pages/public-page";
 import { ReviewForm } from "./components/review-form/review-form";
 import { CourseReviewsPage } from "./pages/course-reviews";
 import { CoursesPage } from "./pages/courses";
-import CourseReviews from './components/courses/course-reviews';
+import { ReviewsList } from "./components/review-list/reviews-list";
 
 export const App = () => {
   const { isLoading } = useAuth0();
@@ -29,12 +29,14 @@ export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      {/* <Route path="/questions" component={<ReviewForm />} /> */}
-      <Route path="/submit_course_review" component={<ReviewForm />} />
+      <Route path="/recent_course_reviews" element={<ReviewsList endpoint={"recent_course_reviews"} />}/>
+
       <Route path="/courses" element={<ReviewForm />}/>
-      <Route path="/course_reviews" element={<CourseReviewsPage />}/>
+      <Route path="/submit_course_review" element={<ReviewForm/>} />
+
       <Route path="/coursesPage" element={<CoursesPage />}/>
-      <Route path="/course-reviews/:course_id" element={<CourseReviews />} />
+      <Route path="/coursesPage/:courseCode" element={<CourseReviewsPage />} />
+      {/* <Route path="/CourseReviewsPage" element={<CourseReviewsPage />}/> */}
       <Route path="/profile" element={<AuthenticationGuard component={ProfilePage} />}/>
       <Route path="/public" element={<PublicPage />} />
       <Route

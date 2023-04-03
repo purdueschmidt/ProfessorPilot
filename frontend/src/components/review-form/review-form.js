@@ -36,7 +36,7 @@ export const ReviewForm = () => {
 
   const fetchCoursesAndMajors = async () => {
     try {
-      const response = await fetch("http://localhost:6060/api/courses/courses");
+      const response = await fetch("http://localhost:6060/api/reviews/courses");
       if (response.ok) {
         const data = await response.json();
         setCourses(data);

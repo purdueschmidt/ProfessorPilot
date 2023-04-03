@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import '../../styles/components/review-card.css'
 
 
-const CourseReviewCard = ({term, year, reviewText, workload, organization, usefulness, interest, difficulty }) => {
+const CourseReviewCard = ({term, year, courseCode, reviewText, workload, organization, usefulness, interest, difficulty }) => {
   return (
     <Card className='card' sx={{ minWidth: 200, mt: 2, mb: 2 }}>
         <CardContent className='card-content'>
@@ -31,6 +31,7 @@ const CourseReviewCard = ({term, year, reviewText, workload, organization, usefu
                         {/* <Typography className='text' variant="h6">{courseName}</Typography> */}
                         <Divider orientation="vertical" flexItem />
                         <Typography className='text' variant="subtitle1">{term}, {year}</Typography>
+                        <Typography className='text' variant="subtitle1">Course Code: {courseCode}</Typography>
                     <Box className='review-box' mt={1}>
                         <Typography className='text'>{reviewText}</Typography>
                     </Box>

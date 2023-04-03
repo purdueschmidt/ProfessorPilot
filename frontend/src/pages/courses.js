@@ -5,7 +5,7 @@ import CoursesList from "../components/courses/courses-list";
 
 export const CoursesPage = () => (
   <PageLayout>
-    <CoursesList></CoursesList>
+    <CoursesList />
     <ReviewForm/>
   </PageLayout>
 );

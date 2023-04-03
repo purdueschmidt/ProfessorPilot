@@ -7,7 +7,7 @@ import { ReviewsList } from "../components/review-list/reviews-list";
 export const HomePage = () => (
   <PageLayout>
     <HeroBanner />
-      <ReviewsList></ReviewsList>
+      <ReviewsList endpoint="recent_course_reviews" />
       <ReviewForm/>
   </PageLayout>
 );

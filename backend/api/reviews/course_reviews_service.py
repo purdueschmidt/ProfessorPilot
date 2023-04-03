@@ -17,11 +17,8 @@ client = MongoClient(client_url)
 db = client['ProfessorPilot']
 course_reviews = db['CourseReviews']
 course_form =db['CourseForm']
+#category_index = course_reviews.create_index("courseCode") # create CourseCode index on collection
 
-def get_form_questions():
-    cursor = course_form.find()
-    questions = [entry for entry in cursor]
-    return questions
 
 def submit_course_review():
     data = request.get_json()
@@ -47,7 +44,6 @@ def submit_course_review():
         'ModifiedDate': timestamp
     }
 
-    response = course_reviews.insert_one(course_review)
     return {"Message": "Submit Review Success"}
 
 def get_recent_course_reviews():
@@ -59,17 +55,20 @@ def get_recent_course_reviews():
     recent_entries = [entry for entry in cursor]
     return recent_entries
 
+def get_reviews_by_course_code(courseCode):
+    " Fetches course reviews for a specific course from the db collection"
 
-def get_reviews_by_course_code(course_code):
     cursor = course_reviews.find(
-        {"Status": "active", "CourseCode": course_code},
-        sort=[("CreateDate", -1)]
+        {"status": "active", "CourseCode": courseCode},
+        sort=[("CreateDate", -1)],
+        limit=25
     )
-    matching_reviews = [entry for entry in cursor]
-    return matching_reviews
+    specific_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
+    return specific_course_reviews
+
+#COURSES
 
 courses_collection = db['Courses']
-
 def get_all_courses():
     cursor = courses_collection.find({})
     all_courses = [{**course, '_id': str(course['_id'])} for course in cursor]
@@ -81,19 +80,22 @@ def get_all_courses():
 
     print('All courses:', all_courses)
     return all_courses
-    
+
+
+
+
+
+
 
 def get_public_message():
     return Message(
         "This is a public message."
     )
 
-
 def get_protected_message():
     return Message(
         "This is a protected message."
     )
-
 
 def get_admin_message():
     return Message(
