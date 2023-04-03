@@ -9,7 +9,6 @@ def json_abort(status_code, data=None):
 from bson.decimal128 import Decimal128
 from flask.json import JSONEncoder
 
-
 #for mongodb
 class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):

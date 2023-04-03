@@ -110,57 +110,41 @@ def get_admin_message():
 def submit_course_review():
     data = request.get_json()
     reviewer = data['reviewer']
-    review_id = str(uuid.uuid4())
+    _id = str(uuid.uuid4())
     timestamp = str(int(time.time() * 1000))
-    print(time)
     course_review = {
+        '_id': _id,
         'Reviewer': str(reviewer),
+        'courseCode': data['courseCode'],
+        'Term': data['term'],
+        'Year': data['year'],
         'Difficulty': data['difficulty'],
         'Interest': data['interest'],
         'Usefulness': data['usefulness'],
         'Organization': data['organization'],
         'Workload': data['workload'],
         'ReviewText': data['review_text'],
-        'Term': data['term'],
-        'Year': data['year'],
         'Upvotes': 0,
         'Status': 'active',
         'CreateDate': timestamp,
-        'ModifiedDate': timestamp,
-        'ReviewId': review_id
+        'ModifiedDate': timestamp
     }
-       
-    
     response = course_reviews.insert_one(course_review)
     return {"Message": "Submit Review Success"}
 
 
 def get_recent_course_reviews():
+    cursor = course_reviews.find({"Status": "active"}).sort(("CreateDate", -1)).limit=25
     
-    cursor = course_reviews.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1).limit(25)
-    recent_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
-    
-    if recent_course_reviews is None:
-        print("null")
-    else:
-        print("not null")
-
-    print('recent course reviews:', recent_course_reviews)
-    return recent_course_reviews
-
-def get_all_course_reviews():
-    " Fetches all course reviews from the db collection"
-
-    cursor = course_reviews.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1)
-    all_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
-
-    return all_course_reviews
+    recent_entries = [entry for entry in cursor]
+    return recent_entries
 
 
-def get_course_reviews(course_name:str):
+
+def get_course_reviews(course_code:str):
     " Fetches course reviews for a specific course from the db collection"
 
-    cursor = course_reviews.find({"CourseName" : course_name}).sort("CreateDate", -1)
+    cursor = course_reviews.find({"CourseName" : course_code}).sort("CreateDate", -1)
     specific_course_reviews = [{**review, '_id': str(review['_id'])} for review in cursor]
 
     return  specific_course_reviews
