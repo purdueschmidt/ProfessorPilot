@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect} from "react";
 import "../../styles/components/review-form.css";
 
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -143,8 +143,8 @@ export const ReviewForm = () => {
         Course Review Form
       </Typography>
       <form id="courseReviewForm" onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={3}>
             <TextField
               className="review-form-field"
               label="Reviewer"
@@ -153,7 +153,7 @@ export const ReviewForm = () => {
               inputRef={reviewer}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
             <TextField
               className="review-form-field"
               label="Term"
@@ -162,7 +162,7 @@ export const ReviewForm = () => {
               inputRef={term}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
             <TextField
               className="review-form-field"
               label="Year"
@@ -172,36 +172,42 @@ export const ReviewForm = () => {
               inputRef={year}
             />
           </Grid>
-          
-          <Grid item xs={12} sm={6}>
-            <div className="grouped-select-container">
-              <FormControl className="grouped-select-form-control" sx={{ m: 1, minWidth: 120}}>
-                <InputLabel className="review-form-field" htmlFor="grouped-native-select">Course Code</InputLabel>
-                <Select name="courseCode" onChange={handleChange} value={courseCode} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
-                  <option aria-label="None" value="" />
-                  {uniqueMajors.map((major, index) => (
-                    <optgroup key={index} label={major}>
-                      {courses
-                        .filter((course) => course.major === major)
-                        .map((course) => (
-                          <option className="review-form-field" key={course.course_code} value={course.course_code}>
-                            {course.course_code}
-                          </option>
-                        ))}
-                    </optgroup>
-                  ))}
-                </Select>
-              </FormControl>
-            </div>
+          <Grid item xs={12} sm={3}>
+            <FormControl sx={{ minWidth: 120}}>
+              <InputLabel className="review-form-field" htmlFor="grouped-native-select">Course Code</InputLabel>
+              <Select name="courseCode" onChange={handleChange} value={courseCode} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
+                <option className="" aria-label="None" value="" />
+                {uniqueMajors.map((major, index) => (
+                  <optgroup key={index} label={major}>
+                    {courses
+                      .filter((course) => course.major === major)
+                      .map((course) => (
+                        <option className="review-form-fieldd" key={course.course_code} value={course.course_code}>
+                          {course.course_code}
+                        </option>
+                      ))}
+                  </optgroup>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
           {criteria.map((criterion, index) => (
-            <Grid item xs={12} sm={6} key={index}>
-              <Typography variant="subtitle1" className="review-form-field">{criterion}:</Typography>
-              <Rating
-                name={criterion}
-                value={eval(criterion)}
-                onChange={(event, newValue) => handleRatingChange(criterion, newValue)}
-              />
+            <Grid item xs={12} sm={2} key={index}>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                width="100%"
+                height="100%"
+              >
+                <Typography variant="subtitle1" className="review-form-field">{criterion}:</Typography>
+                <Rating
+                  name={criterion}
+                  value={eval(criterion)}
+                  onChange={(event, newValue) => handleRatingChange(criterion, newValue)}
+                />
+              </Box>
             </Grid>
           ))}
           <Grid item xs={12}>

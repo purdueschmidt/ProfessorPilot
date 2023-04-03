@@ -15,8 +15,19 @@
 }
 
 .review-form-field input,
-.review-form-field textarea {
+.review-form-field textarea,
+.review-form-field select {
   color: white;
+  background-color: var(--dark-aluminium);
+}
+
+.review-form-fieldd {
+  color: rgb(0, 0, 0) !important;
+}
+
+.review-form-fieldd input,
+.review-form-fieldd textarea {
+  color: rgb(0, 0, 0);
 }
 
 .review-form-field label {
@@ -40,9 +51,116 @@
 .review-form-button {
   margin-top: 20px;
 }
-.review-form-fieldd{
-  color: var(--dark-aluminium);
+
+/* Add the following styles for the select menu */
+.review-form-fieldd .MuiNativeSelect-select {
+  background-color: var(--dark-aluminium);
+  color: rgb(0, 0, 0);
 }
+
+.review-form-fieldd .MuiNativeSelect-select option {
+  background-color: var(--dark-aluminium);
+  color: white;
+}
+
+/* Update the styling for the Select dropdown */
+.review-form-fieldd .MuiNativeSelect-select:focus {
+  background-color: var(--dark-aluminium);
+}
+
+/* Additional styles to fix the input background and text color */
+.review-form-field .MuiInputBase-input,
+.review-form-field .MuiOutlinedInput-input {
+  background-color: var(--dark-aluminium);
+  color: white;
+}
+
+/* Fix the TextField background issue when typing */
+.review-form-field .MuiInputBase-root::before,
+.review-form-field .MuiInputBase-root::after {
+  display: none;
+}
+
+.MuiNativeSelect-select {
+  background-color: var(--dark-aluminium);
+}
+
+.MuiNativeSelect-select option {
+  background-color: var(--dark-aluminium);
+  color: white;
+}
+
+
+
+/* Override the autofill background color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--dark-aluminium) inset !important;
+  box-shadow: 0 0 0 30px var(--dark-aluminium) inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+
+/* .review-form-container {
+  background-color: var(--dark-aluminium);
+  border-radius: 4px;
+  padding: 20px;
+  color: white;
+}
+
+.review-form-title {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.review-form-field {
+  color: white !important;
+}
+
+.review-form-field input,
+.review-form-field textarea {
+  color: rgb(0, 0, 0);
+}
+
+.review-form-fieldd {
+  color: rgb(0, 0, 0) !important;
+}
+
+.review-form-fieldd input,
+.review-form-fieldd textarea {
+  color: rgb(0, 0, 0);
+}
+
+
+.review-form-field label {
+  color: white;
+}
+
+.review-form-field input::placeholder,
+.review-form-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+
+.review-form-field .MuiInput-underline::before,
+.review-form-field .MuiInput-underline::after {
+  border-color: white;
+}
+
+.review-form-field .MuiSelect-icon {
+  fill: white;
+}
+
+.review-form-button {
+  margin-top: 20px;
+}
+
 .grouped-select-container {
   background-color: var(--dark-aluminium);
   border-radius: 4px;
@@ -59,7 +177,7 @@
 }
 
 .grouped-select-optgroup {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .grouped-select-option {
@@ -81,7 +199,7 @@
   fill: white;
 }
 
-
+ */
 
 
 /* .review-item {
