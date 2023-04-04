@@ -3,6 +3,7 @@ import React from "react";
 import { LoginButton } from "../../../buttons/login-button";
 import { LogoutButton } from "../../../buttons/logout-button";
 import { SignupButton } from "../../../buttons/signup-button";
+import ReviewFormButton from "../../../buttons/course-review-form-button";
 
 export const NavBarButtons = () => {
   const { isAuthenticated } = useAuth0();
@@ -11,12 +12,14 @@ export const NavBarButtons = () => {
     <div className="nav-bar__buttons">
       {!isAuthenticated && (
         <>
+          {/* <ReviewFormButton /> */}
           <SignupButton />
           <LoginButton />
         </>
       )}
       {isAuthenticated && (
         <>
+          <ReviewFormButton />
           <LogoutButton />
         </>
       )}
