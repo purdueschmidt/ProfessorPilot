@@ -1,11 +1,11 @@
 import React from "react";
 import { PageLayout } from "../components/page-layout";
 // import { ReviewForm } from "../components/review-form/review-form";
-import CoursesList from "../components/courses/courses-list";
+import ProfessorsList from "../components/professors/professors-list";
 
-export const CoursesPage = () => (
+export const ProfessorsPage = () => (
   <PageLayout>
-    <CoursesList />
+    <ProfessorsList />
     {/* <ReviewForm/> */}
   </PageLayout>
 );
