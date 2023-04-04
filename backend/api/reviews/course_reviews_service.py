@@ -19,7 +19,7 @@ client = MongoClient(client_url)
 db = client['ProfessorPilot']
 course_reviews = db['CourseReviews']
 course_form =db['CourseForm']
-#category_index = course_reviews.create_index("courseCode") # create CourseCode index on collection
+#category_index = course_reviews.create_index("course_code") # create course_code index on collection
 
 
 def submit_course_review(course_json):
@@ -32,7 +32,7 @@ def submit_course_review(course_json):
     course_review = {
         '_id': _id,
         'Reviewer': str(reviewer),
-        'courseCode': data['courseCode'],
+        'course_code': data['course_code'],
         'Term': data['term'],
         'Year': data['year'],
         'Difficulty': data['difficulty'],
@@ -59,11 +59,12 @@ def get_recent_course_reviews():
     recent_entries = [entry for entry in cursor]
     return recent_entries
 
-def get_reviews_by_course_code(courseCode):
+def get_reviews_by_course_code(course_code):
     " Fetches course reviews for a specific course from the db collection"
+    course_code = course_code.replace(" ", "%20")
 
     cursor = course_reviews.find(
-        {"status": "active", "CourseCode": courseCode},
+        {"status": "active", "course_code": course_code},
         sort=[("CreateDate", -1)],
         limit=25
     )
@@ -82,7 +83,7 @@ def get_all_courses():
     else:
         print("not null")
 
-    print('All courses:', all_courses)
+    
     return all_courses
 
 category_index = course_reviews.create_index("CourseName") # create CourseCode index on collection

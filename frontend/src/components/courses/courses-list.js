@@ -5,7 +5,6 @@ import CourseCard from "./courses-card";
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
-  // const history = useHistory();
 
   const fetchCourses = async () => {
     try {
@@ -24,10 +23,6 @@ const CoursesList = () => {
     fetchCourses();
   }, []);
 
-  // const handleCourseClick = (course_code) => {
-  //   const data = fetch('http://localhost:6060/api/reviews/courses/<courseCode>')
-  // };
-  
   return (
     <div>
       <Container>
@@ -40,7 +35,6 @@ const CoursesList = () => {
                 course_name={course.course_name}
                 course_code={course.course_code} 
                 major={course.major}  
-                // onClick={() => handleCourseClick(course.course_code)}
               />
             </Grid>
             );

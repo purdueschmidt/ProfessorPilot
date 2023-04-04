@@ -5,25 +5,30 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
 
-
-const CourseCard = ({ major, course_code, course_name, _id }) => {
+const CourseCard = ({ course_name, course_code, major }) => {
   const navigate = useNavigate();
-  
-  const handleClick = () => {
-    navigate(`/course-reviews/${_id}`);
-    };
+  const handleCourseClick = () => {
+    navigate(`/coursesPage/${course_code}`);
+  };
 
   return (
-    <Card onClick={handleClick} style={{ cursor: 'pointer' }}>
+    <Card>
       <CardContent>
-      <Typography variant="h5" component="div">
-          {major} - {course_code}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="h5" component="h2">
           {course_name}
         </Typography>
+        <Typography color="textSecondary">
+          {course_code}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {major}
+        </Typography>
+        <Link component="button" onClick={handleCourseClick}>
+          View Reviews
+        </Link>
       </CardContent>
     </Card>
   );

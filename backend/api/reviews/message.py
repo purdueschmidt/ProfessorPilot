@@ -29,7 +29,7 @@ class Metadata:
 #                     "PK": f"TYPE#Course",
 #                     "SK": f"{coursename}#{reviewer}",
 #                     "GSI1PK": reviewer,
-#                     "CourseCode": code,
+#                     "course_code": code,
 #                     "Difficulty": criteria[0],
 #                     "Interest": criteria[1],
 #                     "Usefulness": criteria[2],
@@ -78,7 +78,7 @@ class Metadata:
 #                 Key = {"PK": "TYPE#{}".format(self.type),  "SK": "{}#{}".format(coursename, reviewer)},
 #                 UpdateExpression = "SET #cod = :o, #txt = :x, #trm = :r, #yr = :y, #dif =:f, #in =:i, #us = :u, #org = :g, #wkl =:w, #rt =:t, #mod =:d" ,
 #                 ExpressionAttributeNames =  {
-#                     "#cod": "CourseCode",                         
+#                     "#cod": "course_code",                         
 #                     "#txt": "ReviewText",                           
 #                     "#trm": "Term",
 #                     "#yr": "Year",

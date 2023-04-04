@@ -21,7 +21,7 @@ export const ReviewForm = () => {
 
   const [major, setMajor] = useState("");
   const [courses, setCourses] = useState([]);
-  const [courseCode, setCourseCode] = useState("");
+  const [course_code, setcourse_code] = useState("");
 
 
   const [difficulty, setDifficulty] = useState(0);
@@ -55,7 +55,7 @@ export const ReviewForm = () => {
       reviewer: reviewer.current.value,
       term: term.current.value,
       year: year.current.value,
-      courseCode: courseCode,
+      course_code: course_code,
       difficulty: difficulty,
       interest: interest,
       usefulness: usefulness,
@@ -120,8 +120,8 @@ export const ReviewForm = () => {
     const name = event.target.name;
     const value = event.target.value;
   
-    if (name === "courseCode") {
-      setCourseCode(event.target.value);
+    if (name === "course_code") {
+      setcourse_code(event.target.value);
     }
   };
 
@@ -174,7 +174,7 @@ export const ReviewForm = () => {
           <Grid item xs={12} sm={3}>
             <FormControl sx={{ minWidth: 120}}>
               <InputLabel className="review-form-field" htmlFor="grouped-native-select">Course Code</InputLabel>
-              <Select name="courseCode" onChange={handleChange} value={courseCode} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
+              <Select name="course_code" onChange={handleChange} value={course_code} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
                 <option className="" aria-label="None" value="" />
                 {uniqueMajors.map((major, index) => (
                   <optgroup key={index} label={major}>

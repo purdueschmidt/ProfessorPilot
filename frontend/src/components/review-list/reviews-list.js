@@ -51,7 +51,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import CourseReviewCard from "../review-card/review-card";
 import Grid from '@mui/material/Grid';
 
-export const ReviewsList = ({ endpoint, courseCode }) => {
+export const ReviewsList = ({ endpoint, course_code }) => {
   const [reviews, setReviews] = useState([]);
 
   const fetchReviews = useCallback(async () => {
@@ -61,7 +61,8 @@ export const ReviewsList = ({ endpoint, courseCode }) => {
       if (endpoint === "recent_course_reviews") {
         response = await fetch(`http://localhost:6060/api/reviews/recent_course_reviews`);
       } else if (endpoint === "specific_course_review") {
-        response = await fetch(`http://localhost:6060/api/reviews/coursesPage/${courseCode}`);
+        const encodedCourseCode = encodeURIComponent(course_code.replace(/ /g, '%20'));
+        response = await fetch(`http://localhost:6060/api/reviews/coursesPage/${encodedCourseCode}`);
       }
       if (response.ok) {
         const fetchedReviews = await response.json();
@@ -70,7 +71,7 @@ export const ReviewsList = ({ endpoint, courseCode }) => {
     } catch (error) {
       console.error('Failed to fetch reviews:', error);
     }
-  },  [endpoint, courseCode]); ;
+  },  [endpoint, course_code]); ;
 
   useEffect(() => {
     fetchReviews();
@@ -89,7 +90,7 @@ export const ReviewsList = ({ endpoint, courseCode }) => {
               <CourseReviewCard
                 term={review.Term}
                 year={review.Year}
-                courseCode={review.courseCode}
+                course_code={review.course_code}
                 reviewText={review.ReviewText}
                 workload={review.Workload}
                 organization={review.Organization}
