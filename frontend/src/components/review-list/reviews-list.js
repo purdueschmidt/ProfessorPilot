@@ -60,9 +60,8 @@ export const ReviewsList = ({ endpoint, course_code }) => {
       let response;
       if (endpoint === "recent_course_reviews") {
         response = await fetch(`http://localhost:6060/api/reviews/recent_course_reviews`);
-      } else if (endpoint === "specific_course_review") {
-        const encodedCourseCode = encodeURIComponent(course_code.replace(/ /g, '%20'));
-        response = await fetch(`http://localhost:6060/api/reviews/coursesPage/${encodedCourseCode}`);
+      } else if (endpoint === "coursesPage") {
+        response = await fetch(`http://localhost:6060/api/reviews/coursesPage/${course_code}`);
       }
       if (response.ok) {
         const fetchedReviews = await response.json();
