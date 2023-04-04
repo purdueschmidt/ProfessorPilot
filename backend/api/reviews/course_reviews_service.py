@@ -85,12 +85,6 @@ def get_all_courses():
     print('All courses:', all_courses)
     return all_courses
 
-
-
-
-
-
-
 category_index = course_reviews.create_index("CourseName") # create CourseCode index on collection
 
 def get_public_message():

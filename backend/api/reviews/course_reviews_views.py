@@ -8,9 +8,8 @@ from .course_reviews_service import (
     submit_course_review,
     get_recent_course_reviews,
     get_all_courses,
-    get_reviews_by_course_code
-    get_recent_course_reviews
-    get_all_course_reviews,
+    get_reviews_by_course_code,
+    get_recent_course_reviews,
     get_course_reviews
 )
 
