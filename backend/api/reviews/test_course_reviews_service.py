@@ -18,6 +18,7 @@ def test_submit_course_review(mocker):
     )
 
     json_from_create = {'reviewer': 'JOE',
+                        'course_code': 'SSW 695',
                         'difficulty': '4',
                         'interest': '4',
                         'usefulness': '4',
@@ -31,22 +32,22 @@ def test_submit_course_review(mocker):
     actual = submit_course_review(json_from_create)
 
     expected_db_parameter = {
+        '_id':"1",
         'Reviewer': "JOE",
+        'course_code':'SSW 695',
+        'Term': "spring",
+        'Year': "2000",
         'Difficulty': "4",
         'Interest': "4",
         'Usefulness': "4",
         'Organization': "4",
         'Workload': "4",
         'ReviewText': "This is text",
-        'Term': "spring",
-        'Year': "2000",
         'Upvotes': 0,
         'Status': 'active',
         'CreateDate': "1680495280",
         'ModifiedDate': "1680495280",
-        'ReviewId': "1"
     }
 
     course_reviews.insert_one.assert_called_once_with(expected_db_parameter)
     assert expected == actual
-
