@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 // import logo from './../../images/wings.png';
-import logo from "./../../../images/wings.png"
+// import logo from "./../../../images/wings.png"
+import logo from "../../../images/profpilotminimaltassle.png"
 
 export const NavBarBrand = () => {
   return (
@@ -11,10 +12,10 @@ export const NavBarBrand = () => {
           className="nav-bar__logo"
           src={logo}
           alt="ProfessorPilot logo"
-          width="75"
-          height="75"
+          width="100"
+          height="100"
         />
-          <p>ProfessorPilot</p>
+          <p></p>
       </NavLink>
     </div>
   );

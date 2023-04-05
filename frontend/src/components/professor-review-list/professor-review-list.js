@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ProfessorReviewCard from '../professor-review-card/professor-review-card';
+import '../../styles/components/review-list.css'
 
 import Grid from '@mui/material/Grid';
 
@@ -29,7 +30,7 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
 
   return (
     <div>
-      <h1>Professor Reviews</h1>
+      <h1 className='header'>Professor Reviews</h1>
       <Grid container spacing={1}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
