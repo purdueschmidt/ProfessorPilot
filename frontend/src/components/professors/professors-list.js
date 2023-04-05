@@ -32,7 +32,7 @@ const ProfessorsList = () => {
             return (
             <Grid item key={index}>
               <ProfessorCard 
-                professor={professor.name}
+                professor={professor.professor}
               />
             </Grid>
             );

@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { ReviewForm } from "../review-form/review-form";
+import { CourseReviewForm } from "../course-review-form/course-review-form";
 import "../../styles/components/button.css"
 
 const ReviewFormButton = () => {
@@ -26,7 +26,7 @@ const ReviewFormButton = () => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Course Review Form</DialogTitle>
         <DialogContent>
-          <ReviewForm handleClose={handleClose} />
+          <CourseReviewForm handleClose={handleClose} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

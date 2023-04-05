@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ProfessorReviewCard from '../professor-card/professor-review-card';
+import ProfessorReviewCard from '../professor-review-card/professor-review-card';
 
 import Grid from '@mui/material/Grid';
 
@@ -12,7 +12,7 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
       if (endpoint === "recent_professor_reviews") {
         response = await fetch(`http://localhost:6060/api/reviews/recent_professor_reviews`);
       } else if (endpoint === "professorsPage") {
-        response = await fetch(`http://localhost:6060/api/reviews/coursesPage/${professor}`);
+        response = await fetch(`http://localhost:6060/api/reviews/professorsPage/${professor}`);
       }
       if (response.ok) {
         const fetchedProfessorReviews = await response.json();

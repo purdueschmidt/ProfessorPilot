@@ -9,7 +9,7 @@ export const ProfessorReviewsPage = () => {
 
   return (
     <PageLayout>
-      <ProfessorReviewsList endpoint="coursesPage" professor={professor} />
+      <ProfessorReviewsList endpoint="professorsPage" professor={professor} />
       {/* <ReviewForm /> */}
     </PageLayout>
   );

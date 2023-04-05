@@ -13,7 +13,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 
-export const ReviewForm = () => {
+export const CourseReviewForm = () => {
   const reviewer = useRef();
   const term = useRef();
   const year = useRef();

@@ -154,8 +154,8 @@ export const ProfessorReviewForm = () => {
               <Select name="professor" onChange={handleChange} value={professor} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
                 <option className="" aria-label="None" value="" />
                     {professors.map((professor) => (
-                        <option className="review-form-fieldd" key={professor._id} value={professor.name}>
-                          {professor.name}
+                        <option className="review-form-fieldd" key={professor._id} value={professor.professor}>
+                          {professor.professor}
                         </option>
                     ))}
               </Select>
