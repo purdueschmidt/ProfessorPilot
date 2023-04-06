@@ -113,6 +113,26 @@ textarea:-webkit-autofill:active {
   justify-content: center;
 }
 
+.header{
+  color: white;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.MuiInputBase-input {
+color: white;
+}
+
+.sort-by-dropdown {
+color: white;
+background-color: transparent;
+}
+
 
 /* .review-form-container {
   background-color: var(--dark-aluminium);

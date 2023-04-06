@@ -4,10 +4,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import CourseReviewCard from '../course-review-card/course-review-card';
-import "../../styles/components/review-list.css"
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
+import "../../styles/components/review-form.css"
 
 
 const fetchCoursesAndMajors = async () => {
@@ -57,40 +57,51 @@ return (
     <h1 className='header'>Search Course Reviews</h1>
     <div className='search-bar'>
       {/* <TextField label='Search by course code' value={query} onChange={(event) => setQuery(event.target.value)} /> */}
-
-      <FormControl sx={{ minWidth: 120}}>
-            <InputLabel className="review-form-field" htmlFor="grouped-native-select">Course Code</InputLabel>
-            <Select name="course_code" onChange={(event) => setQuery(event.target.value)} value={query} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
-              <option className="" aria-label="None" value="" />
-              {uniqueMajors.map((major, index) => (
-                <optgroup key={index} label={major}>
-                  {courses
-                    .filter((course) => course.major === major)
-                    .map((course) => (
-                      <option className="review-form-fieldd" key={course.course_code} value={course.course_code}>
-                        {course.course_code}
-                      </option>
-                    ))}
-                </optgroup>
-              ))}
-            </Select>
-          </FormControl>
-
-      <TextField
-        label='Sort by'
-        value={sort_by}
-        onChange={(event) => setSort_By(event.target.value)}
-        select
-      >
-        <MenuItem value='Year'>Year</MenuItem>
-        <MenuItem value='Term'>Term</MenuItem>
-        <MenuItem value='Difficulty'>Difficulty</MenuItem>
-        <MenuItem value='Interest'>Interest</MenuItem>
-        <MenuItem value='Usefulness'>Usefulness</MenuItem>
-        <MenuItem value='Organization'>Organization</MenuItem>
-        <MenuItem value='Workload'>Workload</MenuItem>
-      </TextField>
-      <Button variant='contained' onClick={handleSearch}>Search</Button>
+      <form id="courseReviewForm">
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={6}>
+            <FormControl sx={{ minWidth: 120}}>
+              <InputLabel className="review-form-field" htmlFor="grouped-native-select">Course Code</InputLabel>
+              <Select name="course_code" onChange={(event) => setQuery(event.target.value)} value={query} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
+                <option className="" aria-label="None" value="" />
+                {uniqueMajors.map((major, index) => (
+                  <optgroup key={index} label={major}>
+                    {courses
+                      .filter((course) => course.major === major)
+                      .map((course) => (
+                        <option className="review-form-fieldd" key={course.course_code} value={course.course_code}>
+                          {course.course_code}
+                        </option>
+                      ))}
+                  </optgroup>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>    
+          <Grid item xs={12} sm={6}>      
+            <FormControl sx={{ minWidth: 120}}>          
+              <TextField
+                label='Sort by'
+                value={sort_by}
+                onChange={(event) => setSort_By(event.target.value)}
+                select
+                className="review-form-field">
+              
+                <MenuItem value='Year'>Year</MenuItem>
+                <MenuItem value='Term'>Term</MenuItem>
+                <MenuItem value='Difficulty'>Difficulty</MenuItem>
+                <MenuItem value='Interest'>Interest</MenuItem>
+                <MenuItem value='Usefulness'>Usefulness</MenuItem>
+                <MenuItem value='Organization'>Organization</MenuItem>
+                <MenuItem value='Workload'>Workload</MenuItem>
+              </TextField>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button variant='contained' onClick={handleSearch}>Search</Button>
+          </Grid>
+        </Grid>
+      </form>
     </div>
     <Grid container spacing={1}>
       {reviews.map((review, index) => {
