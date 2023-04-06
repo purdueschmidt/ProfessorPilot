@@ -36,6 +36,18 @@ def search_course_reviews(query, sort_by):
 
     return search_result
 
+def search_professor_reviews(query, sort_by):
+    print(query, sort_by)
+    search_result = []
+    if query:
+        reviews = professor_reviews.find({'professor': {'$regex': query, '$options': 'i'}}).sort(sort_by)
+        for row in reviews:
+            search_result.append(dict(row))
+    else:
+        reviews = professor_reviews.find().sort(sort_by)
+
+    return search_result
+
 
 
 

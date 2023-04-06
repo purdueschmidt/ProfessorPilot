@@ -19,6 +19,7 @@ import { ProfessorReviewsPage } from "./pages/professor-reviews";
 import { ProfessorsPage } from "./pages/professors";
 import { ProfessorReviewForm } from "./components/professor-review-form/professor-review-form";
 import { SearchBar } from "./components/search/search-reviews";
+import { ProfessorSearchBar } from "./components/review-list/search-professor-review";
 
 export const App = () => {
   const { isLoading } = useAuth0();
@@ -38,6 +39,7 @@ export const App = () => {
 
       <Route path="/" element={<HomePage />} />
       <Route path="/search" element={<SearchBar />} />
+      <Route path="/professor-review-search" element={<ProfessorSearchBar />} />
 
       {/* courses */}
 
