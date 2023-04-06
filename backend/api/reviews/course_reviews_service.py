@@ -22,6 +22,24 @@ professor_reviews = db['ProfessorReviews']
 
 # category_index = course_reviews.create_index("course_code") # create course_code index on collection
 
+#SEARCH
+
+def search_course_reviews(query, sort_by):
+    print(query, sort_by)
+    search_result = []
+    if query:
+        reviews = course_reviews.find({'course_code': {'$regex': query, '$options': 'i'}}).sort(sort_by)
+        for row in reviews:
+            search_result.append(dict(row))
+    else:
+        reviews = course_reviews.find().sort(sort_by)
+
+    return search_result
+
+
+
+
+
 
 def submit_course_review(course_json):
     data = course_json

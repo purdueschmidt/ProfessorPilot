@@ -14,7 +14,8 @@ from .course_reviews_service import (
     get_all_professors,
     submit_professor_review,
     get_recent_professor_reviews,
-    get_reviews_by_professor
+    get_reviews_by_professor,
+    search_course_reviews
 )
 from ..security.guards import (
     authorization_guard,
@@ -26,6 +27,25 @@ bp_name = 'api-reviews'
 bp_url_prefix = '/api/reviews'
 bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
 
+# SEARCH-------------------------------------------------------------------------------------------------
+
+@bp.route('/search', methods=(['GET', 'OPTIONS']))
+def search_course():
+    if request.method == 'GET':
+        query = request.args.get('query')
+        sort_by = request.args.get('sort_by')
+        search_result = search_course_reviews(query, sort_by)
+        response = jsonify(search_result)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        return response, 200
+    if request.method == 'OPTIONS':
+        response = flask.Response(status=200)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        return response
 
 # COURSE-REVIEWS----------------------------------------------------------------------------------------
 

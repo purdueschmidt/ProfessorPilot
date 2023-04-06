@@ -18,6 +18,7 @@ import { ProfessorReviewsList } from "./components/professor-review-list/profess
 import { ProfessorReviewsPage } from "./pages/professor-reviews";
 import { ProfessorsPage } from "./pages/professors";
 import { ProfessorReviewForm } from "./components/professor-review-form/professor-review-form";
+import { SearchBar } from "./components/search/search-reviews";
 
 export const App = () => {
   const { isLoading } = useAuth0();
@@ -32,14 +33,21 @@ export const App = () => {
 
   return (
     <Routes>
+
+      {/* home */}
+
       <Route path="/" element={<HomePage />} />
+      <Route path="/search" element={<SearchBar />} />
+
+      {/* courses */}
+
       <Route path="/recent_course_reviews" element={<CourseReviewsList endpoint={"recent_course_reviews"} />}/>
       <Route path="/courses" element={<CourseReviewForm />}/>
       <Route path="/submit_course_review" element={<CourseReviewForm/>} />
       <Route path="/coursesPage" element={<CoursesPage />}/>
       <Route path="/coursesPage/:course_code" element={<CourseReviewsPage />} />
 
-      {/* <Route path="/CourseReviewsPage" element={<CourseReviewsPage />}/> */}
+      {/* professors */}
 
       <Route path="/recent_professor_reviews" element={<ProfessorReviewsList endpoint={"recent_professor_reviews"} />}/>
       <Route path="/professors" element={<ProfessorReviewForm />}/>
@@ -47,16 +55,11 @@ export const App = () => {
       <Route path="/professorsPage" element={<ProfessorsPage />}/>
       <Route path="/professorsPage/:professor" element={<ProfessorReviewsPage />} />
 
+      {/* default */}
       <Route path="/profile" element={<AuthenticationGuard component={ProfilePage} />}/>
       <Route path="/public" element={<PublicPage />} />
-      <Route
-        path="/protected"
-        element={<AuthenticationGuard component={ProtectedPage} />}
-      />
-      <Route
-        path="/admin"
-        element={<AuthenticationGuard component={AdminPage} />}
-      />
+      <Route path="/protected" element={<AuthenticationGuard component={ProtectedPage} />} />
+      <Route path="/admin" element={<AuthenticationGuard component={AdminPage} />} />
       <Route path="/callback" element={<CallbackPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
