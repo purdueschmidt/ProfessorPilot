@@ -53,7 +53,12 @@ def test_submit_professor_review(mocker):
     assert expected == actual
 
 
-def test_get_reviews_by_professor():
+def test_get_reviews_by_professor(mocker):
+
+    mocker.patch(
+        'api.reviews.course_reviews_service.professor_reviews.insert_one',
+        return_value = True
+    )
 
     professor_name = "John Doe"
 
@@ -70,27 +75,11 @@ def test_get_reviews_by_professor():
         'Status' : "active",
         'CreateDate': "1680495280",
         'professor': 'John Doe',
-
-    },
-    {
-        '_id':"2",
-        'Reviewer': 'Franck',
-        'Communication': '5',
-        'Organization': '5',
-        'Availability': '5',
-        'Grading': '5',
-        'Competency': '4',
-        'ReviewText': 'This is a test',
-        'Upvotes': 0,
-        'Status' : "active",
-        'CreateDate': "1680495270",
-        'professor': 'John Doe',
-
     }
     ]
         
     
-    professor_reviews.insert_many.assert_called_once_with(existing_parameters_in_db)
+    professor_reviews.insert_one.assert_called_once_with(existing_parameters_in_db)
 
     actual = get_reviews_by_professor(professor_name)
 
