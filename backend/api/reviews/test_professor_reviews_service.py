@@ -21,13 +21,13 @@ def test_submit_professor_review(mocker):
 
     json_from_create = {
         'reviewer': 'Paul',
-        'professor': "John Doe",
-        'Communication': "5",
-        'Organization': "5",
-        'Availability': "5",
-        'Grading': "5",
-        'Competency': "5",
-        'ReviewText': "This is a test"
+        'professor': 'John Doe',
+        'communication': '5',
+        'organization': '5',
+        'availability': '5',
+        'grading': '5',
+        'competency': '5',
+        'review_text': 'This is a test'
     }
 
     expected = {"Message": "Submit Review Success"}
@@ -35,13 +35,13 @@ def test_submit_professor_review(mocker):
 
     expected_db_parameter = {
         '_id':"1",
-        'Reviewer': "Paul",
-        'professor': "John Doe",
-        'Communication': "5",
-        'Organization': "5",
-        'Availability': "5",
-        'Grading': "5",
-        'Competency': "4",
+        'Reviewer': 'Paul',
+        'professor': 'John Doe',
+        'Communication': '5',
+        'Organization': '5',
+        'Availability': '5',
+        'Grading': '5',
+        'Competency': '5',
         'ReviewText': 'This is a test',
         'Upvotes': 0,
         'Status' : "active",
