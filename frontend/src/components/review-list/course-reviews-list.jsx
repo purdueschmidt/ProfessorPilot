@@ -48,7 +48,7 @@
 //   );
 // }
 import React, { useState, useEffect, useCallback } from 'react';
-import CourseReviewCard from "../course-review-card/course-review-card";
+import { CourseReviewCard } from '../course-review-card/course-review-card';
 import Grid from '@mui/material/Grid';
 import '../../styles/components/review-list.css'
 
@@ -86,6 +86,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
           return (
             <Grid item xs={12} sm={6} key={index}>
               <CourseReviewCard
+                _id={review._id}
                 term={review.Term}
                 year={review.Year}
                 course_code={review.course_code}
@@ -95,6 +96,8 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
                 usefulness={review.Usefulness}
                 interest={review.Interest}
                 difficulty={review.Difficulty}
+                UpVotes={review.UpVotes}
+                DownVotes={review.DownVotes}
               />
             </Grid>
           );

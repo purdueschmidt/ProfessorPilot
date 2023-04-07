@@ -36,4 +36,27 @@
     height: 100%;
 }
 
+.upvote-downvote-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .upvote-button, .downvote-button {
+    color: #888888;
+  }
+  
+  .upvote-button:hover, .downvote-button:hover {
+    color: #555555;
+  }
+  
+  .upvote-count, .downvote-count {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  
 

@@ -78,7 +78,7 @@ def submit_course_review(course_json):
         'ModifiedDate': timestamp
     }
     response = course_reviews.insert_one(course_review)
-    return {"Message": "Submit Review Success"}
+    return {"Submit": "Submit Review Success"}
 
 
 def get_recent_course_reviews():
@@ -98,6 +98,23 @@ def get_reviews_by_course_code(course_code):
         {"course_code": course_code}
     )
     return [entry for entry in cursor]
+
+
+def update_review_upvote_downvote(_id, action):
+    update_query = {}
+
+    if action == 'upvote':
+        update_query = {'$inc': {'UpVotes': 1}}
+    elif action == 'downvote':
+        update_query = {'$inc': {'DownVotes': 1}}
+    else:
+        return 0
+
+    result = course_reviews.update_one(
+        {'_id': _id},
+        update_query
+    )
+    return result.modified_count
 
 
 # COURSES

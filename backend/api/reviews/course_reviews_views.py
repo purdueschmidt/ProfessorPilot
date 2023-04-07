@@ -16,7 +16,8 @@ from .course_reviews_service import (
     get_recent_professor_reviews,
     get_reviews_by_professor,
     search_course_reviews,
-    search_professor_reviews
+    search_professor_reviews,
+    update_review_upvote_downvote
 )
 from ..security.guards import (
     authorization_guard,
@@ -39,13 +40,13 @@ def search_course_review():
         response = jsonify(search_result)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
     
 @bp.route('/professor-review-search', methods=(['GET', 'OPTIONS']))
@@ -57,13 +58,13 @@ def search_professor_review():
         response = jsonify(search_result)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
 
 # COURSE-REVIEWS----------------------------------------------------------------------------------------
@@ -78,13 +79,13 @@ def home():
         response = jsonify(recent_course_reviews)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
     if request.method == 'POST':
         val = submit_course_review(request.get_json())
@@ -100,13 +101,13 @@ def recent_course_entries():
         response = jsonify(recent_course_reviews)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
 
 
@@ -117,7 +118,7 @@ def get_course_reviews(course_code):
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
     if request.method == 'GET':
         course_reviews = get_reviews_by_course_code(course_code)
@@ -126,9 +127,29 @@ def get_course_reviews(course_code):
         response = jsonify(course_reviews)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
 
         return response, 200
+    
+@bp.route("/<_id>", methods=["PATCH"])
+def update(_id):
+    if request.method == 'OPTIONS':
+        response = flask.Response(status=200)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
+        return response
+    if request.method == 'PATCH':
+        data = request.get_json()
+        action = data.get("action")
+        result = update_review_upvote_downvote(_id, action)
+        response = jsonify(result)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
+        response = jsonify({'success': True})
+        return response, 200
+
 
 
 # COURSES------------------------------------------------------------------------------------------------
@@ -183,13 +204,13 @@ def recent_professor_entries():
         response = jsonify(recent_professor_reviews)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
 
 
@@ -200,7 +221,7 @@ def get_professor_reviews(professor):
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
     if request.method == 'GET':
         professor_reviews = get_reviews_by_professor(professor)
@@ -209,7 +230,7 @@ def get_professor_reviews(professor):
         response = jsonify(professor_reviews)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
 
         return response, 200
 
@@ -225,13 +246,13 @@ def get_professors():
         response = jsonify(professors)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
 
 

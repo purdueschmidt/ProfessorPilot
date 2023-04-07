@@ -20,6 +20,7 @@ import { ProfessorsPage } from "./pages/professors";
 import { ProfessorReviewForm } from "./components/professor-review-form/professor-review-form";
 import { SearchBar } from "./components/search/search-reviews";
 import { ProfessorSearchBar } from "./components/review-list/search-professor-review";
+import { CourseReviewCard } from "./components/course-review-card/course-review-card";
 
 export const App = () => {
   const { isLoading } = useAuth0();
@@ -48,6 +49,7 @@ export const App = () => {
       <Route path="/submit_course_review" element={<CourseReviewForm/>} />
       <Route path="/coursesPage" element={<CoursesPage />}/>
       <Route path="/coursesPage/:course_code" element={<CourseReviewsPage />} />
+      <Route path="/:_id" element={<CourseReviewCard />} />
 
       {/* professors */}
 

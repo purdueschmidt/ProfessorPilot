@@ -70,7 +70,7 @@ def create_app():
         app,
         resources={r"/api/*": {"origins": client_origin_url}},
         allow_headers=["Authorization", "Content-Type"],
-        methods=["GET", "POST", "OPTIONS"],
+        methods=["GET", "POST", "OPTIONS", "PATCH"],
         max_age=86400
     )
 

@@ -64,7 +64,7 @@ export const CourseReviewForm = () => {
       review_text: reviewText.current.value,
     };
 
-    console.log("Submitting review:", data); // Add this line
+    console.log("Submitting review:", data); 
     await submitReview(data);
   };
 
@@ -82,7 +82,7 @@ export const CourseReviewForm = () => {
       if (response.ok) {
         // alert("Review submitted successfully.");
         const result = await response.json();
-        alert(result["Message"])
+        alert(result["Submit"])
       } else {
         alert("Failed to submit review.");
       }
