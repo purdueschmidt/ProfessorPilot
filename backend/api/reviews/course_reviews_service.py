@@ -48,11 +48,6 @@ def search_professor_reviews(query, sort_by):
 
     return search_result
 
-
-
-
-
-
 def submit_course_review(course_json):
     data = course_json
     reviewer = data['reviewer']

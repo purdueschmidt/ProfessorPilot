@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ProfessorReviewCard from '../professor-review-card/professor-review-card';
+import { ProfessorReviewCard } from '../professor-review-card/professor-review-card';
 import '../../styles/components/review-list.css'
 
 import Grid from '@mui/material/Grid';

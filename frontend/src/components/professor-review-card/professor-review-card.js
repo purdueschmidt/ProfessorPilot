@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import '../../styles/components/review-card.css'
 
 
-const ProfessorReviewCard = ({professor, reviewText, communication, organization, availability, grading, competency}) => {
+export const ProfessorReviewCard = ({professor, reviewText, communication, organization, availability, grading, competency}) => {
   return (
     <Card className='card' sx={{ minWidth: 200, mt: 2, mb: 2 }}>
         <CardContent className='card-content'>
@@ -40,4 +40,3 @@ const ProfessorReviewCard = ({professor, reviewText, communication, organization
   );
 };
 
-export default ProfessorReviewCard;

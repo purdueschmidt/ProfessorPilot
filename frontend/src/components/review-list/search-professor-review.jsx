@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { CourseReviewCard } from '../course-review-card/course-review-card';
+import { ProfessorReviewCard } from '../professor-review-card/professor-review-card';
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
@@ -101,7 +101,7 @@ return (
         // if (!review.CourseName) return null;
         return (
           <Grid item xs={12} sm={6} key={index}>
-            <CourseReviewCard
+            <ProfessorReviewCard
               term={review.Term}
               year={review.Year}
               course_code={review.course_code}
