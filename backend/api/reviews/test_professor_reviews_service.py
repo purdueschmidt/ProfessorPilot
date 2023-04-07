@@ -20,6 +20,7 @@ def test_submit_professor_review(mocker):
     )
 
     json_from_create = {
+        'reviewer': 'Paul',
         'professor': "John Doe",
         'Communication': "5",
         'Organization': "5",
@@ -28,12 +29,13 @@ def test_submit_professor_review(mocker):
         'Competency': "5",
         'ReviewText': "This is a test"
     }
-    
+
     expected = {"Message": "Submit Review Success"}
     actual = submit_professor_review(json_from_create)
 
     expected_db_parameter = {
         '_id':"1",
+        'Reviewer': "Paul",
         'professor': "John Doe",
         'Communication': "5",
         'Organization': "5",
