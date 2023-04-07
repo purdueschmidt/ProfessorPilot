@@ -1,5 +1,5 @@
 
-from api.reviews.course_reviews_service import submit_professor_review, professor_reviews
+from  api.reviews.course_reviews_service import submit_professor_review, professor_reviews, get_reviews_by_professor
 
 
 def test_submit_professor_review(mocker):
@@ -48,8 +48,50 @@ def test_submit_professor_review(mocker):
         'CreateDate': "1680495280"
     }
     
+    
     professor_reviews.insert_one.assert_called_once_with(expected_db_parameter)
     assert expected == actual
 
 
+def test_get_reviews_by_professor():
 
+    professor_name = "John Doe"
+
+    existing_parameters_in_db = [{
+        '_id':"1",
+        'Reviewer': 'Paul',
+        'Communication': '5',
+        'Organization': '5',
+        'Availability': '5',
+        'Grading': '5',
+        'Competency': '4',
+        'ReviewText': 'This is a test',
+        'Upvotes': 0,
+        'Status' : "active",
+        'CreateDate': "1680495280",
+        'professor': 'John Doe',
+
+    },
+    {
+        '_id':"2",
+        'Reviewer': 'Franck',
+        'Communication': '5',
+        'Organization': '5',
+        'Availability': '5',
+        'Grading': '5',
+        'Competency': '4',
+        'ReviewText': 'This is a test',
+        'Upvotes': 0,
+        'Status' : "active",
+        'CreateDate': "1680495270",
+        'professor': 'John Doe',
+
+    }
+    ]
+        
+    
+    professor_reviews.insert_many.assert_called_once_with(existing_parameters_in_db)
+
+    actual = get_reviews_by_professor(professor_name)
+
+    assert actual == existing_parameters_in_db
