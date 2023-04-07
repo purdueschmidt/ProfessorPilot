@@ -131,7 +131,7 @@ def submit_prof_review():
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response
     if request.method == 'POST':
-        val = submit_professor_review()
+        val = submit_professor_review(request.get_json())
         return jsonify(val), 200
 
 

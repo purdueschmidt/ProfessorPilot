@@ -101,11 +101,14 @@ def get_all_professors():
 
 # PROFESSOR REVIEWS
 
-def submit_professor_review():
-    data = request.get_json()
+def submit_professor_review(professor_json):
+
+    # data = request.get_json()
+
+    data = professor_json
     reviewer = data['reviewer']
     _id = str(uuid.uuid4())
-    timestamp = str(int(time.time() * 1000))
+    timestamp = str(int(time.time()))
     professor_review = {
         '_id': _id,
         'Reviewer': str(reviewer),

@@ -28,7 +28,7 @@ def test_submit_professor_review(mocker):
         'Competency': "5",
         'ReviewText': "This is a test"
     }
-
+    
     expected = {"Message": "Submit Review Success"}
     actual = submit_professor_review(json_from_create)
 
