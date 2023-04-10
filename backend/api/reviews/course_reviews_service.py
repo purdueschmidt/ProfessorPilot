@@ -41,7 +41,8 @@ def submit_course_review(course_json):
         'Organization': data['organization'],
         'Workload': data['workload'],
         'ReviewText': data['review_text'],
-        'Upvotes': 0,
+        'UpVotes': 0,
+        'DownVotes': 0,
         'Status': 'active',
         'CreateDate': timestamp,
         'ModifiedDate': timestamp
@@ -119,7 +120,8 @@ def submit_professor_review(professor_json):
         'Grading': data['grading'],
         'Competency': data['competency'],
         'ReviewText': data['review_text'],
-        'Upvotes': 0,
+        'UpVotes': 0,
+        'DownVotes': 0,
         'Status': 'active',
         'CreateDate': timestamp,
     }
