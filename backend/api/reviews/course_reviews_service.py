@@ -48,11 +48,13 @@ def search_professor_reviews(query, sort_by):
 
     return search_result
 
+
 def submit_course_review(course_json):
     data = course_json
     reviewer = data['reviewer']
     _id = str(uuid.uuid4())
     timestamp = str(int(time.time()))
+    rating = (data['difficulty'] + data['interest'] + data['usefulness'] + data['organization'] + data['workload']) / 5.0
 
     course_review = {
         '_id': _id,
@@ -60,6 +62,7 @@ def submit_course_review(course_json):
         'course_code': data['course_code'],
         'Term': data['term'],
         'Year': data['year'],
+        'Rating': rating,
         'Difficulty': data['difficulty'],
         'Interest': data['interest'],
         'Usefulness': data['usefulness'],

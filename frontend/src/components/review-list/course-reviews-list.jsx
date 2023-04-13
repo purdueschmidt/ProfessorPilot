@@ -76,6 +76,40 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
     fetchReviews();
   }, [fetchReviews]);
 
+  const handleVoteUpdate = (_id, newUpVotes, newDownVotes) => {
+    const reviewIndex = reviews.findIndex((review) => review._id === _id);
+  
+    setReviews((prevReviews) => {
+      const updatedReviews = [...prevReviews];
+      updatedReviews[reviewIndex].UpVotes = newUpVotes;
+      updatedReviews[reviewIndex].DownVotes = newDownVotes;
+      return updatedReviews;
+    });
+  };
+
+  const handleVote = async (_id, action) => {
+    try {
+      const response = await fetch(`http://localhost:6060/api/reviews/${_id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ action }),
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        handleVoteUpdate(_id, result.upVotes, result.downVotes);
+      } else {
+        console.error('Failed to update votes:', result.message);
+      } fetchReviews();
+    } catch (error) {
+      console.error('Failed to update votes:', error);
+    }
+  };
+  
+
   return (
     <div>
       <h1 className='header'>Course Reviews</h1>
@@ -89,6 +123,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
                 _id={review._id}
                 term={review.Term}
                 year={review.Year}
+                rating={review.Rating}
                 reviewer={review.Reviewer}
                 course_code={review.course_code}
                 reviewText={review.ReviewText}
@@ -99,6 +134,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
                 difficulty={review.Difficulty}
                 UpVotes={review.UpVotes}
                 DownVotes={review.DownVotes}
+                onVote={handleVote} 
               />
             </Grid>
           );
