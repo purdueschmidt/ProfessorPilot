@@ -12,6 +12,7 @@ import Rating from "@mui/material/Rating";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const CourseReviewForm = () => {
   const reviewer = useRef();
@@ -29,6 +30,8 @@ export const CourseReviewForm = () => {
   const [usefulness, setUsefulness] = useState(0);
   const [organization, setOrganization] = useState(0);
   const [workload, setWorkload] = useState(0);
+
+  const { user } = useAuth0();
 
   useEffect(() => {
     fetchCoursesAndMajors();
@@ -52,7 +55,7 @@ export const CourseReviewForm = () => {
     event.preventDefault();
 
     const data = {
-      reviewer: reviewer.current.value,
+      reviewer: user.nickname,
       term: term.current.value,
       year: year.current.value,
       course_code: course_code,
@@ -144,13 +147,16 @@ export const CourseReviewForm = () => {
       <form id="courseReviewForm" onSubmit={handleSubmit}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
-            <TextField
+            {/* <TextField
               className="review-form-field"
               label="Reviewer"
               fullWidth
               required
               inputRef={reviewer}
-            />
+            /> */}
+            <Typography align="center" className="review-form-field" gutterBottom>
+              {user.nickname}
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={3}>
             <TextField

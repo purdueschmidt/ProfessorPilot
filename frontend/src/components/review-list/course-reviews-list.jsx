@@ -89,6 +89,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
                 _id={review._id}
                 term={review.Term}
                 year={review.Year}
+                reviewer={review.Reviewer}
                 course_code={review.course_code}
                 reviewText={review.ReviewText}
                 workload={review.Workload}
