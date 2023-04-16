@@ -59,46 +59,24 @@ def test_get_reviews_by_professor(mocker):
     
     mocker.patch(
         'api.reviews.course_reviews_service.professor_reviews.find',
-        return_value = [{
-            '_id':"1",
-            'Reviewer': 'Paul',
-            'professor': 'John Doe',
-            'Communication': '5',
-            'Organization': '5',
-            'Availability': '5',
-            'Grading': '5',
-            'Competency': '5',
-            'ReviewText': 'This is a test',
-            'UpVotes': 0,
-            'DownVotes': 0,
-            'Status' : "active",
+        return_value = [{'_id':"1",'Reviewer': 'Paul','professor': 'John Doe','Communication': '5',
+            'Organization': '5','Availability': '5','Grading': '5', 'Competency': '5',
+            'ReviewText': 'This is a test', 'UpVotes': 0, 'DownVotes': 0, 'Status' : "active",
             'CreateDate': "1680495280"
         }
     ]
     )
 
-    argument_1 = get_reviews_by_professor('John Doe')
-
-    expected_outcome_1 = [{
-            '_id':"1",
-            'Reviewer': 'Paul',
-            'professor': 'John Doe',
-            'Communication': '5',
-            'Organization': '5',
-            'Availability': '5',
-            'Grading': '5',
-            'Competency': '5',
-            'ReviewText': 'This is a test',
-            'UpVotes': 0,
-            'DownVotes': 0,
-            'Status' : "active",
+    assert   get_reviews_by_professor('John Doe') ==  [
+        {'_id':"1",'Reviewer': 'Paul','professor': 'John Doe','Communication': '5',
+            'Organization': '5','Availability': '5','Grading': '5', 'Competency': '5',
+            'ReviewText': 'This is a test', 'UpVotes': 0, 'DownVotes': 0, 'Status' : "active",
             'CreateDate': "1680495280"
         }
+        
     ]
 
     professor_reviews.find.assert_called_once_with({'professor': 'John Doe'})
-
-    assert expected_outcome_1 ==  argument_1
 
 
 # test case with empty or incorrect input
@@ -107,87 +85,40 @@ def test_get_reviews_by_professor(mocker):
         return_value = []
     )
 
-    argument_2 =  get_reviews_by_professor('')
-    expected_outcome_2 = []
+    assert get_reviews_by_professor('') ==  []
 
     professor_reviews.find.assert_called_once_with({'professor': ''})
 
-    assert expected_outcome_2 ==  argument_2
 
 
 def test_get_recent_profesor_reviews(mocker):
 
-
     mocker.patch(
         'api.reviews.course_reviews_service.professor_reviews.find',
-        return_value = [{'_id':"1",
-            'Reviewer': 'Paul',
-            'professor': 'John Doe',
-            'Communication': '5',
-            'Organization': '5',
-            'Availability': '5',
-            'Grading': '5',
-            'Competency': '5',
-            'ReviewText': 'This is a test',
-            'UpVotes': 0,
-            'DownVotes': 0,
-            "Status" : "active",
-            "CreateDate": "1680495290"
-        },
-        {
-            '_id':"2",
-            'Reviewer': 'John',
-            'professor': 'Jane Doe',
-            'Communication': '5',
-            'Organization': '3',
-            'Availability': '4',
-            'Grading': '2',
-            'Competency': '5',
-            'ReviewText': 'This is a test',
-            'UpVotes': 0,
-            'DownVotes': 0,
-            "Status" : "active",
+        return_value = [{'_id':"1",'Reviewer': 'Paul','professor': 'John Doe','Communication': '5',
+            'Organization': '5', 'Availability': '5','Grading': '5','Competency': '5', 
+            'ReviewText': 'This is a test','UpVotes': 0, 'DownVotes': 0,"Status" : "active",
+            "CreateDate": "1680495290" },
+        {'_id':"2", 'Reviewer': 'John','professor': 'Jane Doe','Communication': '5',
+            'Organization': '3','Availability': '4','Grading': '2','Competency': '5',
+            'ReviewText': 'This is a test','UpVotes': 0,'DownVotes': 0,"Status" : "active",
             "CreateDate": "1680495280"
         }
-
     ]
     )
     
-    expected_outcome = [ 
-        {
-            '_id':"1",
-            'Reviewer': 'Paul',
-            'professor': 'John Doe',
-            'Communication': '5',
-            'Organization': '5',
-            'Availability': '5',
-            'Grading': '5',
-            'Competency': '5',
-            'ReviewText': 'This is a test',
-            'UpVotes': 0,
-            'DownVotes': 0,
-            "Status" : "active",
-            "CreateDate": "1680495290"
-        },
-        {
-            '_id':"2",
-            'Reviewer': 'John',
-            'professor': 'Jane Doe',
-            'Communication': '5',
-            'Organization': '3',
-            'Availability': '4',
-            'Grading': '2',
-            'Competency': '5',
-            'ReviewText': 'This is a test',
-            'UpVotes': 0,
-            'DownVotes': 0,
-            "Status" : "active",
+    assert get_recent_professor_reviews() == [
+        {'_id':"1",'Reviewer': 'Paul','professor': 'John Doe','Communication': '5',
+            'Organization': '5', 'Availability': '5','Grading': '5','Competency': '5', 
+            'ReviewText': 'This is a test','UpVotes': 0, 'DownVotes': 0,"Status" : "active",
+            "CreateDate": "1680495290" },
+        {'_id':"2", 'Reviewer': 'John','professor': 'Jane Doe','Communication': '5',
+            'Organization': '3','Availability': '4','Grading': '2','Competency': '5',
+            'ReviewText': 'This is a test','UpVotes': 0,'DownVotes': 0,"Status" : "active",
             "CreateDate": "1680495280"
         }
-
     ]
-    
-    result =  get_recent_professor_reviews()
+
 
     professor_reviews.find.assert_called_once_with(
         {"Status": "active"},
@@ -195,7 +126,6 @@ def test_get_recent_profesor_reviews(mocker):
         limit=25
     )
      
-    assert expected_outcome == result
 
 
 def test_get_all_professors(mocker):
@@ -208,14 +138,11 @@ def test_get_all_professors(mocker):
                         {'_id': '4', 'professor': 'Paul John'}
                         ] )
     
-    expected_outcome = [{'_id': '1', 'professor': 'John Doe'}, 
+    assert get_all_professors() == [{'_id': '1', 'professor': 'John Doe'}, 
                         {'_id': '2', 'professor': 'Jane Doe'}, 
                         {'_id': '3','professor': 'Franck Alex'}, 
                         {'_id': '4', 'professor': 'Paul John'}
                         ]
-
-    result = get_all_professors()
-
+                        
     profs_collection.find.assert_called_once_with({})
 
-    assert expected_outcome == result

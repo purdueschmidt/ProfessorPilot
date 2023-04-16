@@ -58,51 +58,24 @@ def test_get_reviews_by_course_code(mocker):
     mocker.patch(
         'api.reviews.course_reviews_service.course_reviews.find',
         return_value = [ {
-        '_id':"1",
-        'Reviewer': "Jack",
-        "course_code":'SSW 565',
-        'Term': "Fall",
-        'Year': "2020",
-        'Difficulty': "4",
-        'Interest': "4",
-        'Usefulness': "4",
-        'Organization': "4",
-        'Workload': "4",
-        'ReviewText': "This is text",
-        'UpVotes': 0,
-        'DownVotes': 0,
-        'Status': 'active',
-        'CreateDate': "1680495280",
-        'ModifiedDate': "1680495280",
+        '_id':"1", 'Reviewer': "Jack", "course_code":'SSW 565', 'Term': "Fall", 'Year': "2020",
+        'Difficulty': "4", 'Interest': "4", 'Usefulness': "4", 'Organization': "4", 'Workload': "4",
+        'ReviewText': "This is text", 'UpVotes': 0, 'DownVotes': 0, 'Status': 'active', 
+        'CreateDate': "1680495280", 'ModifiedDate': "1680495280"
     } 
         ]
     )
 
-    argument_1 = get_reviews_by_course_code('SSW 565')
-
-    expected_outcome_1 = [ {
-        '_id':"1",
-        'Reviewer': "Jack",
-        "course_code":'SSW 565',
-        'Term': "Fall",
-        'Year': "2020",
-        'Difficulty': "4",
-        'Interest': "4",
-        'Usefulness': "4",
-        'Organization': "4",
-        'Workload': "4",
-        'ReviewText': "This is text",
-        'UpVotes': 0,
-        'DownVotes': 0,
-        'Status': 'active',
-        'CreateDate': "1680495280",
-        'ModifiedDate': "1680495280",
+    assert get_reviews_by_course_code('SSW 565') == [ {
+        '_id':"1", 'Reviewer': "Jack", "course_code":'SSW 565', 'Term': "Fall", 'Year': "2020",
+        'Difficulty': "4", 'Interest': "4", 'Usefulness': "4", 'Organization': "4", 'Workload': "4",
+        'ReviewText': "This is text", 'UpVotes': 0, 'DownVotes': 0, 'Status': 'active', 
+        'CreateDate': "1680495280", 'ModifiedDate': "1680495280"
     } 
-    ]
+        ]
+
 
     course_reviews.find.assert_called_once_with({"course_code": "SSW 565"})
-
-    assert expected_outcome_1 ==  argument_1
 
 
 # test case with empty or incorrect input
@@ -111,146 +84,62 @@ def test_get_reviews_by_course_code(mocker):
         return_value = []
     )
 
-    argument_2 =  get_reviews_by_course_code('')
-    expected_outcome_2 = []
+    assert  get_reviews_by_course_code('') == []
 
     course_reviews.find.assert_called_once_with({'course_code': ''})
 
-    assert expected_outcome_2 ==  argument_2
 
 
 def test_get_recent_course_reviews(mocker):
 
     mocker.patch(
         'api.reviews.course_reviews_service.course_reviews.find',
-        return_value = [ {
-        '_id':"1",
-        'Reviewer': "Paul",
-        "course_code":'SSW 565',
-        'Term': "Fall",
-        'Year': "2020",
-        'Difficulty': "4",
-        'Interest': "4",
-        'Usefulness': "4",
-        'Organization': "4",
-        'Workload': "4",
-        'ReviewText': "This is text",
-        'UpVotes': 0,
-        'DownVotes': 0,
-        "Status": "active",
-        "CreateDate": "1680495280",
-        'ModifiedDate': "1680495280",
-    },
-    {
-        '_id':"2",
-        'Reviewer': "Jack",
-        "course_code":'SSW 555',
-        'Term': "Fall",
-        'Year': "2021",
-        'Difficulty': "4",
-        'Interest': "5",
-        'Usefulness': "3",
-        'Organization': "4",
-        'Workload': "3",
-        'ReviewText': "This is text",
-        'UpVotes': 0,
-        'DownVotes': 0,
-        "Status": "active",
-        "CreateDate": "1680495290",
-        'ModifiedDate': "1680495290",
-    } 
+        return_value = [
+        {'_id':"1", 'Reviewer': "Paul", "course_code":'SSW 565', 'Term': "Fall",
+        'Year': "2020",'Difficulty': "4",'Interest': "4",'Usefulness': "4",
+        'Organization': "4",'Workload': "4",'ReviewText': "This is text",'UpVotes': 0,
+        'DownVotes': 0,"Status": "active","CreateDate": "1680495280",'ModifiedDate': "1680495280" },
+        {'_id':"2",'Reviewer': "Jack","course_code":'SSW 555','Term': "Fall", 
+        'Year': "2021",'Difficulty': "4", 'Interest': "5",'Usefulness': "3",
+        'Organization': "4",'Workload': "3",'ReviewText': "This is text",'UpVotes': 0,
+        'DownVotes': 0, "Status": "active","CreateDate": "1680495290",'ModifiedDate': "1680495290",
+        } 
         ]
     )
-
-    expected_outcome = [ {
-        '_id':"1",
-        'Reviewer': "Paul",
-        "course_code":'SSW 565',
-        'Term': "Fall",
-        'Year': "2020",
-        'Difficulty': "4",
-        'Interest': "4",
-        'Usefulness': "4",
-        'Organization': "4",
-        'Workload': "4",
-        'ReviewText': "This is text",
-        'UpVotes': 0,
-        'DownVotes': 0,
-        "Status": "active",
-        "CreateDate": "1680495280",
-        'ModifiedDate': "1680495280",
-    },  
-    {
-        '_id':"2",
-        'Reviewer': "Jack",
-        "course_code":'SSW 555',
-        'Term': "Fall",
-        'Year': "2021",
-        'Difficulty': "4",
-        'Interest': "5",
-        'Usefulness': "3",
-        'Organization': "4",
-        'Workload': "3",
-        'ReviewText': "This is text",
-        'UpVotes': 0,
-        'DownVotes': 0,
-        "Status": "active",
-        "CreateDate": "1680495290",
-        'ModifiedDate': "1680495290",
-    } 
-        ]
     
-    result =  get_recent_course_reviews()
+    assert  get_recent_course_reviews() == [
+        {'_id':"1", 'Reviewer': "Paul", "course_code":'SSW 565', 'Term': "Fall",
+        'Year': "2020",'Difficulty': "4",'Interest': "4",'Usefulness': "4",
+        'Organization': "4",'Workload': "4",'ReviewText': "This is text",'UpVotes': 0,
+        'DownVotes': 0,"Status": "active","CreateDate": "1680495280",'ModifiedDate': "1680495280" },
+        {'_id':"2",'Reviewer': "Jack","course_code":'SSW 555','Term': "Fall", 
+        'Year': "2021",'Difficulty': "4", 'Interest': "5",'Usefulness': "3",
+        'Organization': "4",'Workload': "3",'ReviewText': "This is text",'UpVotes': 0,
+        'DownVotes': 0, "Status": "active","CreateDate": "1680495290",'ModifiedDate': "1680495290",
+        }  
+        ]
 
     course_reviews.find.assert_called_once_with(
         {"Status": "active"},
         sort=[("CreateDate", -1)],
         limit=25
     )
-     
-    assert expected_outcome == result
-
+    
+    
 
 def test_get_all_courses(mocker):
 
     mocker.patch(
         'api.reviews.course_reviews_service.courses_collection.find',
-        return_value = [{"_id": '1',
-                        "major":"*Computer Science",
-                        "course_code":"CS501",
-                        "course_name":"Introduction to JAVA Programming"
-                        },
-                        {"_id": "2",
-                        "major":"*Computer Science",
-                        "course_code":"CS559",
-                        "course_name":"Machine Learning: Fund & Apps"
-                       },
-                       {"_id": '3',
-                        "major":"*Computer Science",
-                        "course_code":"CS505",
-                        "course_name":"Prob & Stochastic Proc I"}
+        return_value = [{"_id": "1", "major":"*Computer Science", "course_code":"CS501", "course_name":"Java Programming" },
+                        {"_id": "2","major":"*Computer Science","course_code":"CS559", "course_name":"Machine Learning: Fund & Apps"
+                       },{"_id": '3',"major":"*Computer Science","course_code":"CS505","course_name":"Prob & Stochastic Proc I"}
                        ]
                     )
-    expected_outcome =  [{"_id": "1",
-                        "major":"*Computer Science",
-                        "course_code":"CS501",
-                        "course_name":"Introduction to JAVA Programming"
-                        },
-                        {"_id": "2",
-                        "major":"*Computer Science",
-                        "course_code":"CS559",
-                        "course_name":"Machine Learning: Fund & Apps"
-                       },
-                        {"_id": '3',
-                        "major":"*Computer Science",
-                        "course_code":"CS505",
-                        "course_name":"Prob & Stochastic Proc I"}
+    
+    assert get_all_courses() == [{"_id": "1", "major":"*Computer Science", "course_code":"CS501", "course_name":"Java Programming"},
+                        {"_id": "2","major":"*Computer Science","course_code":"CS559", "course_name":"Machine Learning: Fund & Apps"
+                       },{"_id": '3',"major":"*Computer Science","course_code":"CS505","course_name":"Prob & Stochastic Proc I"}
                        ]
     
-    result = get_all_courses()
-
-    courses_collection.find.assert_called_once_with({}) 
-
-    assert result ==  expected_outcome
-    
-
+    courses_collection.find.assert_called_once_with({})
