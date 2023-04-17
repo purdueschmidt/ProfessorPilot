@@ -142,9 +142,10 @@ def handle_vote(_id):
         return response
     if request.method == 'PATCH':
         data = request.get_json()
+        review_type = data.get("review_type")
         action = data.get("action")
         user = data.get("reviewer")
-        result = vote(_id, action, user)
+        result = vote(_id, action, user, review_type)
         response = jsonify(result)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
@@ -162,9 +163,10 @@ def handle_comment(_id):
         return response
     if request.method == 'PATCH':
         data = request.get_json()
+        review_type = data.get("review_type")
         action = data.get("comment")
         user = data.get("user")
-        result = comment(_id, action, user)
+        result = comment(_id, action, user, review_type)
         response = jsonify(result)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'

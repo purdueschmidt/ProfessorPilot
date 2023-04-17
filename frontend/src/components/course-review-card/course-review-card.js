@@ -50,7 +50,7 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
     <div>
         {isAuthenticated && (
         <>
-            <Accordion sx={{ minWidth: 200, mt: 2, mb: 2 }}>
+            <Accordion  className='accordion' sx={{ minWidth: 200, mt: 2, mb: 2 }}>
                 <AccordionSummary expandIcon={<ExpandMore />} aria-controls="review-content" id="review-header">
                     <Card>
                         <CardContent className='card-content'>
@@ -115,38 +115,6 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
                 </AccordionDetails>
             </Accordion>
         </>
-        // <>
-        //     <Card className='card' sx={{ minWidth: 200, mt: 2, mb: 2 }}>
-        //         <CardContent className='card-content'>
-        //             <Grid container>
-        //                 <Grid item xs={12} md={3}>
-        //                     <Box className='rating-box'>
-        //                         <Box className='rating'>
-        //                             <Typography className='text' variant="h6">Rating {rating}</Typography>
-        //                         </Box>
-        //                         <Typography className='text' variant="subtitle1">Workload {workload}</Typography>
-        //                         <Typography className='text' variant="subtitle1">Organization {organization}</Typography>
-        //                         <Typography className='text' variant="subtitle1">Usefulness {usefulness}</Typography>
-        //                         <Typography className='text' variant="subtitle1">Interest {interest}</Typography>
-        //                         <Typography className='text' variant="subtitle1">Difficulty {difficulty}</Typography>
-        //                     </Box>
-        //                 </Grid>
-        //                 <Divider orientation="vertical" flexItem />
-        //                 <Grid item xs={12} md={2}>
-        //                     <Box className='info-box' ml={1}>
-        //                         {/* <Typography className='text' variant="h6">{courseName}</Typography> */}
-        //                         <Divider orientation="vertical" flexItem />
-        //                         <Typography className='text' variant="subtitle1">{term}, {year}</Typography>
-        //                         <Typography className='text' variant="subtitle1">Course Code: {course_code}</Typography>
-        //                         <Box className='review-box' mt={1}>
-        //                             <Typography className='text'>{reviewText}</Typography>
-        //                         </Box>
-        //                     </Box>
-        //                 </Grid>
-        //             </Grid>
-        //         </CardContent>
-        //     </Card>
-        // </>
         )}
         {!isAuthenticated && (
         <>

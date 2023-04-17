@@ -98,7 +98,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
           'Content-Type': 'application/json',
         },
         
-        body: JSON.stringify({ _id, action, reviewer: (user.nickname) }),
+        body: JSON.stringify({ _id, action, reviewer: (user.nickname), review_type: ('course') }),
       });
   
       const result = await response.json();
@@ -130,7 +130,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ _id, comment: (newComment), user: (user.nickname) }),
+        body: JSON.stringify({ _id, comment: (newComment), user: (user.nickname), review_type: ('course') }),
       });
   
       const result = await response.json();

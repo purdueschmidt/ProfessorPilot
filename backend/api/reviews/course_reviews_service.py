@@ -84,7 +84,7 @@ def submit_course_review(course_json):
     response = course_reviews.insert_one(course_review)
     return {"Submit": "Submit Review Success"}
 
-def vote(_id, action, user):
+def vote(_id, action, user, review_type):
     # Check if the user has already voted
     existing_vote = vote_collection.find_one({'Review_id': _id, 'User': user})
 
@@ -125,8 +125,13 @@ def vote(_id, action, user):
         }
         response = vote_collection.insert_one(vote)
 
-    # Update the upvote/downvote counts in the review
-    result = course_reviews.update_one(
+    # Update the upvote/downvote counts in the review based on review_type
+    if review_type == 'course':
+        target_collection = course_reviews
+    elif review_type == 'professor':
+        target_collection = professor_reviews
+
+    result = target_collection.update_one(
         {'_id': _id},
         update_query
     )
@@ -134,23 +139,31 @@ def vote(_id, action, user):
     return {"Submit": "Submit Vote Success"}
 
 
-def comment(_id, comment, user):
+def comment(_id, comment_text, user, review_type):
     
     comment = {
         '_id': str(uuid.uuid4()),
         'Review_id': _id,
         'Username': user,
-        'Comment': comment,
+        'Comment': comment_text,
         'Timestamp': str(int(time.time()))
     }
 
     response = comment_collection.insert_one(comment)
 
-    course_reviews.update_one(
+    # Update the review with the new comment based on review_type
+    if review_type == 'course':
+        target_collection = course_reviews
+    elif review_type == 'professor':
+        target_collection = professor_reviews
+    else:
+        return {"Error": "Invalid review_type"}
+
+    target_collection.update_one(
         {'_id': _id},
         {'$push': {'Comments': comment}}
     )
-    return {"Submit": "Submit Vote Success"}
+    return {"Submit": "Submit Comment Success"}
 
 
 def get_recent_course_reviews():
@@ -239,8 +252,9 @@ def submit_professor_review(professor_json):
         'Grading': data['grading'],
         'Competency': data['competency'],
         'ReviewText': data['review_text'],
-        'UpVotes': 0,
+        'Upvotes': 0,
         'DownVotes': 0,
+        'Comments': [],
         'Status': 'active',
         'CreateDate': timestamp,
     }

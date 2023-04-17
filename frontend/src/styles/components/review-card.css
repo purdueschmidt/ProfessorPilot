@@ -58,5 +58,9 @@
     font-weight: bold;
     margin-top: 5px;
   }
+
+.accordion {
+  background-color: var(--black);
+}
   
 
