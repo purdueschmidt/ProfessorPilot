@@ -51,9 +51,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { CourseReviewCard } from '../course-review-card/course-review-card';
 import Grid from '@mui/material/Grid';
 import '../../styles/components/review-list.css'
+import { useAuth0 } from '@auth0/auth0-react';
+
 
 export const CourseReviewsList = ({ endpoint, course_code }) => {
   const [reviews, setReviews] = useState([]);
+  const { user } = useAuth0();
 
   const fetchReviews = useCallback(async () => {
     try {
@@ -78,7 +81,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
 
   const handleVoteUpdate = (_id, newUpVotes, newDownVotes) => {
     const reviewIndex = reviews.findIndex((review) => review._id === _id);
-  
+    
     setReviews((prevReviews) => {
       const updatedReviews = [...prevReviews];
       updatedReviews[reviewIndex].UpVotes = newUpVotes;
@@ -89,12 +92,13 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
 
   const handleVote = async (_id, action) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}`, {
+      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/vote`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ action }),
+        
+        body: JSON.stringify({ _id, action, reviewer: (user.nickname) }),
       });
   
       const result = await response.json();
@@ -108,6 +112,40 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
       console.error('Failed to update votes:', error);
     }
   };
+
+  const handleCommentUpdate = (_id, newComments) => {
+    const reviewIndex = reviews.findIndex((review) => review._id === _id);
+  
+    setReviews((prevReviews) => {
+      const updatedReviews = [...prevReviews];
+      updatedReviews[reviewIndex].comments = newComments;
+      return updatedReviews;
+    });
+  };
+
+  const handleCommentSubmit = async (_id, newComment) => {
+    try {
+      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/comment`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ _id, comment: (newComment), user: (user.nickname) }),
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        handleCommentUpdate(_id, result.comments);
+      } else {
+        console.error('Failed to submit comment:', result.message);
+      } fetchReviews();
+    } catch (error) {
+      console.error('Failed to submit comment:', error);
+    }
+  };
+  
+  
   
 
   return (
@@ -135,6 +173,8 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
                 UpVotes={review.UpVotes}
                 DownVotes={review.DownVotes}
                 onVote={handleVote} 
+                Comments={review.Comments}
+                onCommentSubmit={handleCommentSubmit}
               />
             </Grid>
           );

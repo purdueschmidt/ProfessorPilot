@@ -17,7 +17,9 @@ from .course_reviews_service import (
     get_reviews_by_professor,
     search_course_reviews,
     search_professor_reviews,
-    update_review_upvote_downvote
+    update_review_upvote_downvote,
+    vote,
+    comment
 )
 from ..security.guards import (
     authorization_guard,
@@ -91,7 +93,6 @@ def home():
         val = submit_course_review(request.get_json())
         return jsonify(val), 200
 
-
 @bp.route("/recent_course_reviews", methods=["GET", "OPTIONS"])
 def recent_course_entries():
     if request.method == 'GET':
@@ -131,8 +132,8 @@ def get_course_reviews(course_code):
 
         return response, 200
     
-@bp.route("/<_id>", methods=["PATCH"])
-def update(_id):
+@bp.route("/<_id>/vote", methods=["PATCH", "OPTIONS"])
+def handle_vote(_id):
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
@@ -142,14 +143,33 @@ def update(_id):
     if request.method == 'PATCH':
         data = request.get_json()
         action = data.get("action")
-        result = update_review_upvote_downvote(_id, action)
+        user = data.get("reviewer")
+        result = vote(_id, action, user)
         response = jsonify(result)
         response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
-        response = jsonify({'success': True})
         return response, 200
 
+
+@bp.route("/<_id>/comment", methods=["PATCH", "OPTIONS"])
+def handle_comment(_id):
+    if request.method == 'OPTIONS':
+        response = flask.Response(status=200)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
+        return response
+    if request.method == 'PATCH':
+        data = request.get_json()
+        action = data.get("comment")
+        user = data.get("user")
+        result = comment(_id, action, user)
+        response = jsonify(result)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
+        return response, 200
 
 
 # COURSES------------------------------------------------------------------------------------------------

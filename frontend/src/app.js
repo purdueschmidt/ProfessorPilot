@@ -49,7 +49,8 @@ export const App = () => {
       <Route path="/submit_course_review" element={<CourseReviewForm/>} />
       <Route path="/coursesPage" element={<CoursesPage />}/>
       <Route path="/coursesPage/:course_code" element={<CourseReviewsPage />} />
-      <Route path="/:_id" element={<CourseReviewCard />} />
+      <Route path="/:_id/vote" element={<CourseReviewCard />} />
+      <Route path="/:_id/comment" element={<CourseReviewCard />} />
 
       {/* professors */}
 

@@ -18,6 +18,9 @@ course_reviews = db['CourseReviews']
 courses_collection = db['Courses']
 profs_collection = db['Professors']
 professor_reviews = db['ProfessorReviews']
+vote_collection = db['Votes']
+comment_collection = db['Comments']
+
 
 
 # category_index = course_reviews.create_index("course_code") # create course_code index on collection
@@ -48,7 +51,9 @@ def search_professor_reviews(query, sort_by):
 
     return search_result
 
+#REVIEWS
 
+#COURSE REVIEWS
 def submit_course_review(course_json):
     data = course_json
     reviewer = data['reviewer']
@@ -71,12 +76,81 @@ def submit_course_review(course_json):
         'ReviewText': data['review_text'],
         'UpVotes': 0,
         'DownVotes': 0,
+        'Comments': [],
         'Status': 'active',
         'CreateDate': timestamp,
         'ModifiedDate': timestamp
     }
     response = course_reviews.insert_one(course_review)
     return {"Submit": "Submit Review Success"}
+
+def vote(_id, action, user):
+    # Check if the user has already voted
+    existing_vote = vote_collection.find_one({'Review_id': _id, 'User': user})
+
+    # Update the upvote/downvote counts in the review
+    update_query = {}
+
+    if existing_vote:
+        if existing_vote["Vote"] == action:
+            # User is trying to vote the same way again, do not proceed
+            return {"Submit": "User has already voted this way"}
+
+        # User wants to change their vote
+        if action == 'upvote':
+            update_query = {'$inc': {'UpVotes': 1, 'DownVotes': -1}}
+        else:  # action == 'downvote'
+            update_query = {'$inc': {'UpVotes': -1, 'DownVotes': 1}}
+
+        # Update the user's vote in the vote collection
+        vote_collection.update_one(
+            {'_id': existing_vote["_id"]},
+            {'$set': {'Vote': action}}
+        )
+    else:
+        # User has not voted yet
+        if action == 'upvote':
+            update_query = {'$inc': {'UpVotes': 1}}
+        elif action == 'downvote':
+            update_query = {'$inc': {'DownVotes': 1}}
+        else:
+            return 0
+
+        # Add the user's vote to the vote collection
+        vote = {
+            '_id': str(uuid.uuid4()),
+            'Review_id': _id,
+            'User': user,
+            'Vote': action
+        }
+        response = vote_collection.insert_one(vote)
+
+    # Update the upvote/downvote counts in the review
+    result = course_reviews.update_one(
+        {'_id': _id},
+        update_query
+    )
+
+    return {"Submit": "Submit Vote Success"}
+
+
+def comment(_id, comment, user):
+    
+    comment = {
+        '_id': str(uuid.uuid4()),
+        'Review_id': _id,
+        'Username': user,
+        'Comment': comment,
+        'Timestamp': str(int(time.time()))
+    }
+
+    response = comment_collection.insert_one(comment)
+
+    course_reviews.update_one(
+        {'_id': _id},
+        {'$push': {'Comments': comment}}
+    )
+    return {"Submit": "Submit Vote Success"}
 
 
 def get_recent_course_reviews():
