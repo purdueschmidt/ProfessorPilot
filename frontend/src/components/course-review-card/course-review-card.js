@@ -50,7 +50,7 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
     <div>
         {isAuthenticated && (
         <>
-            <Accordion  className='accordion' sx={{ minWidth: 200, mt: 2, mb: 2 }}>
+            <Accordion sx={{ minWidth: 200, mt: 2, mb: 2 }}>
                 <AccordionSummary expandIcon={<ExpandMore />} aria-controls="review-content" id="review-header">
                     <Card>
                         <CardContent className='card-content'>
