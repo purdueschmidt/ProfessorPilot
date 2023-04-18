@@ -49,7 +49,7 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
         <div>
         {isAuthenticated && (
         <>
-            <Accordion sx={{ minWidth: 200, mt: 2, mb: 2 }}>
+            <Accordion sx={{ minWidth: 200, mt: 2, mb: 2 , backgroundColor: 'var(--light-aluminium)' }}>
                 <AccordionSummary expandIcon={<ExpandMore />} aria-controls="review-content" id="review-header">
                     <Card>
                         <CardContent className='card-content'>
