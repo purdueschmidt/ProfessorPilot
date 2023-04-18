@@ -51,6 +51,10 @@ export const App = () => {
       <Route path="/coursesPage/:course_code" element={<CourseReviewsPage />} />
       <Route path="/:_id/vote" element={<CourseReviewCard />} />
       <Route path="/:_id/comment" element={<CourseReviewCard />} />
+      <Route path="/:_id/vote" element={<SearchBar />} />
+      <Route path="/:_id/comment" element={<SearchBar />} />
+      <Route path="/:_id/vote" element={<ProfessorSearchBar />} />
+      <Route path="/:_id/comment" element={<ProfessorSearchBar />} />
 
       {/* professors */}
 
