@@ -20,6 +20,7 @@ from ..security.guards import (
     permissions_guard,
     admin_messages_permissions
 )
+from common.utils import safe_get_env_var
 
 bp_name = 'api-reviews'
 bp_url_prefix = '/api/reviews'
@@ -38,13 +39,13 @@ def Home():
     if request.method == 'GET':
         recent_professor_reviews = get_recent_professor_reviews()
         response = jsonify(recent_professor_reviews)
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'     
     if request.method == 'POST':
@@ -59,7 +60,7 @@ def get_all_professor_reviews():
     if request.method == 'GET':
         professor_reviews = get_all_professor_reviews()
         response = jsonify(professor_reviews)
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
 
@@ -72,7 +73,7 @@ def get_professor_reviews(professor_name:str):
     if request.method == 'GET':
         professor_reviews = get_professor_reviews(professor_name)
         response = jsonify(professor_reviews)
-        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:4040'
+        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
 

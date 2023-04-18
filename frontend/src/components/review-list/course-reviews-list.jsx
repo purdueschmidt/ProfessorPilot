@@ -57,14 +57,15 @@ import { useAuth0 } from '@auth0/auth0-react';
 export const CourseReviewsList = ({ endpoint, course_code }) => {
   const [reviews, setReviews] = useState([]);
   const { user } = useAuth0();
+  const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
   const fetchReviews = useCallback(async () => {
     try {
       let response;
       if (endpoint === "recent_course_reviews") {
-        response = await fetch(`http://localhost:6060/api/reviews/recent_course_reviews`);
+        response = await fetch(`${apiServerUrl}/api/reviews/recent_course_reviews`);
       } else if (endpoint === "coursesPage") {
-        response = await fetch(`http://localhost:6060/api/reviews/coursesPage/${course_code}`);
+        response = await fetch(`${apiServerUrl}/api/reviews/coursesPage/${course_code}`);
       }
       if (response.ok) {
         const fetchedReviews = await response.json();
@@ -92,7 +93,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
 
   const handleVote = async (_id, action) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/vote`, {
+      const response = await fetch(`${apiServerUrl}/api/reviews/${_id}/vote`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -125,7 +126,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
 
   const handleCommentSubmit = async (_id, newComment) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/comment`, {
+      const response = await fetch(`${apiServerUrl}/api/reviews/${_id}/comment`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

@@ -1,9 +1,10 @@
 const [major, setMajor] = useState("");
 const [courses, setCourses] = useState([]);
+const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
 const fetchCoursesAndMajors = async () => {
     try {
-      const response = await fetch("http://localhost:6060/api/courses");
+      const response = await fetch(`${apiServerUrl}/api/courses`);
       if (response.ok) {
         const data = await response.json();
         setCourses(data);

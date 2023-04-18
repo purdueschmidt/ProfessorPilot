@@ -32,6 +32,7 @@ export const CourseReviewForm = () => {
   const [workload, setWorkload] = useState(0);
 
   const { user } = useAuth0();
+  const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
   useEffect(() => {
     fetchCoursesAndMajors();
@@ -39,7 +40,7 @@ export const CourseReviewForm = () => {
 
   const fetchCoursesAndMajors = async () => {
     try {
-      const response = await fetch("http://localhost:6060/api/reviews/courses");
+      const response = await fetch("${apiServerUrl}/api/reviews/courses");
       if (response.ok) {
         const data = await response.json();
         setCourses(data);
@@ -73,8 +74,8 @@ export const CourseReviewForm = () => {
 
   const submitReview = async (data) => {
     try {
-      // const response = await fetch("http://localhost:6060/api/submit_review", {
-        const response = await fetch("http://localhost:6060/api/reviews/submit_course_review", {
+      // const response = await fetch("${apiServerUrl}/api/submit_review", {
+        const response = await fetch('${apiServerUrl}/api/reviews/submit_course_review', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

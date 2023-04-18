@@ -9,10 +9,12 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import "../../styles/components/review-form.css"
 
+const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
+
 
 const fetchCoursesAndMajors = async () => {
     try {
-      const response = await fetch("http://localhost:6060/api/reviews/courses");
+      const response = await fetch(`${apiServerUrl}/api/reviews/courses`);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -40,7 +42,7 @@ export const SearchBar = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/search?query=${query}&sort_by=${sort_by}`);
+      const response = await fetch(`${apiServerUrl}/api/reviews/search?query=${query}&sort_by=${sort_by}`);
       if (response.ok) {
         const fetchedReviews = await response.json();
         setReviews(fetchedReviews);

@@ -3,12 +3,14 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import CourseCard from "./courses-card";
 
+const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
+
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch('http://localhost:6060/api/reviews/coursesPage');
+      const response = await fetch(`${apiServerUrl}/api/reviews/coursesPage`);
       if (response.ok){
         const courses = await response.json();
         setCourses(courses)
