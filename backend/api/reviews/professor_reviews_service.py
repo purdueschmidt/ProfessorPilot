@@ -34,29 +34,29 @@ def get_admin_message():
         "This is an admin message."
     )
 
-def submit_professor_review():
-    data = request.get_json()
-    reviewer = data['reviewer']
-    review_id = str(uuid.uuid4())
-    timestamp = str(int(time.time() * 1000))
-
-    professor_review = { 
-        'Reviewer': str(reviewer),
-        'Communication': data['communication'],
-        'Organization': data['organization'],
-        'Availability': data['availability'],
-        'Grading': data['grading'],
-        'Competency': data['competency'],
-        'ReviewText': data['review_text'],
-        'Upvotes': 0,
-        'Status': 'active',
-        'CreateDate': timestamp,
-        'ModifiedDate': timestamp,
-        'ReviewId': review_id
-
-    }
-    response = professor_reviews_collection.insert_one(professor_review)
-    return {"Message": "Submit Review Success"}
+# def submit_professor_review():
+#     data = request.get_json()
+#     reviewer = data['reviewer']
+#     review_id = str(uuid.uuid4())
+#     timestamp = str(int(time.time() * 1000))
+#
+#     professor_review = {
+#         'Reviewer': str(reviewer),
+#         'Communication': data['communication'],
+#         'Organization': data['organization'],
+#         'Availability': data['availability'],
+#         'Grading': data['grading'],
+#         'Competency': data['competency'],
+#         'ReviewText': data['review_text'],
+#         'Upvotes': 0,
+#         'Status': 'active',
+#         'CreateDate': timestamp,
+#         'ModifiedDate': timestamp,
+#         'ReviewId': review_id
+#
+#     }
+#     response = professor_reviews_collection.insert_one(professor_review)
+#     return {"Message": "Submit Review Success"}
 
 def get_recent_professor_reviews():
     cursor = professor_reviews_collection.find({"ReviewId": {"$regex": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"}}).sort("CreateDate", -1).limit(25)

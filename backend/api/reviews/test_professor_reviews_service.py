@@ -33,9 +33,8 @@ def test_submit_professor_review(mocker):
     expected = {"Message": "Submit Review Success"}
     actual = submit_professor_review(json_from_create)
 
-
     expected_db_parameter = {
-        '_id':"1",
+        '_id': "1",
         'Reviewer': 'Paul',
         'professor': 'John Doe',
         'Communication': '5',
@@ -44,13 +43,13 @@ def test_submit_professor_review(mocker):
         'Grading': '5',
         'Competency': '5',
         'ReviewText': 'This is a test',
-        'UpVotes': 0,
+        'Upvotes': 0,
         'DownVotes': 0,
-        'Status' : "active",
+        'Comments': [],
+        'Status': "active",
         'CreateDate': "1680495280"
     }
-    
-    
+
     professor_reviews.insert_one.assert_called_once_with(expected_db_parameter)
     assert expected == actual
 
