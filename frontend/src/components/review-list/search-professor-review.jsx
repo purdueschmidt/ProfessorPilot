@@ -102,6 +102,7 @@ return (
         return (
           <Grid item xs={12} sm={6} key={index}>
             <ProfessorReviewCard
+              rating={review.Rating}
               term={review.Term}
               year={review.Year}
               course_code={review.course_code}
@@ -111,6 +112,9 @@ return (
               usefulness={review.Usefulness}
               interest={review.Interest}
               difficulty={review.Difficulty}
+              UpVotes={review.UpVotes}
+              DownVotes={review.DownVotes}
+              Comments={review.Comments}
             />
           </Grid>
         );
