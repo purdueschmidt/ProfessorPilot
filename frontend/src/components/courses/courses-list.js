@@ -35,6 +35,12 @@ const CoursesList = () => {
                 course_name={course.course_name}
                 course_code={course.course_code} 
                 major={course.major}  
+                Rating={course.Rating}
+                Difficulty={course.Difficulty}
+                Interest={course.Interest}
+                Usefulness={course.Usefulness}
+                Organization={course.Organization}
+                Workload={course.Workload}
               />
             </Grid>
             );

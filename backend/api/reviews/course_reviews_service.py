@@ -28,7 +28,7 @@ comment_collection = db['Comments']
 #SEARCH
 
 def search_course_reviews(query, sort_by):
-    print(query, sort_by)
+    
     search_result = []
     if query:
         reviews = course_reviews.find({'course_code': {'$regex': query, '$options': 'i'}}).sort(sort_by)
@@ -40,7 +40,7 @@ def search_course_reviews(query, sort_by):
     return search_result
 
 def search_professor_reviews(query, sort_by):
-    print(query, sort_by)
+    
     search_result = []
     if query:
         reviews = professor_reviews.find({'professor': {'$regex': query, '$options': 'i'}}).sort(sort_by)
@@ -82,6 +82,8 @@ def submit_course_review(course_json):
         'ModifiedDate': timestamp
     }
     response = course_reviews.insert_one(course_review)
+
+    update_course_averages()
     return {"Submit": "Submit Review Success"}
 
 def vote(_id, action, user, review_type):
@@ -178,7 +180,7 @@ def get_recent_course_reviews():
 
 def get_reviews_by_course_code(course_code):
     " Fetches course reviews for a specific course from the db collection"
-    print(course_code)
+
     cursor = course_reviews.find(
         {"course_code": course_code}
     )
@@ -209,13 +211,24 @@ def get_all_courses():
     cursor = courses_collection.find({})
     all_courses = [{**course, '_id': str(course['_id'])} for course in cursor]
 
-    if all_courses is None:
-        print("null")
-    else:
-        print("not null")
+    # if all_courses is None:
+    #     print("null")
+    # else:
+    #     print("not null")
 
     return all_courses
 
+def update_course_averages():
+
+    for course in courses_collection.find():
+        course_reviews_list = list(course_reviews.find({"course_code": course["course_code"]}))
+        review_count = len(course_reviews_list)
+        if review_count > 0:
+            updated_course = course.copy()
+            for attribute in ['Workload', 'Organization', 'Usefulness', 'Interest', 'Difficulty', 'Rating']:
+                updated_course[attribute] = sum([review[attribute] for review in course_reviews_list]) / review_count
+
+            courses_collection.update_one({'_id': course['_id']}, {'$set': updated_course})
 
 # PROFESSORS
 
@@ -223,13 +236,25 @@ def get_all_professors():
     cursor = profs_collection.find({})
     all_profs = [{**professor, '_id': str(professor['_id'])} for professor in cursor]
 
-    if all_profs is None:
-        print("null")
-    else:
-        print("not null")
+    # if all_profs is None:
+    #     print("null")
+    # else:
+    #     print("not null")
 
-    print(all_profs)
+    
     return all_profs
+
+def update_professor_averages():
+    
+    for professor in profs_collection.find():
+        prof_review_list = list(professor_reviews.find({"professor": professor["professor"]}))
+        review_count = len(prof_review_list)
+        if review_count > 0:
+            updated_professor = professor.copy()
+            for attribute in ['Availability', 'Communication', 'Competency', 'Grading', 'Rating']:
+                updated_professor[attribute] = sum([review[attribute] for review in prof_review_list]) / review_count
+
+            profs_collection.update_one({'_id': professor['_id']}, {'$set': updated_professor})
 
 
 # PROFESSOR REVIEWS
@@ -263,6 +288,8 @@ def submit_professor_review(professor_json):
         'CreateDate': timestamp,
     }
     response = professor_reviews.insert_one(professor_review)
+
+    update_professor_averages()
     return {"Message": "Submit Review Success"}
 
 
@@ -278,7 +305,7 @@ def get_recent_professor_reviews():
 
 def get_reviews_by_professor(professor):
     " Fetches professor reviews for a specific professor from the db collection"
-    print(professor)
+    
     cursor = professor_reviews.find(
         {"professor": professor}
     )

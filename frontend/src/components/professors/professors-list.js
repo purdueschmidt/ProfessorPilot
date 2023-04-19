@@ -33,6 +33,12 @@ const ProfessorsList = () => {
             <Grid item key={index}>
               <ProfessorCard 
                 professor={professor.professor}
+                Rating={professor.Rating}
+                Communication={professor.Communication}
+                Organization={professor.Organization}
+                Availability={professor.Availability}
+                Grading={professor.Grading}
+                Competency={professor.Competency}
               />
             </Grid>
             );
