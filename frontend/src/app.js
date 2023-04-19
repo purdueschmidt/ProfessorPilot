@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { PageLoader } from "./components/page-loader";
+import { PageLoader } from "./components/defaults/page-loader";
 import { AuthenticationGuard } from "./components/auth/authentication-guard";
 import { AdminPage } from "./pages/admin-page";
 import { CallbackPage } from "./pages/callback-page";
@@ -10,17 +10,17 @@ import { NotFoundPage } from "./pages/not-found-page";
 import { ProfilePage } from "./pages/profile-page";
 import { ProtectedPage } from "./pages/protected-page";
 import { PublicPage } from "./pages/public-page";
-import { CourseReviewForm } from "./components/course-review-form/course-review-form";
+import { CourseReviewForm } from "./components/forms/course-review-form";
 import { CourseReviewsPage } from "./pages/course-reviews";
 import { CoursesPage } from "./pages/courses";
-import { CourseReviewsList } from "./components/course-review-list/course-reviews-list";
-import { ProfessorReviewsList } from "./components/professor-review-list/professor-review-list";
+import { CourseReviewsList } from "./components/lists/course-reviews-list";
+import { ProfessorReviewsList } from "./components/lists/professor-review-list";
 import { ProfessorReviewsPage } from "./pages/professor-reviews";
 import { ProfessorsPage } from "./pages/professors";
-import { ProfessorReviewForm } from "./components/professor-review-form/professor-review-form";
-import { SearchBar } from "./components/search/search-reviews";
-import { ProfessorSearchBar } from "./components/review-list/search-professor-review";
-import { CourseReviewCard } from "./components/course-review-card/course-review-card";
+import { ProfessorReviewForm } from "./components/forms/professor-review-form";
+import { SearchBar } from "./components/lists/search-course-list";
+import { ProfessorSearchBar } from "./components/lists/search-professor-review";
+import { CourseReviewCard } from "./components/cards/course-review-card";
 
 export const App = () => {
   const { isLoading } = useAuth0();

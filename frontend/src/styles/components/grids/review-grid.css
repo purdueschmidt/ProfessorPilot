@@ -1,9 +1,0 @@
-.review-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  
-  .review-grid .reviewer {
-    grid-column: 1 / -1;
-  }

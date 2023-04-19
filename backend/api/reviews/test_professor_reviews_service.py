@@ -1,21 +1,21 @@
 
-from  api.reviews.course_reviews_service import submit_professor_review, professor_reviews, get_reviews_by_professor, get_recent_professor_reviews, get_all_professors, profs_collection
+from  api.reviews.service import submit_professor_review, professor_reviews, get_reviews_by_professor, get_recent_professor_reviews, get_all_professors, profs_collection
 
 
 def test_submit_professor_review(mocker):
     
     mocker.patch(
-        'api.reviews.course_reviews_service.professor_reviews.insert_one',
+        'api.reviews.service.professor_reviews.insert_one',
         return_value = True
     )
 
     mocker.patch(
-        'api.reviews.course_reviews_service.uuid.uuid4',
+        'api.reviews.service.uuid.uuid4',
         return_value = "1"
     )
 
     mocker.patch(
-        'api.reviews.course_reviews_service.time.time',
+        'api.reviews.service.time.time',
         return_value = "1680495280"
     )
 
@@ -58,7 +58,7 @@ def test_submit_professor_review(mocker):
 def test_get_reviews_by_professor(mocker):
     
     mocker.patch(
-        'api.reviews.course_reviews_service.professor_reviews.find',
+        'api.reviews.service.professor_reviews.find',
         return_value = [{'_id':"1",'Reviewer': 'Paul','professor': 'John Doe','Communication': '5',
             'Organization': '5','Availability': '5','Grading': '5', 'Competency': '5',
             'ReviewText': 'This is a test', 'UpVotes': 0, 'DownVotes': 0, 'Status' : "active",
@@ -81,7 +81,7 @@ def test_get_reviews_by_professor(mocker):
 
 # test case with empty or incorrect input
     mocker.patch(
-        'api.reviews.course_reviews_service.professor_reviews.find',
+        'api.reviews.service.professor_reviews.find',
         return_value = []
     )
 
@@ -94,7 +94,7 @@ def test_get_reviews_by_professor(mocker):
 def test_get_recent_profesor_reviews(mocker):
 
     mocker.patch(
-        'api.reviews.course_reviews_service.professor_reviews.find',
+        'api.reviews.service.professor_reviews.find',
         return_value = [{'_id':"1",'Reviewer': 'Paul','professor': 'John Doe','Communication': '5',
             'Organization': '5', 'Availability': '5','Grading': '5','Competency': '5', 
             'ReviewText': 'This is a test','UpVotes': 0, 'DownVotes': 0,"Status" : "active",
@@ -131,7 +131,7 @@ def test_get_recent_profesor_reviews(mocker):
 def test_get_all_professors(mocker):
 
     mocker.patch(
-        'api.reviews.course_reviews_service.profs_collection.find',
+        'api.reviews.service.profs_collection.find',
         return_value = [{'_id': '1', 'professor': 'John Doe'}, 
                         {'_id': '2', 'professor': 'Jane Doe'}, 
                         {'_id': '3','professor': 'Franck Alex'}, 

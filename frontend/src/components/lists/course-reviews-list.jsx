@@ -1,34 +1,34 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ProfessorReviewCard } from '../professor-review-card/professor-review-card';
-import '../../styles/components/review-list.css'
-
+import { CourseReviewCard } from '../cards/course-review-card';
 import Grid from '@mui/material/Grid';
+import '../../styles/components/review-list.css'
 import { useAuth0 } from '@auth0/auth0-react';
 
-export const ProfessorReviewsList = ({ endpoint, professor }) => {
+
+export const CourseReviewsList = ({ endpoint, course_code }) => {
   const [reviews, setReviews] = useState([]);
   const { user } = useAuth0();
 
-  const fetchProfessorReviews = useCallback(async () => {
+  const fetchReviews = useCallback(async () => {
     try {
-      let response = { ok: false };
-      if (endpoint === "recent_professor_reviews") {
-        response = await fetch(`http://localhost:6060/api/reviews/recent_professor_reviews`);
-      } else if (endpoint === "professorsPage") {
-        response = await fetch(`http://localhost:6060/api/reviews/professorsPage/${professor}`);
+      let response;
+      if (endpoint === "recent_course_reviews") {
+        response = await fetch(`http://localhost:6060/api/reviews/recent_course_reviews`);
+      } else if (endpoint === "coursesPage") {
+        response = await fetch(`http://localhost:6060/api/reviews/coursesPage/${course_code}`);
       }
       if (response.ok) {
-        const fetchedProfessorReviews = await response.json();
-        setReviews(fetchedProfessorReviews);
+        const fetchedReviews = await response.json();
+        setReviews(fetchedReviews);
       }
     } catch (error) {
-      console.error('Failed to fetch professor reviews:', error);
+      console.error('Failed to fetch reviews:', error);
     }
-  },  [endpoint, professor]); ;
+  },  [endpoint, course_code]); ;
 
   useEffect(() => {
-    fetchProfessorReviews();
-  }, [fetchProfessorReviews]);
+    fetchReviews();
+  }, [fetchReviews]);
 
   const handleVoteUpdate = (_id, newUpVotes, newDownVotes) => {
     const reviewIndex = reviews.findIndex((review) => review._id === _id);
@@ -49,7 +49,7 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
           'Content-Type': 'application/json',
         },
         
-        body: JSON.stringify({ _id, action, reviewer: (user.nickname), review_type: ('professor') }),
+        body: JSON.stringify({ _id, action, reviewer: (user.nickname), review_type: ('course') }),
       });
   
       const result = await response.json();
@@ -58,7 +58,7 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
         handleVoteUpdate(_id, result.upVotes, result.downVotes);
       } else {
         console.error('Failed to update votes:', result.message);
-      } fetchProfessorReviews();
+      } fetchReviews();
     } catch (error) {
       console.error('Failed to update votes:', error);
     }
@@ -81,7 +81,7 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ _id, comment: (newComment), user: (user.nickname), review_type: ('professor') }),
+        body: JSON.stringify({ _id, comment: (newComment), user: (user.nickname), review_type: ('course') }),
       });
   
       const result = await response.json();
@@ -90,31 +90,37 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
         handleCommentUpdate(_id, result.comments);
       } else {
         console.error('Failed to submit comment:', result.message);
-      } fetchProfessorReviews();
+      } fetchReviews();
     } catch (error) {
       console.error('Failed to submit comment:', error);
     }
   };
+  
+  
+  
 
   return (
     <div>
-      <h1 className='header'>Professor Reviews</h1>
+      <h1 className='header'>Course Reviews</h1>
       <Grid container spacing={1}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
           // if (!review.CourseName) return null;
           return (
             <Grid item xs={12} sm={6} key={index}>
-              <ProfessorReviewCard
+              <CourseReviewCard
                 _id={review._id}
+                term={review.Term}
+                year={review.Year}
                 rating={review.Rating}
-                professor={review.professor}
+                reviewer={review.Reviewer}
+                course_code={review.course_code}
                 reviewText={review.ReviewText}
-                communication={review.Communication}
+                workload={review.Workload}
                 organization={review.Organization}
-                availability={review.Availability}
-                grading={review.Grading}
-                competency={review.Competency}
+                usefulness={review.Usefulness}
+                interest={review.Interest}
+                difficulty={review.Difficulty}
                 UpVotes={review.UpVotes}
                 DownVotes={review.DownVotes}
                 onVote={handleVote} 
@@ -128,3 +134,5 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
     </div>
   );
 };
+
+

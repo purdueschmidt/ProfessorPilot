@@ -251,7 +251,7 @@ def update_professor_averages():
         review_count = len(prof_review_list)
         if review_count > 0:
             updated_professor = professor.copy()
-            for attribute in ['Availability', 'Communication', 'Competency', 'Grading', 'Rating']:
+            for attribute in ['Availability', 'Communication', 'Competency', 'Organization', 'Grading', 'Rating']:
                 updated_professor[attribute] = sum([review[attribute] for review in prof_review_list]) / review_count
 
             profs_collection.update_one({'_id': professor['_id']}, {'$set': updated_professor})

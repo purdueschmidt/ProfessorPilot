@@ -1,7 +1,7 @@
 import React from "react";
-import { NavBar } from "./navigation/desktop/navbar/nav-bar";
-import { MobileNavBar } from "./navigation/mobile/mobile-nav-bar";
-import { Footer } from  "./navigation/desktop/footer/footer";
+import { NavBar } from "../navigation/desktop/navbar/nav-bar";
+import { MobileNavBar } from "../navigation/mobile/mobile-nav-bar";
+import { Footer } from  "../navigation/desktop/footer/footer";
 
 
 export const PageLayout = ({ children }) => {

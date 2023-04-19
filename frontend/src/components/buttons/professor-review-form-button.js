@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { ProfessorReviewForm } from "../professor-review-form/professor-review-form";
+import { ProfessorReviewForm } from "../forms/professor-review-form";
 import "../../styles/components/button.css"
 
 const ProfessorReviewFormButton = () => {

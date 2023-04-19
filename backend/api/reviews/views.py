@@ -3,7 +3,7 @@ from flask import (
     Flask, Blueprint, request, jsonify
 )
 
-from .course_reviews_service import (
+from .service import (
     get_public_message,
     get_protected_message,
     get_admin_message,

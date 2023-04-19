@@ -1,5 +1,4 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
@@ -7,7 +6,6 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
-import { colors } from '@mui/material';
 
 
 const CourseCard = ({ course_name, course_code, major, Rating, Difficulty ,Interest, Usefulness, Organization, Workload }) => {

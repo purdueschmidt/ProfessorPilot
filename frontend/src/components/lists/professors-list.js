@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import ProfessorCard from "./professors-card";
+import ProfessorCard from "../cards/professors-card";
 
 const ProfessorsList = () => {
   const [professors, setProfessors] = useState([]);

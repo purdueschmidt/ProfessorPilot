@@ -1,19 +1,19 @@
-from api.reviews.course_reviews_service import submit_course_review, course_reviews, get_reviews_by_course_code, get_recent_course_reviews, get_all_courses, courses_collection
+from api.reviews.service import submit_course_review, course_reviews, get_reviews_by_course_code, get_recent_course_reviews, get_all_courses, courses_collection
 
 
 def test_submit_course_review(mocker):
     mocker.patch(
-        'api.reviews.course_reviews_service.course_reviews.insert_one',
+        'api.reviews.service.course_reviews.insert_one',
         return_value=True
     )
 
     mocker.patch(
-        'api.reviews.course_reviews_service.uuid.uuid4',
+        'api.reviews.service.uuid.uuid4',
         return_value="1"
     )
 
     mocker.patch(
-        'api.reviews.course_reviews_service.time.time',
+        'api.reviews.service.time.time',
         return_value="1680495280"
     )
 
@@ -56,7 +56,7 @@ def test_submit_course_review(mocker):
 def test_get_reviews_by_course_code(mocker):
     
     mocker.patch(
-        'api.reviews.course_reviews_service.course_reviews.find',
+        'api.reviews.service.course_reviews.find',
         return_value = [ {
         '_id':"1", 'Reviewer': "Jack", "course_code":'SSW 565', 'Term': "Fall", 'Year': "2020",
         'Difficulty': "4", 'Interest': "4", 'Usefulness': "4", 'Organization': "4", 'Workload': "4",
@@ -80,7 +80,7 @@ def test_get_reviews_by_course_code(mocker):
 
 # test case with empty or incorrect input
     mocker.patch(
-        'api.reviews.course_reviews_service.course_reviews.find',
+        'api.reviews.service.course_reviews.find',
         return_value = []
     )
 
@@ -93,7 +93,7 @@ def test_get_reviews_by_course_code(mocker):
 def test_get_recent_course_reviews(mocker):
 
     mocker.patch(
-        'api.reviews.course_reviews_service.course_reviews.find',
+        'api.reviews.service.course_reviews.find',
         return_value = [
         {'_id':"1", 'Reviewer': "Paul", "course_code":'SSW 565', 'Term': "Fall",
         'Year': "2020",'Difficulty': "4",'Interest': "4",'Usefulness': "4",
@@ -130,7 +130,7 @@ def test_get_recent_course_reviews(mocker):
 def test_get_all_courses(mocker):
 
     mocker.patch(
-        'api.reviews.course_reviews_service.courses_collection.find',
+        'api.reviews.service.courses_collection.find',
         return_value = [{"_id": "1", "major":"*Computer Science", "course_code":"CS501", "course_name":"Java Programming" },
                         {"_id": "2","major":"*Computer Science","course_code":"CS559", "course_name":"Machine Learning: Fund & Apps"
                        },{"_id": '3',"major":"*Computer Science","course_code":"CS505","course_name":"Prob & Stochastic Proc I"}
