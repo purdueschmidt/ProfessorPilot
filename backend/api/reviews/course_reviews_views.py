@@ -201,7 +201,7 @@ def get_courses():
 # @authorization_guard
 def submit_prof_review():
     if request.method == 'GET':
-        recent_professor_reviews = get_recent_professor_reviews
+        recent_professor_reviews = get_recent_professor_reviews()
         response = jsonify(recent_professor_reviews)
         response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
