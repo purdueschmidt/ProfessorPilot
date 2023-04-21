@@ -1,5 +1,5 @@
 import unittest
-from ..wsgi import app
+from api.wsgi import app
 
 
 class TestProfessorReviewsViews(unittest.TestCase):
