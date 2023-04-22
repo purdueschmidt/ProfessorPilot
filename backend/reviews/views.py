@@ -21,7 +21,7 @@ from .service import (
     vote,
     comment
 )
-from ..security.guards import (
+from security.guards import (
     authorization_guard,
     permissions_guard,
     admin_messages_permissions
@@ -29,7 +29,7 @@ from ..security.guards import (
 from common.utils import safe_get_env_var
 
 bp_name = 'api-reviews'
-bp_url_prefix = '/api/reviews'
+bp_url_prefix = '/reviews'
 bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
 
 # SEARCH-------------------------------------------------------------------------------------------------

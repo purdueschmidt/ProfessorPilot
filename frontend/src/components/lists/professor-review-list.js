@@ -14,9 +14,9 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
     try {
       let response = { ok: false };
       if (endpoint === "recent_professor_reviews") {
-        response = await fetch(`${apiServerUrl}/api/reviews/recent_professor_reviews`);
+        response = await fetch(`${apiServerUrl}/reviews/recent_professor_reviews`);
       } else if (endpoint === "professorsPage") {
-        response = await fetch(`${apiServerUrl}/api/reviews/professorsPage/${professor}`);
+        response = await fetch(`${apiServerUrl}/reviews/professorsPage/${professor}`);
       }
       if (response.ok) {
         const fetchedProfessorReviews = await response.json();
@@ -44,7 +44,7 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
 
   const handleVote = async (_id, action) => {
     try {
-      const response = await fetch(`${apiServerUrl}/api/reviews/${_id}/vote`, {
+      const response = await fetch(`${apiServerUrl}/reviews/${_id}/vote`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
 
   const handleCommentSubmit = async (_id, newComment) => {
     try {
-      const response = await fetch(`${apiServerUrl}/api/reviews/${_id}/comment`, {
+      const response = await fetch(`${apiServerUrl}/reviews/${_id}/comment`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

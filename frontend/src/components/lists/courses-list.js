@@ -10,7 +10,7 @@ const CoursesList = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch(`${apiServerUrl}/api/reviews/coursesPage`);
+      const response = await fetch(`${apiServerUrl}/reviews/coursesPage`);
       if (response.ok){
         const courses = await response.json();
         setCourses(courses)

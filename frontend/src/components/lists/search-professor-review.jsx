@@ -15,7 +15,7 @@ const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
 const fetchProfessors = async () => {
     try {
-      const response = await fetch(`${apiServerUrl}/api/reviews/professors`);
+      const response = await fetch(`${apiServerUrl}/reviews/professors`);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -44,7 +44,7 @@ export const ProfessorSearchBar = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`${apiServerUrl}/api/reviews/professor-review-search?query=${query}&sort_by=${sort_by}`);
+      const response = await fetch(`${apiServerUrl}/reviews/professor-review-search?query=${query}&sort_by=${sort_by}`);
       if (response.ok) {
         const fetchedReviews = await response.json();
         setReviews(fetchedReviews);
@@ -72,7 +72,7 @@ export const ProfessorSearchBar = () => {
 
   const handleVote = async (_id, action) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/vote`, {
+      const response = await fetch(`${apiServerUrl}/reviews/${_id}/vote`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export const ProfessorSearchBar = () => {
 
   const handleCommentSubmit = async (_id, newComment) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/comment`, {
+      const response = await fetch(`${apiServerUrl}/reviews/${_id}/comment`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

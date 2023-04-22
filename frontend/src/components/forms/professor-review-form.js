@@ -37,7 +37,7 @@ export const ProfessorReviewForm = () => {
 
   const fetchProfessors = async () => {
     try {
-      const response = await fetch(`${apiServerUrl}/api/reviews/professors`);
+      const response = await fetch(`${apiServerUrl}/reviews/professors`);
       if (response.ok) {
         const data = await response.json();
         setProfessors(data);
@@ -71,7 +71,7 @@ export const ProfessorReviewForm = () => {
   const submitReview = async (data) => {
     try {
       // const response = await fetch("${apiServerUrl}/api/submit_review", {
-        const response = await fetch(`${apiServerUrl}/api/reviews/submit_professor_review`, {
+        const response = await fetch(`${apiServerUrl}/reviews/submit_professor_review`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

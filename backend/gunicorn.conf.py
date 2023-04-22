@@ -5,7 +5,7 @@ from common.utils import safe_get_env_var
 
 load_dotenv()
 
-wsgi_app = "api.wsgi:app"
+wsgi_app = "app:app"
 bind = f"0.0.0.0:{safe_get_env_var('PORT')}"
 
 def wrap_default_headers(func):
