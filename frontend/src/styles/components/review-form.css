@@ -113,15 +113,15 @@ textarea:-webkit-autofill:active {
   justify-content: center;
 }
 
-.header{
+/* .header{
   color: white;
-}
+} */
 
 .search-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  /* color: white; */
 }
 
 .MuiInputBase-input {

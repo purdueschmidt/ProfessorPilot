@@ -1,16 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Button  from "@mui/material/Button";
 
 export const NavBarTab = ({ path, label }) => {
   return (
     <NavLink
       to={path}
       end
-      className={({ isActive }) =>
-        "nav-bar__tab " + (isActive ? "nav-bar__tab--active" : "")
-      }
+      // activeClassName="nav-bar__tab--active"
     >
-      {label}
+      <Button color="inherit">
+        {label}
+      </Button>
     </NavLink>
   );
 };

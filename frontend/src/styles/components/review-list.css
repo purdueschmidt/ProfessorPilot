@@ -1,19 +1,19 @@
-.header{
+/* .header{
     color: white;
-}
+} */
 
 .search-bar {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    /* color: white; */
   }
   
-.MuiInputBase-input {
+/* .MuiInputBase-input {
   color: white;
-}
+} */
 
 .sort-by-dropdown {
-  color: white;
+  /* color: white; */
   background-color: transparent;
 }

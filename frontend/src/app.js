@@ -21,6 +21,7 @@ import { ProfessorReviewForm } from "./components/forms/professor-review-form";
 import { SearchBar } from "./components/lists/search-course-list";
 import { ProfessorSearchBar } from "./components/lists/search-professor-review";
 import { CourseReviewCard } from "./components/cards/course-review-card";
+// import { ThemeProvider, createTheme } from "@mui/material";
 
 export const App = () => {
   const { isLoading } = useAuth0();
@@ -33,7 +34,9 @@ export const App = () => {
     );
   }
 
+
   return (
+  // <ThemeProvider theme={theme}>
     <Routes>
 
       {/* home */}
@@ -72,5 +75,7 @@ export const App = () => {
       <Route path="/callback" element={<CallbackPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
+  // </ThemeProvider>  
+    
   );
 };

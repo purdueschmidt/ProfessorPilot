@@ -143,7 +143,7 @@ return (
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6}>
             <FormControl sx={{ minWidth: 120}}>
-              <InputLabel className="review-form-field" htmlFor="grouped-native-select">Course Code</InputLabel>
+              <InputLabel  htmlFor="grouped-native-select">Course Code</InputLabel>
               <Select name="course_code" onChange={(event) => setQuery(event.target.value)} value={query} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
                 <option className="" aria-label="None" value="" />
                 {uniqueMajors.map((major, index) => (
@@ -167,7 +167,7 @@ return (
                 value={sort_by}
                 onChange={(event) => setSort_By(event.target.value)}
                 select
-                className="review-form-field">
+                >
               
                 <MenuItem value='Year'>Year</MenuItem>
                 <MenuItem value='Term'>Term</MenuItem>
