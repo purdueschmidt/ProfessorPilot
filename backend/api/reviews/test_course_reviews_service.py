@@ -19,16 +19,16 @@ def test_submit_course_review(mocker):
 
     json_from_create = {'reviewer': 'JOE',
                         "course_code": 'SSW 695',
-                        'difficulty': '4',
-                        'interest': '4',
-                        'usefulness': '4',
-                        'organization': '4',
-                        'workload': '4',
+                        'difficulty': 1,
+                        'interest': 2,
+                        'usefulness': 3,
+                        'organization': 4,
+                        'workload': 5,
                         'review_text': 'This is text',
                         'term': 'spring',
                         'year': '2000'}
 
-    expected = {"Message": "Submit Review Success"}
+    expected = {"Submit": "Submit Review Success"}
     actual = submit_course_review(json_from_create)
 
     expected_db_parameter = {
@@ -37,14 +37,16 @@ def test_submit_course_review(mocker):
         "course_code":'SSW 695',
         'Term': "spring",
         'Year': "2000",
-        'Difficulty': "4",
-        'Interest': "4",
-        'Usefulness': "4",
-        'Organization': "4",
-        'Workload': "4",
+        'Rating': 3,
+        'Difficulty': 1,
+        'Interest': 2,
+        'Usefulness': 3,
+        'Organization': 4,
+        'Workload': 5,
         'ReviewText': "This is text",
         'UpVotes': 0,
         'DownVotes': 0,
+        'Comments': [],
         'Status': 'active',
         'CreateDate': "1680495280",
         'ModifiedDate': "1680495280",

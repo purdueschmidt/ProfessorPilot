@@ -5,10 +5,11 @@ import ProfessorCard from "../cards/professors-card";
 
 const ProfessorsList = () => {
   const [professors, setProfessors] = useState([]);
+  const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
 
   const fetchProfessors = async () => {
     try {
-      const response = await fetch('http://localhost:6060/api/reviews/professorsPage');
+      const response = await fetch(`${apiServerUrl}/api/reviews/professorsPage`);
       if (response.ok){
         const professors = await response.json();
         setProfessors(professors)
