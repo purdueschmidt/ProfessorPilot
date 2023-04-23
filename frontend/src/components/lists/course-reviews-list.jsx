@@ -102,7 +102,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
   return (
     <div>
       <h1 className='header'>Course Reviews</h1>
-      <Grid container spacing={1}>
+      <Grid container spacing={3}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
           // if (!review.CourseName) return null;

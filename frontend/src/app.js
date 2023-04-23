@@ -37,6 +37,7 @@ export const App = () => {
 
   return (
   // <ThemeProvider theme={theme}>
+    
     <Routes>
 
       {/* home */}
@@ -75,7 +76,7 @@ export const App = () => {
       <Route path="/callback" element={<CallbackPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
-  // </ThemeProvider>  
+
     
   );
 };

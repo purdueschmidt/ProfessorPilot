@@ -136,14 +136,14 @@ export const SearchBar = () => {
 
 return (
   <div>
-    <h1 className='header'>Search Course Reviews</h1>
+    <h1 className='header'>Search Professor Reviews</h1>
     <div className='search-bar'>
       {/* <TextField label='Search by course code' value={query} onChange={(event) => setQuery(event.target.value)} /> */}
       <form id="courseReviewForm">
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6}>
             <FormControl sx={{ minWidth: 120}}>
-              <InputLabel  htmlFor="grouped-native-select">Course Code</InputLabel>
+              <InputLabel variant="outlined" htmlFor="grouped-native-select">Course Code</InputLabel>
               <Select name="course_code" onChange={(event) => setQuery(event.target.value)} value={query} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
                 <option className="" aria-label="None" value="" />
                 {uniqueMajors.map((major, index) => (
@@ -151,7 +151,7 @@ return (
                     {courses
                       .filter((course) => course.major === major)
                       .map((course) => (
-                        <option className="review-form-fieldd" key={course.course_code} value={course.course_code}>
+                        <option  key={course.course_code} value={course.course_code}>
                           {course.course_code}
                         </option>
                       ))}

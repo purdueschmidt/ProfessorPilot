@@ -15,7 +15,6 @@ import Select from "@mui/material/Select";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const ProfessorReviewForm = () => {
-  const reviewer = useRef();
   const reviewText = useRef();
 
   const [professors, setProfessors] = useState([]);
@@ -136,28 +135,21 @@ export const ProfessorReviewForm = () => {
 
 
   return (
-    <Container maxWidth="sm" className="review-form-container">
-      <Typography variant="h4" align="center" className="review-form-title" gutterBottom>
-        Professor Review Form
-      </Typography>
+    <Container maxWidth="sm">
       <form id="courseReviewForm" onSubmit={handleSubmit}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
-            {/* <TextField
-              className="review-form-field"
-              label="Reviewer"
-              fullWidth
-              required
-              inputRef={reviewer}
-            /> */}
-            <Typography align="center" className="review-form-field" gutterBottom>
-              {user.nickname}
-            </Typography>
+            <Grid item xs={12} sm={3}>
+              <Typography align="center" alignItems="center"
+                  justifyContent="center" variant="subtitle1">
+                {user.nickname}
+              </Typography>
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={3}>
             <FormControl sx={{ minWidth: 120}}>
-              <InputLabel className="review-form-field" htmlFor="grouped-native-select">Professor</InputLabel>
-              <Select name="professor" onChange={handleChange} value={professor} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
+              <InputLabel htmlFor="grouped-native-select">Professor</InputLabel>
+              <Select name="professor" onChange={handleChange} value={professor} native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
                 <option className="" aria-label="None" value="" />
                     {professors.map((professor) => (
                         <option className="review-form-fieldd" key={professor._id} value={professor.professor}>
@@ -168,7 +160,7 @@ export const ProfessorReviewForm = () => {
             </FormControl>
           </Grid>
           {criteria.map((criterion, index) => (
-            <Grid item xs={12} sm={2} key={index}>
+            <Grid item xs={10} sm={3} key={index}>
               <Box
                 display="flex"
                 flexDirection="column"
@@ -177,9 +169,10 @@ export const ProfessorReviewForm = () => {
                 width="100%"
                 height="100%"
               >
-                <Typography variant="subtitle1" className="review-form-field">{criterion}:</Typography>
+                <Typography variant="subtitle1">{criterion}:</Typography>
                 <Rating
                   name={criterion}
+                  size="small"
                   value={eval(criterion)}
                   onChange={(event, newValue) => handleRatingChange(criterion, newValue)}
                 />
@@ -188,7 +181,7 @@ export const ProfessorReviewForm = () => {
           ))}
           <Grid item xs={12}>
             <TextField
-              className="review-form-field"
+          
               label="Review Text"
               multiline
               rows={4}
@@ -198,7 +191,7 @@ export const ProfessorReviewForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary" className="review-form-button">
+            <Button type="submit" variant="contained" color="primary">
               Submit
             </Button>
           </Grid>

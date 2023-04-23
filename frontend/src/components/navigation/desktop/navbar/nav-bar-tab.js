@@ -9,7 +9,7 @@ export const NavBarTab = ({ path, label }) => {
       end
       // activeClassName="nav-bar__tab--active"
     >
-      <Button color="inherit">
+      <Button variant="outlined" color="secondary">
         {label}
       </Button>
     </NavLink>

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./app";
 import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate";
 import { ThemeProvider, createTheme } from "@mui/material";
+import CssBaseline from '@mui/material/CssBaseline';
 // import "./styles/styles.css";
 
 
@@ -24,7 +25,7 @@ const theme = createTheme({
       dark: '#c58600',
     },
     background: {
-      default: 'rgba(234,234,197,0.75)',
+      default: '#eaeac5bf',
       paper: '#eaeac5',
     },
     info: {
@@ -50,15 +51,15 @@ const theme = createTheme({
 })
 
 root.render(
-  <ThemeProvider theme={theme}>
-    <React.StrictMode>
-      
+  <React.StrictMode>
+    <CssBaseline>
+      <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Auth0ProviderWithNavigate>
-            <App />
+            <App/>
           </Auth0ProviderWithNavigate>
         </BrowserRouter>
-      
-    </React.StrictMode>
-  </ThemeProvider>
+        </ThemeProvider>
+    </CssBaseline>
+  </React.StrictMode>
 );

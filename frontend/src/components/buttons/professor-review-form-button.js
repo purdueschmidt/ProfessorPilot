@@ -20,7 +20,7 @@ const ProfessorReviewFormButton = () => {
 
   return (
     <>
-      <Button className="button__review-form-button" onClick={handleClickOpen} color="inherit">
+      <Button onClick={handleClickOpen} color="secondary">
         Review Professor
       </Button>
       <Dialog open={open} onClose={handleClose}>

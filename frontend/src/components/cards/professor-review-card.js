@@ -49,13 +49,12 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
         <div>
         {isAuthenticated && (
         <>
-            <Accordion sx={{ minWidth: 200, mt: 2, mb: 2 , backgroundColor: 'var(--light-aluminium)' }}>
+            <Accordion sx={{ minWidth: 200, mt: 2, mb: 2 , backgroundColor: (theme) => theme.palette.background.paper }}>
                 <AccordionSummary expandIcon={<ExpandMore />} aria-controls="review-content" id="review-header">
-                    <Card>
-                        <CardContent className='card-content'>
+
                             <Grid container>
-                                <Grid item xs={12} md={1}>
-                                    <Box className='rating-box'>
+                                <Grid item xs={12} md={3}>
+                                    <Box sx={{ minWidth: 200, mt: 2, mb: 2 }}>
                                         
                                         <IconButton className='upvote-button' onClick={handleUpvote}>
                                             <ThumbUpIcon />
@@ -68,8 +67,8 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12} md={3}>
-                                    <Box className='rating-box'>
-                                        <Box className='rating'>
+                                    <Box sx={{ minWidth: 300, mt: 2, mb: 2 }}>
+                                        <Box >
                                             <Typography className='text' variant="h6">Rating {rating}</Typography>
                                         </Box>
                                         <Typography className='text' variant="subtitle1">Communication: {communication}</Typography>
@@ -79,8 +78,10 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                                         <Typography className='text' variant="subtitle1">Competency: {competency}</Typography>
                                     </Box>
                                 </Grid>
-                                <Divider orientation="vertical" flexItem />
-                                <Grid item xs={12} md={2}>
+                                <Grid item xs={12} md={3}>
+                                    <Divider orientation="vertical" flexItem />
+                                </Grid>
+                                <Grid item xs={12} md={3}>
                                     <Box className='info-box' ml={1}>
                                         <Typography className='text' variant="subtitle1">Professor: {professor}</Typography>
                                         <Box className='review-box' mt={1}>
@@ -89,8 +90,7 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                                     </Box>
                                 </Grid>
                             </Grid>
-                        </CardContent>
-                    </Card>
+
                 </AccordionSummary>
                 <AccordionDetails>
                     {/* <Typography className='text'>{comment}</Typography> */}
@@ -114,8 +114,8 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
         )}
         {!isAuthenticated && (
         <>
-            <Card className='card' sx={{ minWidth: 200, mt: 2, mb: 2 }}>
-                <CardContent className='card-content'>
+            <Card sx={{ backgroundColor: (theme) => theme.palette.background.paper, padding: 1, border:1, margin:1, minWidth: 200, mt: 2, mb: 2}}>
+                <CardContent >
                     <Grid container>
                         <Grid item xs={12} md={3}>
                             <Box className='rating-box'>
@@ -144,34 +144,6 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
         </>
         )}
     </div>
-
-    // <Card className='card' sx={{ minWidth: 200, mt: 2, mb: 2 }}>
-    //     <CardContent className='card-content'>
-    //         <Grid container>
-    //             <Grid item xs={12} md={3}>
-    //                 <Box className='rating-box'>
-    //                     <Box className='rating'>
-    //                         <Typography className='text' variant="h6">Rating</Typography>
-    //                     </Box>
-    //                     <Typography className='text' variant="subtitle1">Communication: {communication}</Typography>
-    //                     <Typography className='text' variant="subtitle1">Organization: {organization}</Typography>
-    //                     <Typography className='text' variant="subtitle1">Availability: {availability}</Typography>
-    //                     <Typography className='text' variant="subtitle1">Grading: {grading}</Typography>
-    //                     <Typography className='text' variant="subtitle1">Competency: {competency}</Typography>
-    //                 </Box>
-    //             </Grid>
-    //             <Divider orientation="vertical" flexItem />
-    //             <Grid item xs={12} md={2}>
-    //                 <Box className='info-box' ml={1}>
-    //                     <Typography className='text' variant="subtitle1">Professor: {professor}</Typography>
-    //                 <Box className='review-box' mt={1}>
-    //                     <Typography className='text'>{reviewText}</Typography>
-    //                 </Box>
-    //                 </Box>
-    //             </Grid>
-    //         </Grid>
-    //     </CardContent>
-    // </Card>
   );
 };
 

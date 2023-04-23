@@ -1,4 +1,4 @@
-.review-form-container {
+/* .review-form-container {
   background-color: var(--dark-aluminium);
   border-radius: 4px;
   padding: 20px;
@@ -52,7 +52,7 @@
   margin-top: 20px;
 }
 
-/* Add the following styles for the select menu */
+
 .review-form-fieldd .MuiNativeSelect-select {
   background-color: var(--dark-aluminium);
   color: rgb(0, 0, 0);
@@ -63,19 +63,19 @@
   color: white;
 }
 
-/* Update the styling for the Select dropdown */
+
 .review-form-fieldd .MuiNativeSelect-select:focus {
   background-color: var(--dark-aluminium);
 }
 
-/* Additional styles to fix the input background and text color */
+
 .review-form-field .MuiInputBase-input,
 .review-form-field .MuiOutlinedInput-input {
   background-color: var(--dark-aluminium);
   color: white;
 }
 
-/* Fix the TextField background issue when typing */
+
 .review-form-field .MuiInputBase-root::before,
 .review-form-field .MuiInputBase-root::after {
   display: none;
@@ -88,11 +88,11 @@
 .MuiNativeSelect-select option {
   background-color: var(--dark-aluminium);
   color: white;
-}
+} */
+
+/*
 
 
-
-/* Override the autofill background color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -113,15 +113,13 @@ textarea:-webkit-autofill:active {
   justify-content: center;
 }
 
-/* .header{
-  color: white;
-} */
+
 
 .search-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* color: white; */
+
 }
 
 .MuiInputBase-input {
@@ -134,7 +132,7 @@ background-color: transparent;
 }
 
 
-/* .review-form-container {
+ .review-form-container {
   background-color: var(--dark-aluminium);
   border-radius: 4px;
   padding: 20px;
@@ -226,10 +224,10 @@ background-color: transparent;
   fill: white;
 }
 
- */
+ 
 
 
-/* .review-item {
+ .review-item {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -328,4 +326,4 @@ background-color: transparent;
     padding: 0.8rem;
   }
 }
- */
+*/
