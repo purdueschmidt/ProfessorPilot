@@ -26,7 +26,7 @@ def create_app():
     # Flask App Instance
     ##########################################
 
-    app = Flask(__name__, static_url_path='/', static_folder='../frontend/build')
+    app = Flask(__name__, static_url_path='/', static_folder='../frontend/build', template_folder='../frontend/build')
 
     app.json_encoder = CustomJSONEncoder #for mongodb
 
@@ -40,8 +40,15 @@ def create_app():
                         '*'
                         ],
         'style-src': ['\'self\'',
-                      '\'unsafe-inline\''
+                      '\'unsafe-inline\'',
+                      '*'
                       ],
+        "img-src": [
+            "\'self\'",
+            "data:"
+        ],
+        'script-src': ['\'self\'',
+                       '\'unsafe-eval\''],
         'frame-ancestors': ['\'none\'']
     }
 
@@ -92,10 +99,11 @@ def create_app():
 
     app.register_blueprint(views.bp)
     app.register_blueprint(exception_views.bp)
+    app.register_blueprint(views.bp2)
 
     return app
 
 if __name__ == '__main__':
 
     app = create_app()
-    app.run(port=5000)
+    app.run(port=6060)

@@ -1,6 +1,6 @@
 import flask
 from flask import (
-    Flask, Blueprint, request, jsonify
+    Flask, Blueprint, request, jsonify, render_template, redirect, url_for
 )
 
 from .service import (
@@ -31,7 +31,10 @@ from common.utils import safe_get_env_var
 bp_name = 'api-reviews'
 bp_url_prefix = '/reviews'
 bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
+bp2 = Blueprint('home', __name__, url_prefix='/')
 
+# client_url = safe_get_env_var("CLIENT_ORIGIN_URL") + ":" + str(safe_get_env_var("PORT"))
+client_url = '*'
 # SEARCH-------------------------------------------------------------------------------------------------
 
 @bp.route('/search', methods=(['GET', 'OPTIONS']))
@@ -41,13 +44,13 @@ def search_course_review():
         sort_by = request.args.get('sort_by')
         search_result = search_course_reviews(query, sort_by)
         response = jsonify(search_result)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
@@ -59,18 +62,22 @@ def search_professor_review():
         sort_by = request.args.get('sort_by')
         search_result = search_professor_reviews(query, sort_by)
         response = jsonify(search_result)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
 
 # COURSE-REVIEWS----------------------------------------------------------------------------------------
+@bp2.route('/', methods=(['GET', 'POST']))
+@bp2.route('/callback', methods=(['GET', 'POST']))
+def index():
+    return render_template('index.html', name=None)
 
 @bp.route('/', methods=(['GET', 'POST']))
 @bp.route('/home', methods=(['GET', 'POST', 'OPTONS']))
@@ -80,13 +87,13 @@ def home():
     if request.method == 'GET':
         recent_course_reviews = get_recent_course_reviews()
         response = jsonify(recent_course_reviews)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
@@ -101,13 +108,13 @@ def recent_course_entries():
         for entry in recent_course_reviews:
             entry["_id"] = str(entry["_id"])
         response = jsonify(recent_course_reviews)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
@@ -118,7 +125,7 @@ def get_course_reviews(course_code):
     "Gets reviews for a specific course"
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
@@ -127,7 +134,7 @@ def get_course_reviews(course_code):
         for entry in course_reviews:
             entry["_id"] = str(entry["_id"])
         response = jsonify(course_reviews)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
 
@@ -137,7 +144,7 @@ def get_course_reviews(course_code):
 def handle_vote(_id):
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
@@ -148,7 +155,7 @@ def handle_vote(_id):
         user = data.get("reviewer")
         result = vote(_id, action, user, review_type)
         response = jsonify(result)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
@@ -158,7 +165,7 @@ def handle_vote(_id):
 def handle_comment(_id):
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
@@ -169,7 +176,7 @@ def handle_comment(_id):
         user = data.get("user")
         result = comment(_id, action, user, review_type)
         response = jsonify(result)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
@@ -183,13 +190,13 @@ def get_courses():
     if request.method == 'GET':
         courses = get_all_courses()
         response = jsonify(courses)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response
@@ -203,13 +210,13 @@ def submit_prof_review():
     if request.method == 'GET':
         recent_professor_reviews = get_recent_professor_reviews()
         response = jsonify(recent_professor_reviews)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         return response
@@ -225,13 +232,13 @@ def recent_professor_entries():
         for entry in recent_professor_reviews:
             entry["_id"] = str(entry["_id"])
         response = jsonify(recent_professor_reviews)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
@@ -242,7 +249,7 @@ def get_professor_reviews(professor):
     "Gets reviews for a specific professor"
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
@@ -251,7 +258,7 @@ def get_professor_reviews(professor):
         for entry in professor_reviews:
             entry["_id"] = str(entry["_id"])
         response = jsonify(professor_reviews)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
 
@@ -267,13 +274,13 @@ def get_professors():
     if request.method == 'GET':
         professors = get_all_professors()
         response = jsonify(professors)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response, 200
     if request.method == 'OPTIONS':
         response = flask.Response(status=200)
-        response.headers['Access-Control-Allow-Origin'] = safe_get_env_var("CLIENT_ORIGIN_URL")
+        response.headers['Access-Control-Allow-Origin'] = client_url
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PATCH'
         return response
