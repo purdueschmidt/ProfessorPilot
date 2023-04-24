@@ -14,7 +14,7 @@ const ProfessorCard = ({ professor, Rating, Communication, Organization, Availab
   };
 
   return (
-    <Card className='card'>
+    <Card >
       <CardContent>
         <Grid container>
           <Grid item xs={6}>
@@ -29,12 +29,12 @@ const ProfessorCard = ({ professor, Rating, Communication, Organization, Availab
             <Divider orientation="vertical" flexItem />
           </Grid>
           <Grid item xs={5}>
-            <Typography className='text' variant="h5"  color="textPrimary">Rating: {Rating}</Typography>
-            <Typography className='text' variant="subtitle1" color="textPrimary">Communication: {Communication}</Typography>
-            <Typography className='text' variant="subtitle1" color="textPrimary">Organization: {Organization}</Typography>
-            <Typography className='text' variant="subtitle1" color="textPrimary">Availability: {Availability}</Typography>
-            <Typography className='text' variant="subtitle1" color="textPrimary">Grading: {Grading}</Typography>
-            <Typography className='text' variant="subtitle1" color="textPrimary">Competency: {Competency}</Typography>
+            <Typography variant="h5"  color="textPrimary">Rating: {Rating}</Typography>
+            <Typography variant="subtitle1" color="textPrimary">Communication: {Communication}</Typography>
+            <Typography variant="subtitle1" color="textPrimary">Organization: {Organization}</Typography>
+            <Typography variant="subtitle1" color="textPrimary">Availability: {Availability}</Typography>
+            <Typography variant="subtitle1" color="textPrimary">Grading: {Grading}</Typography>
+            <Typography variant="subtitle1" color="textPrimary">Competency: {Competency}</Typography>
           </Grid>
         </Grid>
       </CardContent>

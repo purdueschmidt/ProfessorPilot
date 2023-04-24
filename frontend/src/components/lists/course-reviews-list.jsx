@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { CourseReviewCard } from '../cards/course-review-card';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+
 import '../../styles/components/review-list.css'
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -101,13 +103,13 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
 
   return (
     <div>
-      <h1 className='header'>Course Reviews</h1>
-      <Grid container spacing={1}>
+      <Typography margin={2} variant="h3" color="primary">Course Reviews</Typography>
+      <Grid container spacing={3}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
           // if (!review.CourseName) return null;
           return (
-            <Grid item xs={12} sm={6} key={index}>
+            <Grid padding={2} margin={2} item xs={12} sm={12} key={index}>
               <CourseReviewCard
                 _id={review._id}
                 term={review.Term}

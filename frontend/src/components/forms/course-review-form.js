@@ -15,7 +15,6 @@ import Select from "@mui/material/Select";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const CourseReviewForm = () => {
-  const reviewer = useRef();
   const term = useRef();
   const year = useRef();
   const reviewText = useRef();
@@ -140,10 +139,7 @@ export const CourseReviewForm = () => {
 
 
   return (
-    <Container maxWidth="sm" className="review-form-container">
-      <Typography variant="h4" align="center" className="review-form-title" gutterBottom>
-        Course Review Form
-      </Typography>
+    <Container maxWidth="sm">
       <form id="courseReviewForm" onSubmit={handleSubmit}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={3}>
@@ -154,13 +150,16 @@ export const CourseReviewForm = () => {
               required
               inputRef={reviewer}
             /> */}
-            <Typography align="center" className="review-form-field" gutterBottom>
-              {user.nickname}
-            </Typography>
+            <Grid item xs={12} sm={3}>
+              <Typography align="center" alignItems="center"
+                  justifyContent="center" variant="subtitle1">
+                {user.nickname}
+              </Typography>
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={3}>
             <TextField
-              className="review-form-field"
+              
               label="Term"
               fullWidth
               required
@@ -169,7 +168,7 @@ export const CourseReviewForm = () => {
           </Grid>
           <Grid item xs={12} sm={3}>
             <TextField
-              className="review-form-field"
+              
               label="Year"
               fullWidth
               required
@@ -179,15 +178,15 @@ export const CourseReviewForm = () => {
           </Grid>
           <Grid item xs={12} sm={3}>
             <FormControl sx={{ minWidth: 120}}>
-              <InputLabel className="review-form-field" htmlFor="grouped-native-select">Course Code</InputLabel>
-              <Select name="course_code" onChange={handleChange} value={course_code} className="review-form-fieldd" native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
-                <option className="" aria-label="None" value="" />
+              <InputLabel htmlFor="grouped-native-select">Course Code</InputLabel>
+              <Select name="course_code" onChange={handleChange} value={course_code} native defaultValue="" id="grouped-native-select" label="Grouping"   inputProps={{id: "grouped-native-select"}}>
+                <option aria-label="None" value="" />
                 {uniqueMajors.map((major, index) => (
                   <optgroup key={index} label={major}>
                     {courses
                       .filter((course) => course.major === major)
                       .map((course) => (
-                        <option className="review-form-fieldd" key={course.course_code} value={course.course_code}>
+                        <option key={course.course_code} value={course.course_code}>
                           {course.course_code}
                         </option>
                       ))}
@@ -197,7 +196,7 @@ export const CourseReviewForm = () => {
             </FormControl>
           </Grid>
           {criteria.map((criterion, index) => (
-            <Grid item xs={12} sm={2} key={index}>
+            <Grid item xs={12} sm={4} key={index} container spacing={2} paddingX={1}margin={1}>
               <Box
                 display="flex"
                 flexDirection="column"
@@ -206,18 +205,22 @@ export const CourseReviewForm = () => {
                 width="100%"
                 height="100%"
               >
-                <Typography variant="subtitle1" className="review-form-field">{criterion}:</Typography>
-                <Rating
-                  name={criterion}
-                  value={eval(criterion)}
-                  onChange={(event, newValue) => handleRatingChange(criterion, newValue)}
-                />
+                
+                <Typography variant="subtitle1">{criterion}:</Typography>
+                
+                  <Rating
+                    name={criterion}
+                    size="small"
+                    value={eval(criterion)}
+                    onChange={(event, newValue) => handleRatingChange(criterion, newValue)}
+                  />
+                
               </Box>
             </Grid>
           ))}
           <Grid item xs={12}>
             <TextField
-              className="review-form-field"
+              
               label="Review Text"
               multiline
               rows={4}
@@ -227,7 +230,7 @@ export const CourseReviewForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" color="primary" className="review-form-button">
+            <Button type="submit" variant="contained" color="primary">
               Submit
             </Button>
           </Grid>

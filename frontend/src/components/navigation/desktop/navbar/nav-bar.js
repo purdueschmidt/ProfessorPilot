@@ -9,12 +9,15 @@ import Box from "@mui/material/Box";
 export const NavBar = () => {
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" color="primary">
         <Toolbar>
           <Box display="flex" flexGrow={1}>
             <NavBarBrand />
+          </Box >
+          <Box display="flex" flexGrow={1}>
             <NavBarTabs />
           </Box>
+          
           <NavBarButtons />
         </Toolbar>
       </AppBar>

@@ -9,3 +9,6 @@
 @import "grids/index.css";
 @import "layouts/index.css";
 @import "angular.css";
+@import "review-card.css";
+@import "review-form.css";
+@import "review-list.css";
