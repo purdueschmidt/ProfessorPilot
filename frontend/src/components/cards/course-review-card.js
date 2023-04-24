@@ -56,40 +56,42 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
                     
 
                             <Grid container>
-                                <Grid item xs={12} md={1}>
-                                    <Box className='rating-box'>
+                                <Grid item xs={1}>
+                                    <Box >
                                         
-                                        <IconButton className='upvote-button' onClick={handleUpvote}>
+                                        <IconButton  onClick={handleUpvote}>
                                             <ThumbUpIcon />
                                         </IconButton>
-                                        <Typography className='text' variant="subtitle1">{upVotes}</Typography>
-                                        <IconButton className='downvote-button' onClick={handleDownvote}>
+                                        <Typography  variant="subtitle1">{upVotes}</Typography>
+                                        <IconButton  onClick={handleDownvote}>
                                             <ThumbDownIcon />
                                         </IconButton>
-                                        <Typography className='text' variant="subtitle1">{downVotes}</Typography>
+                                        <Typography  variant="subtitle1">{downVotes}</Typography>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} md={3}>
-                                    <Box className='rating-box'>
-                                        <Box className='rating'>
-                                            <Typography className='text' variant="h6">Rating {rating}</Typography>
+                                <Grid item xs={12} sm={5}>
+                                    <Box>
+                                        <Box >
+                                            <Typography  variant="h5">Rating {rating}</Typography>
                                         </Box>
-                                        <Typography className='text' variant="subtitle1">Workload {workload}</Typography>
-                                        <Typography className='text' variant="subtitle1">Organization {organization}</Typography>
-                                        <Typography className='text' variant="subtitle1">Usefulness {usefulness}</Typography>
-                                        <Typography className='text' variant="subtitle1">Interest {interest}</Typography>
-                                        <Typography className='text' variant="subtitle1">Difficulty {difficulty}</Typography>
+                                        <Box>
+                                            <Typography  variant="subtitle1">Workload {workload}</Typography>
+                                            <Typography  variant="subtitle1">Organization {organization}</Typography>
+                                            <Typography variant="subtitle1">Usefulness {usefulness}</Typography>
+                                            <Typography  variant="subtitle1">Interest {interest}</Typography>
+                                            <Typography variant="subtitle1">Difficulty {difficulty}</Typography>
+                                        </Box>
                                     </Box>
                                 </Grid>
                                 <Divider orientation="vertical" flexItem />
-                                <Grid item xs={12} md={2}>
-                                    <Box className='info-box' ml={1}>
+                                <Grid item xs={12} sm={5}>
+                                    <Box  ml={1}>
                                         {/* <Typography className='text' variant="h6">{courseName}</Typography> */}
                                         <Divider orientation="vertical" flexItem />
-                                        <Typography className='text' variant="subtitle1">{term}, {year}</Typography>
-                                        <Typography className='text' variant="subtitle1">Course Code: {course_code}</Typography>
-                                        <Box className='review-box' mt={1}>
-                                            <Typography className='text'>{reviewText}</Typography>
+                                        <Typography  variant="subtitle1">{term}, {year}</Typography>
+                                        <Typography  variant="subtitle1">Course Code: {course_code}</Typography>
+                                        <Box mt={1}>
+                                            <Typography sx={{ wordBreak: "break-word" }}>{reviewText}</Typography>
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -108,8 +110,8 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
                         ))}
                         </List>
                         <Box>
-                            <TextField id="filled-basic" label="Add a comment" multiline rows={4} fullWidth value={newComment} onChange={(e) => setNewComment(e.target.value)}/>
-                            <Button onClick={handleCommentSubmit} type="submit" variant="contained" color="primary" className="review-form-button">Submit</Button>
+                            <TextField sx={{margin:1}} id="filled-basic" label="Add a comment" multiline rows={4} fullWidth value={newComment} onChange={(e) => setNewComment(e.target.value)}/>
+                            <Button sx={{margin:2}} onClick={handleCommentSubmit} type="submit" variant="contained" color="primary">Submit</Button>
                         </Box>
                     </Box>
                 </AccordionDetails>
@@ -121,27 +123,29 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
             <Card sx={{ backgroundColor: (theme) => theme.palette.background.paper, padding: 1, border:1, margin:1, minWidth: 200, mt: 2, mb: 2}}>
                 <CardContent >
                     <Grid container>
-                        <Grid item xs={12} md={3}>
-                            <Box className='rating-box'>
-                                <Box className='rating'>
-                                    <Typography className='text' variant="h6">Rating {rating}</Typography>
+                        <Grid item xs={3} sm={2}>
+                            <Box >
+                                <Box >
+                                    <Typography  variant="h5">Rating {rating}</Typography>
                                 </Box>
-                                <Typography className='text' variant="subtitle1">Workload {workload}</Typography>
-                                <Typography className='text' variant="subtitle1">Organization {organization}</Typography>
-                                <Typography className='text' variant="subtitle1">Usefulness {usefulness}</Typography>
-                                <Typography className='text' variant="subtitle1">Interest {interest}</Typography>
-                                <Typography className='text' variant="subtitle1">Difficulty {difficulty}</Typography>
+                                <Box>
+                                    <Typography  variant="subtitle1">Workload {workload}</Typography>
+                                    <Typography  variant="subtitle1">Organization {organization}</Typography>
+                                    <Typography variant="subtitle1">Usefulness {usefulness}</Typography>
+                                    <Typography  variant="subtitle1">Interest {interest}</Typography>
+                                    <Typography variant="subtitle1">Difficulty {difficulty}</Typography>
+                                </Box>
                             </Box>
                         </Grid>
                         <Divider orientation="vertical" flexItem />
                         <Grid item xs={12} md={2}>
-                            <Box className='info-box' ml={1}>
+                            <Box  ml={1}>
                                 {/* <Typography className='text' variant="h6">{courseName}</Typography> */}
                                 <Divider orientation="vertical" flexItem />
-                                <Typography className='text' variant="subtitle1">{term}, {year}</Typography>
-                                <Typography className='text' variant="subtitle1">Course Code: {course_code}</Typography>
-                                <Box className='review-box' mt={1}>
-                                    <Typography className='text'>{reviewText}</Typography>
+                                <Typography variant="subtitle1">{term}, {year}</Typography>
+                                <Typography variant="subtitle1">Course Code: {course_code}</Typography>
+                                <Box mt={1}>
+                                    <Typography sx={{ wordBreak: "break-word" }}>{reviewText}</Typography>
                                 </Box>
                             </Box>
                         </Grid>

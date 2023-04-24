@@ -18,7 +18,7 @@ export const SignupButton = () => {
   };
 
   return (
-    <Button color="secondary" onClick={handleSignUp}>
+    <Button sx={{margin:2}} size="large" variant="contained" color="secondary" onClick={handleSignUp}>
       Sign Up
     </Button>
   );

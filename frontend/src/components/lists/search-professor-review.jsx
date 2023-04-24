@@ -7,6 +7,8 @@ import { ProfessorReviewCard } from '../cards/professor-review-card';
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
+import { Typography } from '@mui/material';
+
 import { useAuth0 } from '@auth0/auth0-react';
 import "../../styles/components/review-form.css"
 
@@ -126,7 +128,7 @@ export const ProfessorSearchBar = () => {
 
 return (
   <div>
-    <h1 className='header'>Search Professor Reviews</h1>
+    <Typography margin={2} variant="h3" color="primary">Search Professor Reviews</Typography> 
     <div className='search-bar'>
       {/* <TextField label='Search by course code' value={query} onChange={(event) => setQuery(event.target.value)} /> */}
         <form id="courseReviewForm">

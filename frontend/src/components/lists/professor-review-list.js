@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ProfessorReviewCard } from '../cards/professor-review-card';
+import { Typography } from '@mui/material';
+
 import '../../styles/components/review-list.css'
 
 import Grid from '@mui/material/Grid';
@@ -98,13 +100,13 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
 
   return (
     <div>
-      <h1 className='header'>Professor Reviews</h1>
+      <Typography margin={2} variant="h3" color="primary">Professor Reviews</Typography>
       <Grid container spacing={1}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
           // if (!review.CourseName) return null;
           return (
-            <Grid item xs={12} sm={6} key={index}>
+            <Grid padding={2} margin={2} item xs={12} sm={12} key={index}>
               <ProfessorReviewCard
                 _id={review._id}
                 rating={review.Rating}

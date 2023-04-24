@@ -14,7 +14,7 @@ export const LogoutButton = () => {
   };
 
   return (
-    <Button onClick={handleLogout} color="secondary">
+    <Button sx={{margin:2, padding:1}} size="large" variant="contained"  onClick={handleLogout} color="secondary">
       Log Out
     </Button>
   );

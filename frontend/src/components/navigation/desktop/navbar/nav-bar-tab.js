@@ -9,7 +9,7 @@ export const NavBarTab = ({ path, label }) => {
       end
       // activeClassName="nav-bar__tab--active"
     >
-      <Button variant="outlined" color="secondary">
+      <Button sx={{margin:2}} size="large" variant="outlined" color="secondary">
         {label}
       </Button>
     </NavLink>
