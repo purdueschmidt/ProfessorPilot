@@ -26,7 +26,14 @@ def create_app():
     # Flask App Instance
     ##########################################
 
+<<<<<<< HEAD:backend/appfactory.py
     app = Flask(__name__, static_url_path='/', static_folder='../frontend/build', template_folder='../frontend/build')
+=======
+    app = Flask(__name__, instance_relative_config=True)
+    
+
+    app.testing = True
+>>>>>>> matT:backend/api/__init__.py
 
     app.json_encoder = CustomJSONEncoder #for mongodb
 
