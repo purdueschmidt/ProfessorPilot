@@ -127,7 +127,7 @@ export const ProfessorSearchBar = () => {
 
 return (
   <div>
-    <Typography margin={2} variant="h3" color="primary">Search Professor Reviews</Typography> 
+    <Typography margin={2} variant="h4" color="primary">Search Professor Reviews</Typography> 
     <div className='search-bar'>
       {/* <TextField label='Search by course code' value={query} onChange={(event) => setQuery(event.target.value)} /> */}
         <form id="courseReviewForm">

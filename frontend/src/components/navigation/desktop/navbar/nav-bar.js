@@ -42,10 +42,8 @@ export const NavBar = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-
                 <NavBarTabs />
                 <NavBarButtons />
-
               </Menu>
             </Box>
             <Box>

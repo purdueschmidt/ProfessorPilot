@@ -14,6 +14,7 @@ export const NavBarButtons = () => {
   return (
 
       <div>
+
         
         {!isAuthenticated && (
           <>
@@ -28,7 +29,6 @@ export const NavBarButtons = () => {
             <MenuItem> <LogoutButton /> </MenuItem>
           </>
         )}
-        
       </div>
     
   );

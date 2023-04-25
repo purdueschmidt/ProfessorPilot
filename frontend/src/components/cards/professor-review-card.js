@@ -121,7 +121,7 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                         <Grid item xs={12} md={3}>
                             <Box>
                                 <Box>
-                                    <Typography variant="h5">Rating {rating}</Typography>
+                                    <Typography color="primary" variant="h5">Rating {rating}</Typography>
                                 </Box>
                                 <Box> 
                                     <Typography variant="subtitle1">Communication: {communication}</Typography>
@@ -135,7 +135,7 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                         <Divider orientation="vertical" flexItem />
                         <Grid item xs={12} md={2}>
                             <Box  ml={1}>
-                                <Typography variant="subtitle1">Professor: {professor}</Typography>
+                                <Typography color="secondary.light" variant="subtitle1">Professor: {professor}</Typography>
                                 <Box mt={1}>
                                     <Typography sx={{ wordBreak: "break-word" }}>{reviewText}</Typography>
                                 </Box>

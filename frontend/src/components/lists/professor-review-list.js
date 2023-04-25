@@ -100,7 +100,7 @@ export const ProfessorReviewsList = ({ endpoint, professor }) => {
 
   return (
     <div>
-      <Typography margin={2} variant="h3" color="primary">Professor Reviews</Typography>
+      <Typography margin={2} variant="h4" color="primary">Professor Reviews</Typography>
       <Grid container spacing={1}>
         {reviews.map((review, index) => {
           console.log('Review JSON:', JSON.stringify(review));
