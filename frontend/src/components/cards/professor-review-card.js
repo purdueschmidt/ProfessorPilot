@@ -53,7 +53,7 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                 <AccordionSummary expandIcon={<ExpandMore />} aria-controls="review-content" id="review-header">
 
                             <Grid container>
-                                <Grid item xs={1}>
+                                <Grid item xs={2}>
                                     <Box sx={{ minWidth: 200, mt: 2, mb: 2 }}>
                                         
                                         <IconButton onClick={handleUpvote}>
@@ -66,10 +66,10 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                                         <Typography variant="subtitle1">{downVotes}</Typography>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} sm={4}>
+                                <Grid item xs={5} sm={5} md={5}>
                                     <Box sx={{ minWidth: 300, mt: 2, mb: 2 }}>
                                         <Box >
-                                            <Typography variant="h5">Rating {rating}</Typography>
+                                            <Typography color="primary" variant="h5">Rating {rating}</Typography>
                                         </Box>
                                         <Box> 
                                             <Typography variant="subtitle1">Communication: {communication}</Typography>
@@ -80,12 +80,11 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                                         </Box>
                                     </Box>
                                 </Grid>
+            
                                 
-                                <Divider orientation="vertical" flexItem />
-                                
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={5} sm={5} md={5}>
                                     <Box ml={1}>
-                                        <Typography variant="subtitle1">Professor: {professor}</Typography>
+                                        <Typography color="secondary.light" variant="subtitle1">Professor: {professor}</Typography>
                                         <Box padding={1} mt={1}>
                                             <Typography sx={{ wordBreak: "break-word" }}>{reviewText}</Typography>
                                         </Box>
@@ -107,7 +106,7 @@ export const ProfessorReviewCard = ({_id, rating, professor, reviewText, communi
                         </List>
                         <Box>
                             <TextField sx={{margin:1}} label="Add a comment" multiline rows={4} fullWidth value={newComment} onChange={(e) => setNewComment(e.target.value)}/>
-                            <Button sx={{margin:2}} onClick={handleCommentSubmit} type="submit" variant="contained" color="primary">Submit</Button>
+                            <Button sx={{margin:2, padding:2}} onClick={handleCommentSubmit} type="submit" variant="contained" color="primary">Submit</Button>
                         </Box>
                     </Box>
                 </AccordionDetails>

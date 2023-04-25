@@ -5,50 +5,78 @@ import { App } from "./app";
 import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate";
 import { ThemeProvider, createTheme } from "@mui/material";
 import CssBaseline from '@mui/material/CssBaseline';
-// import "./styles/styles.css";
+import "./styles/styles.css";
 
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 
 const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   palette: {
-    mode: 'light',
+    mode: "dark",
     primary: {
-      main: '#003831',
-      light: '#2a5c4b',
-      dark: '#00201f',
+      main: "#26c6da",
+      light: "#6ff9ff",
+      dark: "#0095a8",
     },
     secondary: {
-      main: '#efb21e',
-      light: '#ffca4b',
-      dark: '#c58600',
+      main: "#ab47bc",
+      light: "#df78ef",
+      dark: "#790e8b",
     },
     background: {
-      default: '#eaeac5bf',
-      paper: '#eaeac5',
+      default: "#303030",
+      paper: "#424242",
     },
     info: {
-      main: '#1976d2',
-      light: '#63a4ff',
-      dark: '#004ba0',
+      main: "#2196f3",
+      light: "#6ec6ff",
+      dark: "#0069c0",
     },
-    divider: '#9c824a',
+    divider: "#757575",
     text: {
-      primary: '#0c0c0c',
-      secondary: '#616161',
-      disabled: '#9e9e9e',
+      primary: "#ffffff",
+      secondary: "#b3b3b3",
+      disabled: "#757575",
     },
     warning: {
-      main: '#ffa000',
-      dark: '#c67100',
-      light: '#ffd149',
+      main: "#ff9800",
+      dark: "#c66900",
+      light: "#ffc947",
     },
   },
   typography: {
-    fontFamily: 'Oswald',
-  }
-})
+    fontFamily: "Oswald",
+    h1: {
+      color: "#ffffff",
+    },
+    h2: {
+      color: "#ffffff",
+    },
+    h3: {
+      color: "#ffffff",
+    },
+    h4: {
+      color: "#ffffff",
+    },
+    h5: {
+      color: "#ffffff",
+    },
+    h6: {
+      color: "#ffffff",
+    },
+  },
+});
+
 
 root.render(
   <React.StrictMode>

@@ -6,27 +6,30 @@ import { LogoutButton } from "../../../buttons/logout-button";
 import { SignupButton } from "../../../buttons/signup-button";
 import ReviewFormButton from "../../../buttons/course-review-form-button";
 import ProfessorReviewFormButton from "../../../buttons/professor-review-form-button";
+import { Container, MenuItem } from "@mui/material";
 
 export const NavBarButtons = () => {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div>
-      <ButtonGroup>
+
+      <div>
+        
         {!isAuthenticated && (
           <>
-            <SignupButton />
-            <LoginButton />
+            <MenuItem><SignupButton /></MenuItem>
+            <MenuItem><LoginButton /></MenuItem>
           </>
         )}
         {isAuthenticated && (
           <>
-            <ReviewFormButton />
-            <ProfessorReviewFormButton />
-            <LogoutButton />
+            <MenuItem> <ReviewFormButton /> </MenuItem>
+            <MenuItem> <ProfessorReviewFormButton /> </MenuItem>
+            <MenuItem> <LogoutButton /> </MenuItem>
           </>
         )}
-      </ButtonGroup>
-    </div>
+        
+      </div>
+    
   );
 };

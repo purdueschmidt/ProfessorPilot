@@ -20,7 +20,7 @@ const ReviewFormButton = () => {
 
   return (
     <>
-      <Button sx={{margin:2}} size="large" onClick={handleClickOpen} variant="contained" color="secondary">
+      <Button sx={{margin:2}} onClick={handleClickOpen} variant="contained" color="secondary">
         Review Course
       </Button>
       <Dialog open={open} onClose={handleClose}>

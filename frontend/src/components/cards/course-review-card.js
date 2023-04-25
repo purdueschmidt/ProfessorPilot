@@ -56,8 +56,8 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
                     
 
                             <Grid container>
-                                <Grid item xs={1}>
-                                    <Box >
+                                <Grid item xs={2}>
+                                    <Box sx={{ minWidth: 100, mt: 2, mb: 2 }}>
                                         
                                         <IconButton  onClick={handleUpvote}>
                                             <ThumbUpIcon />
@@ -69,10 +69,10 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
                                         <Typography  variant="subtitle1">{downVotes}</Typography>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={12} sm={5}>
-                                    <Box>
+                                <Grid item xs={5} sm={5} md={5}>
+                                    <Box sx={{ minWidth: 300, mt: 2, mb: 2 }}>
                                         <Box >
-                                            <Typography  variant="h5">Rating {rating}</Typography>
+                                            <Typography color="primary" variant="h5">Rating {rating}</Typography>
                                         </Box>
                                         <Box>
                                             <Typography  variant="subtitle1">Workload {workload}</Typography>
@@ -83,12 +83,12 @@ export const CourseReviewCard = ({ _id, term, year, rating, reviewer, course_cod
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Divider orientation="vertical" flexItem />
-                                <Grid item xs={12} sm={5}>
+                                
+                                <Grid item xs={2} sm={5} md={5}>
                                     <Box  ml={1}>
                                         {/* <Typography className='text' variant="h6">{courseName}</Typography> */}
                                         <Divider orientation="vertical" flexItem />
-                                        <Typography  variant="subtitle1">{term}, {year}</Typography>
+                                        <Typography color="secondary.light" variant="subtitle1">{term}, {year}</Typography>
                                         <Typography  variant="subtitle1">Course Code: {course_code}</Typography>
                                         <Box mt={1}>
                                             <Typography sx={{ wordBreak: "break-word" }}>{reviewText}</Typography>

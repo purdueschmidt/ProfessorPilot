@@ -4,10 +4,11 @@ import IconButton from "@mui/material/IconButton";
 // import logo from './../../images/wings.png';
 // import logo from "./../../../images/wings.png"
 import logo from "../../../images/profpilotminimaltassle.png"
+import { Container } from "@mui/material";
 
 export const NavBarBrand = () => {
   return (
-    <div>
+    <Container>
       <NavLink to="/">
         <IconButton>
           <img
@@ -18,6 +19,6 @@ export const NavBarBrand = () => {
           />
         </IconButton>
       </NavLink>
-    </div>
+    </Container>
   );
 };

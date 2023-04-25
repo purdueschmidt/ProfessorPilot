@@ -17,7 +17,7 @@ export const LoginButton = () => {
   };
 
   return (
-    <Button sx={{margin:2}} size="large" color="secondary" variant="contained" onClick={handleLogin}>
+    <Button sx={{margin:2}} color="secondary" variant="contained" onClick={handleLogin}>
       Log In
     </Button>
   );

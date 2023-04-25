@@ -109,7 +109,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
           console.log('Review JSON:', JSON.stringify(review));
           // if (!review.CourseName) return null;
           return (
-            <Grid padding={2} margin={2} item xs={12} sm={12} key={index}>
+            <Grid padding={2} margin={2} item xs={12} key={index}>
               <CourseReviewCard
                 _id={review._id}
                 term={review.Term}
