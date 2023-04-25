@@ -1,32 +1,37 @@
 
-from  api.reviews.service import submit_professor_review, professor_reviews, get_reviews_by_professor, get_recent_professor_reviews, get_all_professors, profs_collection
+from backend.reviews.service import submit_professor_review, professor_reviews, get_reviews_by_professor, get_recent_professor_reviews, get_all_professors, profs_collection
 
 
 def test_submit_professor_review(mocker):
     
     mocker.patch(
-        'api.reviews.service.professor_reviews.insert_one',
+        'backend.reviews.service.professor_reviews.insert_one',
         return_value = True
     )
 
     mocker.patch(
-        'api.reviews.service.uuid.uuid4',
+        'backend.reviews.service.uuid.uuid4',
         return_value = "1"
     )
 
     mocker.patch(
-        'api.reviews.service.time.time',
+        'backend.reviews.service.time.time',
         return_value = "1680495280"
+    )
+
+    mocker.patch(
+        'backend.reviews.service.update_professor_averages',
+        return_value=True
     )
 
     json_from_create = {
         'reviewer': 'Paul',
         'professor': 'John Doe',
-        'communication': '5',
-        'organization': '5',
-        'availability': '5',
-        'grading': '5',
-        'competency': '5',
+        'communication': 1,
+        'organization': 2,
+        'availability': 3,
+        'grading': 4,
+        'competency': 5,
         'review_text': 'This is a test'
     }
 
@@ -36,12 +41,13 @@ def test_submit_professor_review(mocker):
     expected_db_parameter = {
         '_id': "1",
         'Reviewer': 'Paul',
+        'Rating': 3,
         'professor': 'John Doe',
-        'Communication': '5',
-        'Organization': '5',
-        'Availability': '5',
-        'Grading': '5',
-        'Competency': '5',
+        'Communication': 1,
+        'Organization': 2,
+        'Availability': 3,
+        'Grading': 4,
+        'Competency': 5,
         'ReviewText': 'This is a test',
         'Upvotes': 0,
         'DownVotes': 0,
@@ -57,7 +63,7 @@ def test_submit_professor_review(mocker):
 def test_get_reviews_by_professor(mocker):
     
     mocker.patch(
-        'api.reviews.service.professor_reviews.find',
+        'backend.reviews.service.professor_reviews.find',
         return_value = [{'_id':"1",'Reviewer': 'Paul','professor': 'John Doe','Communication': '5',
             'Organization': '5','Availability': '5','Grading': '5', 'Competency': '5',
             'ReviewText': 'This is a test', 'UpVotes': 0, 'DownVotes': 0, 'Status' : "active",
@@ -80,7 +86,7 @@ def test_get_reviews_by_professor(mocker):
 
 # test case with empty or incorrect input
     mocker.patch(
-        'api.reviews.service.professor_reviews.find',
+        'backend.reviews.service.professor_reviews.find',
         return_value = []
     )
 
@@ -93,7 +99,7 @@ def test_get_reviews_by_professor(mocker):
 def test_get_recent_profesor_reviews(mocker):
 
     mocker.patch(
-        'api.reviews.service.professor_reviews.find',
+        'backend.reviews.service.professor_reviews.find',
         return_value = [{'_id':"1",'Reviewer': 'Paul','professor': 'John Doe','Communication': '5',
             'Organization': '5', 'Availability': '5','Grading': '5','Competency': '5', 
             'ReviewText': 'This is a test','UpVotes': 0, 'DownVotes': 0,"Status" : "active",
@@ -130,7 +136,7 @@ def test_get_recent_profesor_reviews(mocker):
 def test_get_all_professors(mocker):
 
     mocker.patch(
-        'api.reviews.service.profs_collection.find',
+        'backend.reviews.service.profs_collection.find',
         return_value = [{'_id': '1', 'professor': 'John Doe'}, 
                         {'_id': '2', 'professor': 'Jane Doe'}, 
                         {'_id': '3','professor': 'Franck Alex'}, 
