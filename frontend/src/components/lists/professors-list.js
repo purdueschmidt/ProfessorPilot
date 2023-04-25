@@ -8,7 +8,7 @@ const ProfessorsList = () => {
 
   const fetchProfessors = async () => {
     try {
-      const response = await fetch('http://localhost:6060/api/reviews/professorsPage');
+      const response = await fetch(`/reviews/professorsPage`);
       if (response.ok){
         const professors = await response.json();
         setProfessors(professors)

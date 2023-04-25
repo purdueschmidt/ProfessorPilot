@@ -6,13 +6,13 @@ from flask import Flask
 from flask_cors import CORS
 from flask_talisman import Talisman
 
-from api import exception_views
-from api.reviews import views
-from api.security.auth0_service import auth0_service
+import exception_views
+from reviews import views
+from security.auth0_service import auth0_service
 
 from common.utils import safe_get_env_var
 
-from .utils import CustomJSONEncoder
+from utils import CustomJSONEncoder
 
 def create_app():
     ##########################################
@@ -26,7 +26,7 @@ def create_app():
     # Flask App Instance
     ##########################################
 
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__, static_url_path='/', static_folder='../frontend/build', template_folder='../frontend/build')
 
     app.json_encoder = CustomJSONEncoder #for mongodb
 
@@ -36,7 +36,19 @@ def create_app():
     ##########################################
 
     csp = {
-        'default-src': ['\'self\''],
+        'default-src': ['\'self\'',
+                        '*'
+                        ],
+        'style-src': ['\'self\'',
+                      '\'unsafe-inline\'',
+                      '*'
+                      ],
+        "img-src": [
+            "\'self\'",
+            "data:"
+        ],
+        'script-src': ['\'self\'',
+                       '\'unsafe-eval\''],
         'frame-ancestors': ['\'none\'']
     }
 
@@ -58,7 +70,7 @@ def create_app():
         response.headers['Cache-Control'] = 'no-store, max-age=0, must-revalidate'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
-        response.headers['Content-Type'] = 'application/json; charset=utf-8'
+        # response.headers['Content-Type'] = 'application/json; charset=utf-8'
         response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
         return response
 
@@ -68,7 +80,7 @@ def create_app():
 
     CORS(
         app,
-        resources={r"/api/*": {"origins": client_origin_url}},
+        resources={r"/*": {"origins": client_origin_url}},
         allow_headers=["Authorization", "Content-Type"],
         methods=["GET", "POST", "OPTIONS", "PATCH"],
         max_age=86400
@@ -87,5 +99,11 @@ def create_app():
 
     app.register_blueprint(views.bp)
     app.register_blueprint(exception_views.bp)
+    app.register_blueprint(views.bp2)
 
     return app
+
+if __name__ == '__main__':
+
+    app = create_app()
+    app.run(port=6060)

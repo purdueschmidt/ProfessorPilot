@@ -15,9 +15,9 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
     try {
       let response;
       if (endpoint === "recent_course_reviews") {
-        response = await fetch(`http://localhost:6060/api/reviews/recent_course_reviews`);
+        response = await fetch(`/reviews/recent_course_reviews`);
       } else if (endpoint === "coursesPage") {
-        response = await fetch(`http://localhost:6060/api/reviews/coursesPage/${course_code}`);
+        response = await fetch(`/reviews/coursesPage/${course_code}`);
       }
       if (response.ok) {
         const fetchedReviews = await response.json();
@@ -45,7 +45,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
 
   const handleVote = async (_id, action) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/vote`, {
+      const response = await fetch(`/reviews/${_id}/vote`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ export const CourseReviewsList = ({ endpoint, course_code }) => {
 
   const handleCommentSubmit = async (_id, newComment) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/comment`, {
+      const response = await fetch(`/reviews/${_id}/comment`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

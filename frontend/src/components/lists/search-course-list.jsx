@@ -14,7 +14,7 @@ import { Typography } from '@mui/material';
 
 const fetchCoursesAndMajors = async () => {
     try {
-      const response = await fetch("http://localhost:6060/api/reviews/courses");
+      const response = await fetch(`/reviews/courses`);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -44,7 +44,7 @@ export const SearchBar = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/search?query=${query}&sort_by=${sort_by}`);
+      const response = await fetch(`/reviews/search?query=${query}&sort_by=${sort_by}`);
       if (response.ok) {
         const fetchedReviews = await response.json();
         console.log('Fetched reviews:', fetchedReviews);
@@ -74,7 +74,7 @@ export const SearchBar = () => {
 
   const handleVote = async (_id, action) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/vote`, {
+      const response = await fetch(`/reviews/${_id}/vote`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ export const SearchBar = () => {
 
   const handleCommentSubmit = async (_id, newComment) => {
     try {
-      const response = await fetch(`http://localhost:6060/api/reviews/${_id}/comment`, {
+      const response = await fetch(`/reviews/${_id}/comment`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

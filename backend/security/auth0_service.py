@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 import jwt
-from api.utils import json_abort
+from utils import json_abort
 
 
 class Auth0Service:

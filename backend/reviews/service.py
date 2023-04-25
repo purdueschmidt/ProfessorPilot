@@ -1,4 +1,4 @@
-from api.reviews.message import Message
+from .message import Message
 import uuid
 import time
 from flask import jsonify, request

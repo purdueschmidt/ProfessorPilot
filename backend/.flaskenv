@@ -1,3 +1,3 @@
-FLASK_APP=api
+FLASK_APP=app
 FLASK_RUN_PORT=6060
 FLASK_ENV=development

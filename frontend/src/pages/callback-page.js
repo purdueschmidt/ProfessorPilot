@@ -6,7 +6,7 @@ import { PageLayout } from "../components/defaults/page-layout";
 
 export const CallbackPage = () => {
   const { error } = useAuth0();
-
+console.log("IN THE CALLBACK")
   if (error) {
     return (
       <PageLayout>
@@ -27,7 +27,6 @@ export const CallbackPage = () => {
   return (
     <div className="page-layout">
       <NavBar />
-      <MobileNavBar />
       <div className="page-layout__content" />
     </div>
   );
