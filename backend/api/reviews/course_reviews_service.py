@@ -31,7 +31,7 @@ def search_course_reviews(query, sort_by):
     print(query, sort_by)
     search_result = []
     if query:
-        reviews = course_reviews.find({'course_code': {'$regex': query, '$options': 'i'}}).sort(sort_by)
+        reviews = course_reviews.find({'course_code': {'$regex': query, '$options': 'i'}}, sort=[(sort_by, -1)])
         for row in reviews:
             search_result.append(dict(row))
     else:
@@ -43,7 +43,7 @@ def search_professor_reviews(query, sort_by):
     print(query, sort_by)
     search_result = []
     if query:
-        reviews = professor_reviews.find({'professor': {'$regex': query, '$options': 'i'}}).sort(sort_by)
+        reviews = professor_reviews.find({'professor': {'$regex': query, '$options': 'i'}}, sort=[(sort_by, -1)])
         for row in reviews:
             search_result.append(dict(row))
     else:
@@ -88,13 +88,14 @@ def vote(_id, action, user, review_type):
     # Check if the user has already voted
     existing_vote = vote_collection.find_one({'Review_id': _id, 'User': user})
 
+    # print(existing_vote)
     # Update the upvote/downvote counts in the review
     update_query = {}
 
     if existing_vote:
         if existing_vote["Vote"] == action:
             # User is trying to vote the same way again, do not proceed
-            return {"Submit": "User has already voted this way"}
+            return {"Submit": "User has already voted this way"}     
 
         # User wants to change their vote
         if action == 'upvote':
@@ -107,7 +108,10 @@ def vote(_id, action, user, review_type):
             {'_id': existing_vote["_id"]},
             {'$set': {'Vote': action}}
         )
+       
+        
     else:
+
         # User has not voted yet
         if action == 'upvote':
             update_query = {'$inc': {'UpVotes': 1}}
@@ -124,7 +128,7 @@ def vote(_id, action, user, review_type):
             'Vote': action
         }
         response = vote_collection.insert_one(vote)
-
+        
     # Update the upvote/downvote counts in the review based on review_type
     if review_type == 'course':
         target_collection = course_reviews
@@ -136,6 +140,7 @@ def vote(_id, action, user, review_type):
         update_query
     )
 
+    
     return {"Submit": "Submit Vote Success"}
 
 
