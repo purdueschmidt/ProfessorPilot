@@ -14,6 +14,7 @@ from common.utils import safe_get_env_var
 
 from utils import CustomJSONEncoder
 
+
 def create_app():
     ##########################################
     # Environment Variables
@@ -26,17 +27,9 @@ def create_app():
     # Flask App Instance
     ##########################################
 
-<<<<<<< HEAD:backend/appfactory.py
     app = Flask(__name__, static_url_path='/', static_folder='../frontend/build', template_folder='../frontend/build')
-=======
-    app = Flask(__name__, instance_relative_config=True)
-    
 
-    app.testing = True
->>>>>>> matT:backend/api/__init__.py
-
-    app.json_encoder = CustomJSONEncoder #for mongodb
-
+    app.json_encoder = CustomJSONEncoder  # for mongodb
 
     ##########################################
     # HTTP Security Headers
@@ -110,7 +103,7 @@ def create_app():
 
     return app
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     app = create_app()
     app.run(port=6060)
