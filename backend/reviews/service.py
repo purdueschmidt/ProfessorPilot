@@ -59,7 +59,7 @@ def submit_course_review(course_json):
     reviewer = data['reviewer']
     _id = str(uuid.uuid4())
     timestamp = str(int(time.time()))
-    rating = (data['difficulty'] + data['interest'] + data['usefulness'] + data['organization'] + data['workload']) / 5.0
+    rating = round((data['difficulty'] + data['interest'] + data['usefulness'] + data['organization'] + data['workload']) / 5.0, 1)
 
     course_review = {
         '_id': _id,
