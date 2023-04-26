@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 // import logo from './../../images/wings.png';
 // import logo from "./../../../images/wings.png"
-import logo from "../../../images/profpilotminimaltassle.png"
+import logo from "../../../images/profpilotminimaltassletransparent.png"
 import { Container } from "@mui/material";
 
 export const NavBarBrand = () => {
@@ -14,7 +14,7 @@ export const NavBarBrand = () => {
           <img
             src={logo}
             alt="ProfessorPilot logo"
-            width="100"
+            width="175"
             height="100"
           />
         </IconButton>

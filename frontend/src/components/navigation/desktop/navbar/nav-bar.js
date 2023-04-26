@@ -5,7 +5,7 @@ import { NavBarTabs } from "./nav-bar-tabs";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
-import { Container, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { Container, ListItemButton, ListItemText, ThemeProvider, Typography, createTheme } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
@@ -21,6 +21,8 @@ export const NavBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
 
   return (
     <div>
@@ -50,7 +52,7 @@ export const NavBar = () => {
               <NavBarBrand />
             </Box>
             <Box>
-              <Typography color="secondary" variant="h3">Professor Pilot</Typography>
+              <Typography sx={{marginRight:1}} color="secondary" variant="h5">Professor Pilot</Typography>
             </Box>
 
           </Toolbar>
