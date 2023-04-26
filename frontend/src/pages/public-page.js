@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { CodeSnippet } from "../components/code-snippet";
-import { PageLayout } from "../components/page-layout";
+import { CodeSnippet } from "../components/defaults/code-snippet";
+import { PageLayout } from "../components/defaults/page-layout";
 import { getPublicResource } from "../services/message.service";
 
 export const PublicPage = () => {

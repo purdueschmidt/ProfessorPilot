@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { CourseReviewForm } from "../course-review-form/course-review-form";
+import { CourseReviewForm } from "../forms/course-review-form";
 import "../../styles/components/button.css"
 
 const ReviewFormButton = () => {
@@ -20,7 +20,7 @@ const ReviewFormButton = () => {
 
   return (
     <>
-      <Button className="button__review-form-button" onClick={handleClickOpen} color="inherit">
+      <Button sx={{margin:2}} onClick={handleClickOpen} variant="contained" color="secondary">
         Review Course
       </Button>
       <Dialog open={open} onClose={handleClose}>

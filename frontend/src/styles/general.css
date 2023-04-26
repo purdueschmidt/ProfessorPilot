@@ -1,4 +1,12 @@
-/* General */
+/* html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+} */
+
+/* General
 
 * {
   box-sizing: border-box;
@@ -151,4 +159,6 @@ code {
   .mobile-scroll-lock {
     overflow: hidden;
   }
-}
+} */
+
+

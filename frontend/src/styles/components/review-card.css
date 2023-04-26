@@ -6,31 +6,31 @@
     margin-right: auto;
     border-radius: 0.8rem;
     margin-top: 3.2rem;
+    /* background-color: var(--dark-aluminium); */
+
+}
+
+/* .card-content{
     background-color: var(--dark-aluminium);
-
-}
-
-.card-content{
-    background-color: var(--black);
-}
+} */
 
 .rating-box{
-    background-color: var(--dark-aluminium);
+    /* background-color: var(--dark-aluminium); */
     padding: 1.8rem;
     width: 100%;
 }
 
-.rating {
+/* .rating {
     color: white;
     background-color: #635dff;
-}
+} */
 
-.text{
+/* .text{
     color: white;
-}
+} */
 
 .info-box{
-    background-color: var(--dark-aluminium);
+    /* background-color: var(--dark-aluminium); */
     padding: 1.8rem;
     width: 275px;
     height: 100%;
@@ -45,13 +45,13 @@
     height: 100%;
   }
   
-  .upvote-button, .downvote-button {
+  /* .upvote-button, .downvote-button {
     color: #888888;
-  }
+  } */
   
-  .upvote-button:hover, .downvote-button:hover {
+  /* .upvote-button:hover, .downvote-button:hover {
     color: #555555;
-  }
+  } */
   
   .upvote-count, .downvote-count {
     font-size: 12px;
@@ -59,8 +59,8 @@
     margin-top: 5px;
   }
 
-.accordion {
-  background-color: var(--black);
+/* .accordion {
+  background-color: var(--dark-aluminium);
 }
-  
+   */
 

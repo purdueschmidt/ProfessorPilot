@@ -1,10 +1,10 @@
 import { callExternalApi } from "./external-api.service";
 
-const apiServerUrl = process.env.REACT_APP_API_SERVER_URL;
+const apiServerUrl = process.env.API_SERVER_URL + ':' + process.env.PORT;
 
 export const getPublicResource = async () => {
   const config = {
-    url: `${apiServerUrl}/api/messages/public`,
+    url: `${apiServerUrl}/messages/public`,
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -21,7 +21,7 @@ export const getPublicResource = async () => {
 
 export const getProtectedResource = async (accessToken) => {
   const config = {
-    url: `${apiServerUrl}/api/messages/protected`,
+    url: `${apiServerUrl}/messages/protected`,
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -39,7 +39,7 @@ export const getProtectedResource = async (accessToken) => {
 
 export const getAdminResource = async (accessToken) => {
   const config = {
-    url: `${apiServerUrl}/api/messages/admin`,
+    url: `${apiServerUrl}/messages/admin`,
     method: "GET",
     headers: {
       "content-type": "application/json",
